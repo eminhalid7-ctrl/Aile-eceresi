@@ -348,7 +348,10 @@ Object.assign(TX.tr,{
  copy:"Kopyala",copied:"Kopyalandı",wa:"WhatsApp ile gönder",
  tMembers:"Üyeler",invite:"Yeni davet oluştur",inviteFor:"Kimin için",inviteForPh:"Adı",perm:"Yetki",
  permViewer:"Sadece görsün",permEditor:"Düzenleyebilsin",permAdmin:"Yönetici",makeInvite:"Davet linki oluştur",
- inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",backHere:"Bu ana dön",backHereNote:"\"Bu ana dön\": ağacı o değişiklik yapılmadan hemen önceki haline getirir, ondan sonraki her şey geri alınır. İstersen bunu da sonra geri alabilirsin.",confirmBackHere:d=>"Ağaç, "+d+" tarihindeki bu değişiklikten hemen önceki haline dönecek. Bu andan sonra herkesin yaptığı tüm değişiklikler geri alınır.",hRestored:"Ağaç önceki bir haline döndürüldü",everyone:"Herkes",undoAllBy:n=>n+" adlı kişinin tüm değişikliklerini geri al",confirmUndoAll:n=>n+" adlı kişinin yaptığı tüm değişiklikler sondan başa doğru geri alınacak.",colorsText:"Her rengin yanındaki kutuya dokunup istediğin rengi seç. Değişiklik hemen görünür. Diğer tonları (kenarlar, yazı gölgeleri) uygulama senin seçtiğin renklere uyumlu olarak kendisi ayarlar.",cPaper:"Arka plan",cCard:"Kişi kartları",cInk:"Yazılar",cLine:"Bağlantı çizgileri",cMarr:"Evlilik çizgisi ve vurgular",cMale:"Erkek",cFemale:"Kadın",cBranches:"Dal renkleri (dedenin her çocuğunun soyu)",cReset:"Varsayılana dön",cDone:"Tamam",settings:"Ayarlar",setLook:"Görünüm",setLang:"Dil",setPhone:"Bu telefon",setData:"Veriler",setTrees:"Ağaçlar",customColors:"Renkleri kendim seçeyim",nameTaken:"Bu isim ağaçta zaten var. Lütfen kendi adını yaz. Bu senin başka bir cihazınsa adının yanına cihazı ekle, örneğin \"(tablet)\".",themes:"Tema ve renkler",addAsParent:(n,g)=>n+" de "+(g==="f"?"annesi":g==="m"?"babası":"ebeveyni")+" olsun",
+ inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",dupWarn:x=>"Ağaçta bu isimde biri zaten var: "+x+". Aynı kişiyse yeni ekleme; Vazgeç'e bas ve o kişinin \"Bağlantıları düzenle\" kısmından bağla. Farklı biriyse tekrar Kaydet'e bas.",linksT:"Bağlantıları düzenle",linksText:"Bu kişiyi ağaçta ZATEN OLAN biriyle bağla. Yeni kişi oluşturmaz, böylece aynı kişiden iki tane olmaz.",parentsL:"Anne-babası",spousesL:"Eşleri",kidsL:"Çocukları",unlink:"Bağı kopar",
+ linkParent:"Ağaçtan anne/baba seç",linkSpouse:"Ağaçtan eş seç",linkChild:"Ağaçtan çocuk seç",twoParents:"Bu kişinin zaten iki ebeveyni var. Önce birini çıkar.",
+ mergeBtn:"Aynı kişi: ikisini birleştir",mergePick:x=>x+" ile aynı kişi olan kaydı seç",mergeConfirm:(a,b)=>"\""+b+"\" kaydı \""+a+"\" ile birleşecek. Anne-baba, eş ve çocuk bağları tek kişide toplanır, boş bilgiler tamamlanır, fazla kayıt silinir. İstersen Değişiklik geçmişi'nden geri alabilirsin.",mergeDo:"Birleştir",merged:"Kayıtlar birleştirildi",
+ dupsT:"Aynı isimli kişiler",dupsText:"Aynı isimle birden fazla kayıt var. Aynı kişiyse \"Birleştir\"e bas: bağları tek kayıtta toplanır, ağaç düzelir. Farklı kişilerse (örneğin dedesiyle aynı adı taşıyan torun) dokunma.",noDups:"Aynı isimli kayıt yok.",noParents:"anne-babası yok",show:"Göster",mergeInto1:"İlkiyle birleştir",backHere:"Bu ana dön",backHereNote:"\"Bu ana dön\": ağacı o değişiklik yapılmadan hemen önceki haline getirir, ondan sonraki her şey geri alınır. İstersen bunu da sonra geri alabilirsin.",confirmBackHere:d=>"Ağaç, "+d+" tarihindeki bu değişiklikten hemen önceki haline dönecek. Bu andan sonra herkesin yaptığı tüm değişiklikler geri alınır.",hRestored:"Ağaç önceki bir haline döndürüldü",everyone:"Herkes",undoAllBy:n=>n+" adlı kişinin tüm değişikliklerini geri al",confirmUndoAll:n=>n+" adlı kişinin yaptığı tüm değişiklikler sondan başa doğru geri alınacak.",colorsText:"Her rengin yanındaki kutuya dokunup istediğin rengi seç. Değişiklik hemen görünür. Diğer tonları (kenarlar, yazı gölgeleri) uygulama senin seçtiğin renklere uyumlu olarak kendisi ayarlar.",cPaper:"Arka plan",cCard:"Kişi kartları",cInk:"Yazılar",cLine:"Bağlantı çizgileri",cMarr:"Evlilik çizgisi ve vurgular",cMale:"Erkek",cFemale:"Kadın",cBranches:"Dal renkleri (dedenin her çocuğunun soyu)",cReset:"Varsayılana dön",cDone:"Tamam",settings:"Ayarlar",setLook:"Görünüm",setLang:"Dil",setPhone:"Bu telefon",setData:"Veriler",setTrees:"Ağaçlar",customColors:"Renkleri kendim seçeyim",nameTaken:"Bu isim ağaçta zaten var. Lütfen kendi adını yaz. Bu senin başka bir cihazınsa adının yanına cihazı ekle, örneğin \"(tablet)\".",themes:"Tema ve renkler",addAsParent:(n,g)=>n+" de "+(g==="f"?"annesi":g==="m"?"babası":"ebeveyni")+" olsun",
  legendT:"Çizgiler ne anlama geliyor?",lgChild:"Renkli düz çizgi: anne-babadan çocuklarına. Her renk dedenin bir çocuğunun soyu.",lgMarried:"Altın çizgi: evli çift.",lgDivorced:"Kesik çizgi: boşanmış çift (sadece sen \"Boşandı\" olarak işaretlersen).",lgInlaw:"Noktalı çizgi: dışarıdan gelen gelin ya da damadın kendi anne-babasına bağlantısı. Üvey değildir.",
  lgStep:"\"Üvey\" sadece açıkça girilmiş bilgiyle gösterilir: iki kişinin de anne ve babası kayıtlıysa ve sadece biri ortaksa üvey kardeş sayılır. Bir ebeveyni eksik girilmiş kişi asla üvey sayılmaz.",instTitle:"Uygulamayı telefona yükle",instTitleJoin:"Hoş geldin! Uygulamayı telefona yükle",instText:"Yüklersen ana ekranında kendi simgesiyle durur, tam ekran ve internetsiz de açılır. Bir daha link gerekmez.",installBtn:"Yükle",installed:"Uygulama yüklendi",later:"Sonra",
  andStep1:"Chrome'da sağ üstteki ⋮ menüsüne dokun.",andStep2:"\"Uygulamayı yükle\" ya da \"Ana ekrana ekle\"yi seç. Ana ekranda simgesi çıkar, girişin hatırlanır.",
@@ -383,7 +386,10 @@ Object.assign(TX.ug,{
  copy:"كۆچۈرۈش",copied:"كۆچۈرۈلدى",wa:"WhatsApp ئارقىلىق ئەۋەتىش",
  tMembers:"ئەزالار",invite:"يېڭى تەكلىپ قۇرۇش",inviteFor:"كىم ئۈچۈن",inviteForPh:"ئىسمى",perm:"ھوقۇق",
  permViewer:"پەقەت كۆرسۇن",permEditor:"تەھرىرلىيەلىسۇن",permAdmin:"باشقۇرغۇچى",makeInvite:"تەكلىپ ئۇلىنىشى قۇرۇش",
- inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",backHere:"بۇ ۋاقىتقا قايتىش",backHereNote:"«بۇ ۋاقىتقا قايتىش»: دەرەخنى شۇ ئۆزگىرىشتىن بۇرۇنقى ھالىتىگە قايتۇرىدۇ، كېيىنكى ھەممە ئۆزگىرىش قايتۇرۇلىدۇ.",confirmBackHere:d=>"دەرەخ "+d+" دىكى بۇ ئۆزگىرىشتىن بۇرۇنقى ھالىتىگە قايتىدۇ. ئۇنىڭدىن كېيىنكى ھەممە ئۆزگىرىش قايتۇرۇلىدۇ.",hRestored:"دەرەخ ئىلگىرىكى ھالىتىگە قايتۇرۇلدى",everyone:"ھەممەيلەن",undoAllBy:n=>n+" نىڭ ھەممە ئۆزگىرىشىنى قايتۇرۇش",confirmUndoAll:n=>n+" قىلغان ھەممە ئۆزگىرىش ئاخىرىدىن باشلاپ قايتۇرۇلىدۇ.",colorsText:"ھەر بىر رەڭنىڭ يېنىدىكى كۇنۇپكىنى بېسىپ خالىغان رەڭنى تاللاڭ. ئۆزگىرىش دەرھال كۆرۈنىدۇ. باشقا رەڭلەرنى ئەپ ئۆزى ماسلاشتۇرىدۇ.",cPaper:"تەگلىك",cCard:"كىشى كارتىلىرى",cInk:"خەتلەر",cLine:"باغلىنىش سىزىقلىرى",cMarr:"نىكاھ سىزىقى ۋە تەكىتلەش",cMale:"ئەر",cFemale:"ئايال",cBranches:"شاخ رەڭلىرى (بوۋىنىڭ ھەر بىر بالىسىنىڭ نەسلى)",cReset:"ئەسلىگە قايتۇرۇش",cDone:"بولدى",settings:"تەڭشەكلەر",setLook:"كۆرۈنۈش",setLang:"تىل",setPhone:"بۇ تېلېفون",setData:"سانلىق مەلۇمات",setTrees:"دەرەخلەر",customColors:"رەڭلەرنى ئۆزۈم تاللاي",nameTaken:"بۇ ئىسىم دەرەختە بار. ئۆز ئىسمىڭىزنى يېزىڭ. بۇ سىزنىڭ باشقا ئۈسكۈنىڭىز بولسا، ئىسمىڭىزنىڭ يېنىغا ئۈسكۈنىنى يېزىڭ، مەسىلەن «(تابلېت)».",themes:"تېما ۋە رەڭلەر",addAsParent:(n,g)=>n+" مۇ "+(g==="f"?"ئانىسى":g==="m"?"دادىسى":"ئاتا-ئانىسى")+" بولسۇن",
+ inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",dupWarn:x=>"دەرەختە بۇ ئىسىملىك بىرى بار: "+x+". ئوخشاش كىشى بولسا يېڭىدىن قوشماڭ، «باغلىنىشلارنى تەھرىرلەش» تىن باغلاڭ. باشقا كىشى بولسا قايتا ساقلاشنى بېسىڭ.",linksT:"باغلىنىشلارنى تەھرىرلەش",linksText:"بۇ كىشىنى دەرەختە ئاللىبۇرۇن بار بولغان بىرى بىلەن باغلاڭ. يېڭى كىشى قۇرمايدۇ، شۇڭا بىر كىشىدىن ئىككى بولمايدۇ.",parentsL:"ئاتا-ئانىسى",spousesL:"جۈپتلىرى",kidsL:"بالىلىرى",unlink:"باغنى ئۈزۈش",
+ linkParent:"دەرەختىن ئاتا/ئانا تاللاش",linkSpouse:"دەرەختىن جۈپت تاللاش",linkChild:"دەرەختىن بالا تاللاش",twoParents:"بۇ كىشىنىڭ ئاللىبۇرۇن ئىككى ئاتا-ئانىسى بار.",
+ mergeBtn:"ئوخشاش كىشى: ئىككىسىنى بىرلەشتۈرۈش",mergePick:x=>x+" بىلەن ئوخشاش كىشى بولغان خاتىرىنى تاللاڭ",mergeConfirm:(a,b)=>"«"+b+"» خاتىرىسى «"+a+"» بىلەن بىرلەشتۈرۈلىدۇ. باغلىنىشلار بىر كىشىدە يىغىلىدۇ، ئارتۇق خاتىرە ئۆچۈرۈلىدۇ.",mergeDo:"بىرلەشتۈرۈش",merged:"خاتىرىلەر بىرلەشتۈرۈلدى",
+ dupsT:"ئوخشاش ئىسىملىك كىشىلەر",dupsText:"ئوخشاش ئىسىملىك بىردىن كۆپ خاتىرە بار. ئوخشاش كىشى بولسا «بىرلەشتۈرۈش» نى بېسىڭ. ئوخشىمىغان كىشىلەر بولسا تەگمەڭ.",noDups:"ئوخشاش ئىسىملىك خاتىرە يوق.",noParents:"ئاتا-ئانىسى يوق",show:"كۆرسىتىش",mergeInto1:"بىرىنچىسى بىلەن بىرلەشتۈرۈش",backHere:"بۇ ۋاقىتقا قايتىش",backHereNote:"«بۇ ۋاقىتقا قايتىش»: دەرەخنى شۇ ئۆزگىرىشتىن بۇرۇنقى ھالىتىگە قايتۇرىدۇ، كېيىنكى ھەممە ئۆزگىرىش قايتۇرۇلىدۇ.",confirmBackHere:d=>"دەرەخ "+d+" دىكى بۇ ئۆزگىرىشتىن بۇرۇنقى ھالىتىگە قايتىدۇ. ئۇنىڭدىن كېيىنكى ھەممە ئۆزگىرىش قايتۇرۇلىدۇ.",hRestored:"دەرەخ ئىلگىرىكى ھالىتىگە قايتۇرۇلدى",everyone:"ھەممەيلەن",undoAllBy:n=>n+" نىڭ ھەممە ئۆزگىرىشىنى قايتۇرۇش",confirmUndoAll:n=>n+" قىلغان ھەممە ئۆزگىرىش ئاخىرىدىن باشلاپ قايتۇرۇلىدۇ.",colorsText:"ھەر بىر رەڭنىڭ يېنىدىكى كۇنۇپكىنى بېسىپ خالىغان رەڭنى تاللاڭ. ئۆزگىرىش دەرھال كۆرۈنىدۇ. باشقا رەڭلەرنى ئەپ ئۆزى ماسلاشتۇرىدۇ.",cPaper:"تەگلىك",cCard:"كىشى كارتىلىرى",cInk:"خەتلەر",cLine:"باغلىنىش سىزىقلىرى",cMarr:"نىكاھ سىزىقى ۋە تەكىتلەش",cMale:"ئەر",cFemale:"ئايال",cBranches:"شاخ رەڭلىرى (بوۋىنىڭ ھەر بىر بالىسىنىڭ نەسلى)",cReset:"ئەسلىگە قايتۇرۇش",cDone:"بولدى",settings:"تەڭشەكلەر",setLook:"كۆرۈنۈش",setLang:"تىل",setPhone:"بۇ تېلېفون",setData:"سانلىق مەلۇمات",setTrees:"دەرەخلەر",customColors:"رەڭلەرنى ئۆزۈم تاللاي",nameTaken:"بۇ ئىسىم دەرەختە بار. ئۆز ئىسمىڭىزنى يېزىڭ. بۇ سىزنىڭ باشقا ئۈسكۈنىڭىز بولسا، ئىسمىڭىزنىڭ يېنىغا ئۈسكۈنىنى يېزىڭ، مەسىلەن «(تابلېت)».",themes:"تېما ۋە رەڭلەر",addAsParent:(n,g)=>n+" مۇ "+(g==="f"?"ئانىسى":g==="m"?"دادىسى":"ئاتا-ئانىسى")+" بولسۇن",
  legendT:"سىزىقلار نېمىنى بىلدۈرىدۇ؟",lgChild:"رەڭلىك تۈز سىزىق: ئاتا-ئانىدىن بالىلىرىغا. ھەر بىر رەڭ بوۋىنىڭ بىر بالىسىنىڭ نەسلى.",lgMarried:"ئالتۇن رەڭ سىزىق: نىكاھلىق جۈپتلەر.",lgDivorced:"ئۈزۈك سىزىق: ئاجراشقان جۈپتلەر (پەقەت سىز «ئاجراشقان» دەپ بەلگىلىسىڭىز).",lgInlaw:"چېكىتلىك سىزىق: سىرتتىن كەلگەن كېلىن ياكى كۈيئوغۇلنىڭ ئۆز ئاتا-ئانىسىغا باغلىنىشى. ئۆگەي ئەمەس.",
  lgStep:"«ئۆگەي» پەقەت ئېنىق كىرگۈزۈلگەن ئۇچۇر بىلەنلا كۆرسىتىلىدۇ: ئىككى كىشىنىڭ ھەر ئىككىسىنىڭ ئاتا-ئانىسى خاتىرىلەنگەن بولۇپ، پەقەت بىرىلا ئورتاق بولسا ئۆگەي قېرىنداش ھېسابلىنىدۇ. ئاتا-ئانىسىنىڭ بىرى كەم كىرگۈزۈلگەن كىشى ھەرگىز ئۆگەي ھېسابلانمايدۇ.",instTitle:"ئەپنى تېلېفونغا قاچىلاش",instTitleJoin:"خۇش كەلدىڭىز! ئەپنى تېلېفونغا قاچىلاڭ",instText:"قاچىلىسىڭىز ئاساسىي ئېكراندا ئۆز بەلگىسى بىلەن تۇرىدۇ، تولۇق ئېكران ۋە تورسىز ئېچىلىدۇ. قايتا ئۇلىنىش كېرەك بولمايدۇ.",installBtn:"قاچىلاش",installed:"ئەپ قاچىلاندى",later:"كېيىن",
  andStep1:"Chrome نىڭ ئوڭ ئۈستىدىكى ⋮ تىزىملىكىنى بېسىڭ.",andStep2:"«ئەپنى قاچىلاش» ياكى «ئاساسىي ئېكرانغا قوشۇش» نى تاللاڭ. ئاساسىي ئېكراندا بەلگىسى چىقىدۇ، كىرىشىڭىز ئەستە قالىدۇ.",
@@ -696,6 +702,7 @@ function showTreeMenu(){
    <div class="menu">
     ${T.role==="admin"?`<button class="btn pri" id="m-mem">${esc(t("members"))}</button>`:""}
     ${T.role==="admin"?`<button class="btn" id="m-rec">${esc(t("recovery"))}</button>`:""}
+    ${S.canWrite&&dupGroups().length?`<button class="btn" id="m-dup">${esc(t("dupsT"))} <span class="pill">${dupGroups().length}</span></button>`:""}
     <button class="btn" id="m-hist">${esc(t("history"))}</button>
     <button class="btn" id="m-exp">${esc(t("exportT"))}</button>
     <button class="btn" id="m-set">⚙︎ ${esc(t("settings"))}</button>
@@ -711,7 +718,7 @@ function legendHtml(){return`<details class="legend"><summary>${esc(t("legendT")
 function bindTreeMenu(T){
   if($("m-mem"))$("m-mem").onclick=showMembers;$("m-set").onclick=showSettings;
   sheet.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{const id=b.dataset.go;closeSheet();revealPerson(id);select(id);});
-  $("m-hist").onclick=showHistory;$("m-exp").onclick=showExport;
+  $("m-hist").onclick=showHistory;$("m-exp").onclick=showExport;if($("m-dup"))$("m-dup").onclick=showDups;
   if($("m-rec"))$("m-rec").onclick=async()=>{let tk=null;
     try{const rows=await rpc("list_members_v2",{p_tree:T.id,p_token:T.token});const key=keyOf(T);
       const inv=rows.find(m=>m.kind==="invite"&&m.role==="admin"&&(()=>{try{return open_(m.label,key).tk;}catch(e){return null;}})());
@@ -1228,6 +1235,73 @@ function chainRel(a,b){/* en kısa yol: "babası → kızı → eşi" */
   const steps=[];let c=b.id;while(prev.get(c)){const [p,how]=prev.get(c);steps.unshift(W.chain[how]);c=p;}
   return steps.join(" → ");
 }
+/* ---------- Ağaçtaki biriyle bağlama, birleştirme ---------- */
+function descendantsOf(p){const set=new Set();const q=[p];while(q.length){const x=q.shift();kidsOf(x).forEach(k=>{if(!set.has(k.id)){set.add(k.id);q.push(k);}});}return set;}
+function ancestorsOf(p){const set=new Set();const q=[p];while(q.length){const x=q.shift();parentsOf(x).forEach(k=>{if(!set.has(k.id)){set.add(k.id);q.push(k);}});}return set;}
+function pickPerson(title,sub,exclude,onPick,back){sheetMode="search";
+  openSheet(`<div class="sh-head"><div style="min-width:0"><h2>${esc(title)}</h2>${sub?`<div style="color:var(--muted);font-size:13px" dir="auto">${esc(sub)}</div>`:""}</div><button class="x" id="sh-x">×</button></div>
+   <input type="search" id="q" dir="auto" placeholder="${esc(t("searchPh"))}" autocomplete="off"><div id="qlist"></div>
+   <button class="btn" id="pk-back" style="width:100%;margin-top:10px">${esc(t("back"))}</button>`);
+  $("pk-back").onclick=back;const q=$("q"),list=$("qlist");
+  const run=()=>{const v=norm(q.value.trim());const res=[...S.people.values()].filter(p=>!exclude.has(p.id)&&(!v||norm(p.name).includes(v))).sort((x,y)=>String(x.name).localeCompare(String(y.name))).slice(0,50);
+    list.innerHTML=res.map(p=>`<button class="qrow" data-id="${esc(p.id)}"><span class="av ${p.gender||""}" style="width:30px;height:30px;font-size:13px">${esc(initial(p.name))}</span><span style="min-width:0"><b dir="auto">${esc(p.name||t("unnamed"))}</b><small dir="auto">${esc([lifeText(p).replace(/<[^>]+>/g,""),parentsOf(p).map(x=>x.name).join(" & ")].filter(Boolean).join(" · "))}</small></span></button>`).join("")||`<div class="warn">${esc(t("noResult"))}</div>`;
+    list.querySelectorAll(".qrow").forEach(x=>x.onclick=()=>onPick(P(x.dataset.id)));};
+  q.addEventListener("input",run);run();setTimeout(()=>q.focus(),150);}
+function showLinks(id){const p=P(id);if(!p)return;if(sheetMode==="view")flushNote();sheetMode="menu";const par=parentsOf(p),sps=spouseLinks(p),ks=kidsOf(p);
+  const row=(x,btn)=>`<div class="mrow"><div style="min-width:0"><b dir="auto">${esc(x.name)}</b><small dir="auto">${esc(lifeText(x).replace(/<[^>]+>/g,""))}</small></div>${btn}</div>`;
+  openSheet(`<div class="sh-head"><div style="min-width:0"><h2>${esc(t("linksT"))}</h2><div style="color:var(--muted);font-size:13px" dir="auto">${esc(p.name)}</div></div><button class="x" id="sh-x">×</button></div>
+   <p style="color:var(--muted);font-size:13px;line-height:1.45;margin:0 0 10px">${esc(t("linksText"))}</p>
+   <span class="lb">${esc(t("parentsL"))}</span><div class="mlist">${par.map(x=>row(x,`<button class="btn danger sm" data-unpar="${esc(x.id)}">${esc(t("unlink"))}</button>`)).join("")}
+     ${par.length<2?`<button class="btn" id="ln-par">+ ${esc(t("linkParent"))}</button>`:""}</div>
+   <span class="lb" style="margin-top:12px;display:block">${esc(t("spousesL"))}</span><div class="mlist">${sps.map(l=>row(P(l.id),`<button class="btn danger sm" data-unsp="${esc(l.id)}">${esc(t("unlink"))}</button>`)).join("")}
+     <button class="btn" id="ln-sp">+ ${esc(t("linkSpouse"))}</button></div>
+   <span class="lb" style="margin-top:12px;display:block">${esc(t("kidsL"))}</span><div class="mlist">${ks.map(x=>row(x,`<button class="btn danger sm" data-unkid="${esc(x.id)}">${esc(t("unlink"))}</button>`)).join("")}
+     <button class="btn" id="ln-kid">+ ${esc(t("linkChild"))}</button></div>
+   <button class="btn" id="ln-merge" style="width:100%;margin-top:14px">${esc(t("mergeBtn"))}</button>
+   <button class="btn" id="ln-back" style="width:100%;margin-top:8px">${esc(t("back"))}</button>`);
+  const again=()=>setTimeout(()=>showLinks(id),60);
+  $("ln-back").onclick=()=>select(id);
+  sheet.querySelectorAll("[data-unpar]").forEach(b=>b.onclick=()=>{store.update(id,{parents:(P(id).parents||[]).filter(x=>x!==b.dataset.unpar)});again();});
+  sheet.querySelectorAll("[data-unsp]").forEach(b=>b.onclick=async()=>{await setMarriage(id,b.dataset.unsp,null);again();});
+  sheet.querySelectorAll("[data-unkid]").forEach(b=>b.onclick=()=>{const k=P(b.dataset.unkid);store.update(k.id,{parents:(k.parents||[]).filter(x=>x!==id)});again();});
+  if($("ln-par"))$("ln-par").onclick=()=>{const ex=new Set([id,...descendantsOf(p),...(p.parents||[])]);
+    pickPerson(t("linkParent"),p.name,ex,x=>{const cur=(P(id).parents||[]).filter(z=>S.people.has(z));if(cur.length>=2)return;store.update(id,{parents:[...cur,x.id]});toast(t("saved"));showLinks(id);},()=>showLinks(id));};
+  $("ln-sp").onclick=()=>{const ex=new Set([id,...sps.map(l=>l.id)]);pickPerson(t("linkSpouse"),p.name,ex,async x=>{await setMarriage(id,x.id,"m");toast(t("saved"));showLinks(id);},()=>showLinks(id));};
+  $("ln-kid").onclick=()=>{const ex=new Set([id,...ancestorsOf(p),...ks.map(k=>k.id)]);
+    pickPerson(t("linkChild"),p.name,ex,x=>{const cur=(x.parents||[]).filter(z=>S.people.has(z));if(cur.length>=2){toast(t("twoParents"));return;}store.update(x.id,{parents:[...cur,id]});toast(t("saved"));showLinks(id);},()=>showLinks(id));};
+  $("ln-merge").onclick=()=>{const ex=new Set([id]);pickPerson(t("mergeBtn"),t("mergePick",p.name),ex,x=>confirmMerge(id,x.id),()=>showLinks(id));};
+}
+function confirmMerge(keepId,dropId){const a=P(keepId),b=P(dropId);sheetMode="menu";
+  openSheet(`<div class="sh-head"><h2>${esc(t("mergeBtn"))}</h2><button class="x" id="sh-x">×</button></div>
+   <div class="warn" dir="auto">${esc(t("mergeConfirm",a.name,b.name))}</div>
+   <div class="acts"><button class="btn" id="mg-no">${esc(t("cancel"))}</button><button class="btn pri" id="mg-yes">${esc(t("mergeDo"))}</button></div>`);
+  $("mg-no").onclick=()=>showLinks(keepId);
+  $("mg-yes").onclick=async()=>{await mergePeople(keepId,dropId);toast(t("merged"));select(keepId);};}
+/* iki kaydı tek kişide birleştir: boş alanlar diğerinden dolar, tüm bağlantılar kalan kişiye taşınır */
+async function mergePeople(keepId,dropId){const a=P(keepId),b=P(dropId);if(!a||!b||a.id===b.id)return;BATCH=rid();
+  const patch={};["name","gender","born","died"].forEach(k=>{if(!a[k]&&b[k])patch[k]=b[k];});
+  if(b.note&&b.note!==a.note)patch.note=a.note?a.note+"\n"+b.note:b.note;
+  const par=[...new Set([...(a.parents||[]),...(b.parents||[])])].filter(x=>S.people.has(x)&&x!==a.id&&x!==b.id).slice(0,2);patch.parents=par;
+  const sl=[...spouseLinks(a),...spouseLinks(b)].filter(l=>l.id!==a.id&&l.id!==b.id);const seenS=new Map();sl.forEach(l=>{if(!seenS.has(l.id))seenS.set(l.id,l);});
+  const spl=[...seenS.values()];const cur=spl.filter(l=>l.st==="m");patch.spouses=spl;patch.spouse=(cur[cur.length-1]||{}).id||"";
+  await store.update(a.id,patch);
+  for(const o of [...S.people.values()]){if(o.id===a.id||o.id===b.id)continue;const up={};
+    if((o.parents||[]).includes(b.id))up.parents=[...new Set((o.parents||[]).map(x=>x===b.id?a.id:x))].slice(0,2);
+    const ol=spouseLinks(o);if(ol.some(l=>l.id===b.id)){const m=new Map();ol.forEach(l=>{const id2=l.id===b.id?a.id:l.id;if(!m.has(id2))m.set(id2,{id:id2,st:l.st});});const arr=[...m.values()];const c2=arr.filter(l=>l.st==="m");up.spouses=arr;up.spouse=(c2[c2.length-1]||{}).id||"";}
+    if(Object.keys(up).length)await store.update(o.id,up);}
+  await store.remove(b.id);BATCH=null;}
+/* aynı isimli kayıtlar */
+function dupGroups(){const m=new Map();S.people.forEach(p=>{const k=normName(p.name);if(!k)return;if(!m.has(k))m.set(k,[]);m.get(k).push(p);});return[...m.values()].filter(g=>g.length>1);}
+function showDups(){sheetMode="menu";const gs=dupGroups();
+  openSheet(`<div class="sh-head"><h2>${esc(t("dupsT"))}</h2><button class="x" id="sh-x">×</button></div>
+   <p style="color:var(--muted);font-size:13px;line-height:1.45;margin:0 0 10px">${esc(t("dupsText"))}</p>
+   ${gs.length?gs.map(g=>`<div class="relbox"><b dir="auto">${esc(g[0].name)}</b> <span class="pill">${g.length}</span>
+     <div class="mlist" style="margin-top:8px">${g.map((p,i)=>`<div class="mrow"><div style="min-width:0"><small dir="auto">${esc([lifeText(p).replace(/<[^>]+>/g,""),parentsOf(p).length?t("parentsL")+": "+parentsOf(p).map(x=>x.name).join(" & "):t("noParents"),spousesOf(p).length?t("spousesL")+": "+spousesOf(p).map(x=>x.name).join(", "):"",kidsOf(p).length?t("nKids",kidsOf(p).length):""].filter(Boolean).join(" · "))}</small></div>
+       <button class="btn sm" data-go="${esc(p.id)}">${esc(t("show"))}</button>${i>0&&S.canWrite?`<button class="btn pri sm" data-mg="${esc(g[0].id)}|${esc(p.id)}">${esc(t("mergeInto1"))}</button>`:""}</div>`).join("")}</div></div>`).join(""):`<div class="warn">${esc(t("noDups"))}</div>`}
+   <button class="btn" id="dp-back" style="width:100%;margin-top:10px">${esc(t("back"))}</button>`);
+  $("dp-back").onclick=showTreeMenu;
+  sheet.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{const id=b.dataset.go;closeSheet();revealPerson(id);select(id);});
+  sheet.querySelectorAll("[data-mg]").forEach(b=>b.onclick=async()=>{const [k,d]=b.dataset.mg.split("|");await mergePeople(k,d);toast(t("merged"));showDups();});}
 function showRelPick(bId){const b=P(bId);if(!b)return;if(sheetMode==="view")flushNote();sheetMode="search";
   openSheet(`<div class="sh-head"><div style="min-width:0"><h2>${esc(t("relTitle"))}</h2><div style="color:var(--muted);font-size:13px" dir="auto">${esc(t("relPick",b.name))}</div></div><button class="x" id="sh-x">×</button></div>
    <input type="search" id="q" dir="auto" placeholder="${esc(t("searchPh"))}" autocomplete="off"><div id="qlist"></div>`);
@@ -1438,6 +1512,7 @@ function showView(id,recenter=true){
       ${par.length===1?spousesOf(par[0]).filter(x=>x.id!==p.id).map(x=>`<button class="btn wide" data-a="addpar" data-x="${esc(x.id)}"><bdi>${esc(x.name)}</bdi> ${esc(t("addAsParent","",x.gender).trim())}</button>`).join(""):""}
       ${par.length<2?`<button class="btn" data-a="parent">${pl}</button>`:""}
       <button class="btn" data-a="edit">${t("edit")}</button>
+      <button class="btn" data-a="links">${t("linksT")}</button>
       ${kidsOf(p).length?`<button class="btn" data-a="fold">${isFolded(p)?esc(t("unfold")):esc(t("fold"))}</button>`:""}
       <button class="btn danger" data-a="del">${t("del")}</button>
     </div>`;
@@ -1484,7 +1559,11 @@ function formView(title,sub,def,onSave){
   nm.addEventListener("input",upd);
   sheet.querySelectorAll('input[name=g]').forEach(r=>r.addEventListener("change",()=>{manual=true;hint.className="hint";hint.textContent=t("hManual");}));
   $("f-cancel").onclick=()=>def.back?def.back():closeSheet();
+  let dupOk=false;
   $("pf").onsubmit=async e=>{e.preventDefault();const name=nm.value.trim();if(!name){nm.focus();return;}
+    if(!def.editId&&!dupOk){const same=[...S.people.values()].filter(x=>normName(x.name)===normName(name));
+      if(same.length){dupOk=true;let w=$("dup-warn");if(!w){w=document.createElement("div");w.id="dup-warn";w.className="warn";$("pf").querySelector(".acts").before(w);}
+        w.setAttribute("dir","auto");w.textContent=t("dupWarn",same.map(x=>x.name+(parentsOf(x).length?" ("+parentsOf(x).map(z=>z.name).join(" & ")+")":"")).join(", "));return;}}
     const g=(sheet.querySelector('input[name=g]:checked')||{}).value||"";
     const f={name,gender:g,born:readDate("b"),died:readDate("d"),note:def.withNote?$("f-note").value:""};
     if(f.born&&f.died&&dateKey(f.died)<dateKey(f.born)){toast(t("badDates"));return;}
@@ -1504,6 +1583,7 @@ function action(a,id,other){
     const o=other===undefined?spouseOf(p):(other?P(other):null);
     formView(t("tChild"),t("childOf",p.name,o&&o.name),{withNote:true,back},f=>addChild(id,f,o?o.id:null));}
   if(a==="rel"){showRelPick(id);return;}
+  if(a==="links"){showLinks(id);return;}
   if(a==="addpar"){const x=P(other);if(!x)return;const par=(p.parents||[]).filter(z=>S.people.has(z));if(par.length!==1)return;
     store.update(id,{parents:[par[0],x.id]});toast(t("saved"));setTimeout(()=>select(id),50);return;}
   if(a==="marr"){sheetMode="menu";
@@ -1517,7 +1597,7 @@ function action(a,id,other){
   if(a==="spouse"){const g=p.gender==="m"?"f":p.gender==="f"?"m":"";formView(t("tSpouse"),t("forX",p.name),{withNote:true,gender:g,genderHint:g?t("hOpp"):"",back},f=>addSpouse(id,f));}
   if(a==="parent"){const o=parentsOf(p)[0];const g=o?(o.gender==="m"?"f":o.gender==="f"?"m":""):"";
     formView(g==="f"?t("addMother"):g==="m"?t("addFather"):t("addParents"),o?t("pairWith",p.name,o.name):t("forX",p.name),{withNote:true,gender:g,back},f=>addParent(id,f));}
-  if(a==="edit"){formView(t("tEdit"),"",{name:p.name,gender:p.gender,born:p.born,died:p.died,back},async f=>{await store.update(id,{name:f.name,gender:f.gender,born:f.born,died:f.died});return id;});}
+  if(a==="edit"){formView(t("tEdit"),"",{editId:id,name:p.name,gender:p.gender,born:p.born,died:p.died,back},async f=>{await store.update(id,{name:f.name,gender:f.gender,born:f.born,died:f.died});return id;});}
   if(a==="fold"){toggleFold(id);return;}
   if(a==="del"){sheetMode="confirm";const k=kidsOf(p).length;
     openSheet(`<div class="sh-head"><h2>${t("tDel")}</h2><button class="x" id="sh-x">×</button></div>
