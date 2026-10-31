@@ -62,11 +62,17 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-body);overflow
 .qrow{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:12px;border:1px solid var(--card-edge);background:var(--card);color:var(--ink);font:inherit;text-align:start;cursor:pointer}
 .qrow small{color:var(--muted);display:block;font-size:12px;margin-top:2px}
 #edges .wed{stroke:var(--gold);stroke-width:2.6}
+#edges .wed.div{stroke:var(--muted);stroke-dasharray:3 5}
+#edges .wed.wid{stroke:var(--muted)}
 .yrs{display:grid;grid-template-columns:1fr 1fr 0.8fr;gap:8px;margin-bottom:14px}
 .yrs .field{margin:0;min-width:0}
 .drow{display:grid;grid-template-columns:0.8fr 1.4fr 1fr;gap:6px}
 .drow select{font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--card-edge);border-radius:12px;padding:10px 8px;min-width:0}
 .drow input{min-width:0}
+.relbox{background:var(--paper);border-radius:14px;padding:14px;margin-bottom:10px}
+.relline{color:var(--muted);font-size:14px;line-height:1.4}
+.relline b{color:var(--ink);font-weight:600}
+.relword{font-family:var(--f-display);font-size:26px;line-height:1.2;margin-top:4px;text-wrap:balance}
 .agerow{display:flex;align-items:center;gap:10px;margin:-4px 0 14px}
 .agerow .agebox{padding:7px 14px;min-width:40px}
 .bday{background:var(--gold-soft);color:var(--ink);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-weight:600}
@@ -308,7 +314,9 @@ Object.assign(TX.tr,{
  copy:"Kopyala",copied:"Kopyalandı",wa:"WhatsApp ile gönder",
  tMembers:"Üyeler",invite:"Yeni davet oluştur",inviteFor:"Kimin için",inviteForPh:"Örn. Halid",perm:"Yetki",
  permViewer:"Sadece görsün",permEditor:"Düzenleyebilsin",permAdmin:"Yönetici",makeInvite:"Davet linki oluştur",
- inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",history:"Değişiklik geçmişi",undo:"Geri al",undone:"geri alındı",undoneToast:"Geri alındı",someone:"Biri",noHistory:"Henüz bir değişiklik yok.",
+ inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",relBtn:"Akrabalık: kimin nesi?",relTitle:"Akrabalık",relPick:x=>x+" kime göre? Diğer kişiyi seç.",relAgain:"Başka kişiyle karşılaştır",exSpouse:"Eski eşi",lateSpouse:"Merhum eşi",stepMother:"Üvey annesi",stepFather:"Üvey babası",stepParent:"Üvey ebeveyni",siblings:"Kardeşleri",halfSiblings:"Üvey kardeşleri",
+ addAnotherSpouse:"Başka eş ekle",marriages:"Evlilikler",whichParent:"Çocuğun diğer ebeveyni kim?",otherParentUnknown:"Diğer ebeveyn bilinmiyor / ağaçta yok",
+ stMarried:"Evli",stDivorced:"Boşandı",stWidowed:"Eşi vefat etti",stRemove:"Evlilik kaydını kaldır",marrNote:"Boşanan çiftlerin çizgisi kesikli görünür. Çocuklar hangi evlilikten olduğuna göre o çiftin altında durur. Üvey anne-baba ve üvey kardeşler kendiliğinden bulunur.",history:"Değişiklik geçmişi",undo:"Geri al",undone:"geri alındı",undoneToast:"Geri alındı",someone:"Biri",noHistory:"Henüz bir değişiklik yok.",
  hAdd:n=>n+" eklendi",hDel:n=>n+" silindi",hEdit:(n,f)=>n+": "+f+" değişti",hMore:n=>"(+"+n+" bağlantı)",hUndo:x=>"Geri alındı: "+x,confirmUndo:x=>"\""+x+"\" değişikliği geri alınacak. Herkesin ağacında da eski haline döner.",
  fName:"isim",fGender:"cinsiyet",fBorn:"doğum tarihi",fDied:"vefat tarihi",fNote:"açıklama",fParents:"anne-baba",fSpouse:"eş",
  backup:"Yedek",backupDue:"yedek al",backupText:"Ağacın tamamını bir dosya olarak bu cihaza indirir. Bilgisayarından indirirsen yedek bilgisayarında, İndirilenler klasöründe durur. Bu dosya şifresizdir, kimseyle paylaşma.",
@@ -336,7 +344,9 @@ Object.assign(TX.ug,{
  copy:"كۆچۈرۈش",copied:"كۆچۈرۈلدى",wa:"WhatsApp ئارقىلىق ئەۋەتىش",
  tMembers:"ئەزالار",invite:"يېڭى تەكلىپ قۇرۇش",inviteFor:"كىم ئۈچۈن",inviteForPh:"مەسىلەن: خالىد",perm:"ھوقۇق",
  permViewer:"پەقەت كۆرسۇن",permEditor:"تەھرىرلىيەلىسۇن",permAdmin:"باشقۇرغۇچى",makeInvite:"تەكلىپ ئۇلىنىشى قۇرۇش",
- inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",history:"ئۆزگىرىش تارىخى",undo:"قايتۇرۇش",undone:"قايتۇرۇلدى",undoneToast:"قايتۇرۇلدى",someone:"بىرى",noHistory:"تېخى ئۆزگىرىش يوق.",
+ inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",relBtn:"تۇغقاندارچىلىق: كىمنىڭ نېمىسى؟",relTitle:"تۇغقاندارچىلىق",relPick:x=>x+" كىمگە نىسبەتەن؟ يەنە بىر كىشىنى تاللاڭ.",relAgain:"باشقا كىشى بىلەن سېلىشتۇرۇش",exSpouse:"ئىلگىرىكى جۈپتى",lateSpouse:"مەرھۇم جۈپتى",stepMother:"ئۆگەي ئانىسى",stepFather:"ئۆگەي دادىسى",stepParent:"ئۆگەي ئاتا-ئانىسى",siblings:"قېرىنداشلىرى",halfSiblings:"ئۆگەي قېرىنداشلىرى",
+ addAnotherSpouse:"باشقا جۈپت قوشۇش",marriages:"نىكاھلار",whichParent:"بالىنىڭ يەنە بىر ئاتا-ئانىسى كىم؟",otherParentUnknown:"يەنە بىرى نامەلۇم / دەرەختە يوق",
+ stMarried:"نىكاھلىق",stDivorced:"ئاجراشقان",stWidowed:"جۈپتى ۋاپات بولغان",stRemove:"نىكاھ خاتىرىسىنى ئۆچۈرۈش",marrNote:"ئاجراشقانلارنىڭ سىزىقى ئۈزۈك كۆرۈنىدۇ. بالىلار قايسى نىكاھتىن بولسا شۇ جۈپتنىڭ ئاستىدا تۇرىدۇ. ئۆگەي ئاتا-ئانا ۋە ئۆگەي قېرىنداشلار ئۆزلۈكىدىن تېپىلىدۇ.",history:"ئۆزگىرىش تارىخى",undo:"قايتۇرۇش",undone:"قايتۇرۇلدى",undoneToast:"قايتۇرۇلدى",someone:"بىرى",noHistory:"تېخى ئۆزگىرىش يوق.",
  hAdd:n=>n+" قوشۇلدى",hDel:n=>n+" ئۆچۈرۈلدى",hEdit:(n,f)=>n+": "+f+" ئۆزگەردى",hMore:n=>"(+"+n+" باغلىنىش)",hUndo:x=>"قايتۇرۇلدى: "+x,confirmUndo:x=>"\""+x+"\" ئۆزگىرىشى قايتۇرۇلىدۇ. ھەممەيلەننىڭ دەرىخىدىمۇ ئەسلىگە قايتىدۇ.",
  fName:"ئىسىم",fGender:"جىنس",fBorn:"تۇغۇلغان ۋاقىت",fDied:"ۋاپات ۋاقتى",fNote:"چۈشەندۈرۈش",fParents:"ئاتا-ئانا",fSpouse:"جۈپتى",
  backup:"زاپاس",backupDue:"زاپاسلاڭ",backupText:"پۈتۈن دەرەخنى بىر ھۆججەت قىلىپ بۇ ئۈسكۈنىگە چۈشۈرىدۇ. كومپيۇتېردىن چۈشۈرسىڭىز، زاپاس كومپيۇتېرىڭىزدا ساقلىنىدۇ. بۇ ھۆججەت شىفىرلانمىغان، ھېچكىمگە بەرمەڭ.",
@@ -711,21 +721,32 @@ function lifeText(p,full){const b=parseD(p.born);if(!b)return "";const d=parseD(
 /* ---------- İşlemler ---------- */
 const P=id=>id?S.people.get(id):null;
 const parentsOf=p=>(p.parents||[]).map(P).filter(Boolean);
-const spouseOf=p=>P(p.spouse)||null;
+/* eşler: p.spouses = [{id, st}] st: "m" evli, "d" boşandı, "w" eşi vefat etti. Eski kayıtlardaki tek "spouse" alanı da okunur. */
+function spouseLinks(p){if(!p)return[];const out=[],seen=new Set();
+  (p.spouses||[]).forEach(x=>{if(x&&x.id&&x.id!==p.id&&S.people.has(x.id)&&!seen.has(x.id)){seen.add(x.id);out.push({id:x.id,st:x.st||"m"});}});
+  if(p.spouse&&p.spouse!==p.id&&S.people.has(p.spouse)&&!seen.has(p.spouse)){seen.add(p.spouse);out.push({id:p.spouse,st:"m"});}
+  S.people.forEach(o=>{if(o.id===p.id||seen.has(o.id))return;const l=(o.spouses||[]).find(x=>x&&x.id===p.id);if(l||o.spouse===p.id){seen.add(o.id);out.push({id:o.id,st:(l&&l.st)||"m"});}});
+  return out;}
+const spousesOf=p=>spouseLinks(p).map(l=>P(l.id)).filter(Boolean);
+const spouseOf=p=>{const ls=spouseLinks(p);const cur=ls.filter(l=>l.st==="m");const l=cur[cur.length-1]||ls[ls.length-1];return l?P(l.id):null;};
+const marriageSt=(a,b)=>{const l=spouseLinks(a).find(x=>x.id===b);return l?l.st:null;};
+async function setMarriage(aId,bId,st){/* st null: bağı kaldır */
+  for(const [x,y] of [[aId,bId],[bId,aId]]){const px=P(x);if(!px)continue;let ls=spouseLinks(px).filter(l=>l.id!==y);if(st)ls.push({id:y,st});
+    const cur=ls.filter(l=>l.st==="m");await store.update(x,{spouses:ls,spouse:(cur[cur.length-1]||{}).id||""});}}
 const kidsOf=p=>[...S.people.values()].filter(c=>(c.parents||[]).includes(p.id));
 function newPerson(f){return{name:f.name,gender:f.gender||"",born:f.born||"",died:f.died||"",note:f.note||"",parents:f.parents||[],spouse:f.spouse||"",created:Date.now()};}
-async function addChild(pid,f){const p=P(pid),s=spouseOf(p);const id=uid();await store.set(id,newPerson({...f,parents:[p.id,s&&s.id].filter(Boolean)}));return id;}
-async function addSpouse(pid,f){const id=uid();await store.set(id,newPerson({...f,spouse:pid}));await store.update(pid,{spouse:id});return id;}
+async function addChild(pid,f,otherId){const p=P(pid);const o=otherId===undefined?spouseOf(p):P(otherId);const id=uid();await store.set(id,newPerson({...f,parents:[p.id,o&&o.id].filter(Boolean)}));return id;}
+async function addSpouse(pid,f){const id=uid();await store.set(id,newPerson({...f}));await setMarriage(pid,id,"m");return id;}
 async function addParent(pid,f){const p=P(pid);const other=parentsOf(p)[0];const id=uid();
-  await store.set(id,newPerson({...f,spouse:other&&!other.spouse?other.id:""}));
-  if(other&&!other.spouse) await store.update(other.id,{spouse:id});
+  await store.set(id,newPerson({...f}));
+  if(other&&!spouseLinks(other).length) await setMarriage(other.id,id,"m");
   const sibs=other?kidsOf(other):[p];
   for(const c of sibs){ if((c.parents||[]).length<2) await store.update(c.id,{parents:[...(c.parents||[]),id]}); }
   return id;}
 async function removePerson(id){
   for(const c of [...S.people.values()]){
     if((c.parents||[]).includes(id)) await store.update(c.id,{parents:c.parents.filter(x=>x!==id)});
-    if(c.spouse===id) await store.update(c.id,{spouse:""});
+    if(spouseLinks(c).some(l=>l.id===id)){const ls=spouseLinks(c).filter(l=>l.id!==id);const cur=ls.filter(l=>l.st==="m");await store.update(c.id,{spouses:ls,spouse:(cur[cur.length-1]||{}).id||""});}
   }
   await store.remove(id);
 }
@@ -741,52 +762,62 @@ function computeLayout(){
   let first=[...all].sort((a,b)=>(a.created||0)-(b.created||0))[0];
   for(let guard=0;first&&hasPar(first)&&guard<60;guard++){const ps=parentsOf(first);first=ps.find(x=>x.gender==="m")||ps[0];}
   const rootIds=new Set();
-  if(first){const q=[first];rootIds.add(first.id);const sp=spouseOf(first);if(sp&&!hasPar(sp)){q.push(sp);rootIds.add(sp.id);}
+  if(first){const q=[first];rootIds.add(first.id);spousesOf(first).forEach(sp=>{if(!hasPar(sp)){q.push(sp);rootIds.add(sp.id);}});
     while(q.length){const x=q.shift();if(blood.has(x.id))continue;blood.add(x.id);kidsOf(x).forEach(k=>q.push(k));}}
-  const anchorOf=p=>{const s=spouseOf(p); if(!s) return p.id;
-    const ba=blood.has(p.id),bb=blood.has(s.id); if(ba&&!bb) return p.id; if(bb&&!ba) return s.id;
-    const a=hasPar(p),b=hasPar(s); if(a&&!b) return p.id; if(b&&!a) return s.id;
-    return ((p.created||0)<(s.created||0)||((p.created||0)===(s.created||0)&&p.id<s.id))?p.id:s.id;};
+  const score=x=>(blood.has(x.id)?4:0)+(hasPar(x)?2:0);
+  const better=(x,y)=>score(x)>score(y)||(score(x)===score(y)&&((x.created||0)<(y.created||0)||((x.created||0)===(y.created||0)&&x.id<y.id)));
+  const anchorMemo=new Map();
+  const anchorOf=p=>{if(anchorMemo.has(p.id))return anchorMemo.get(p.id);let best=p;spousesOf(p).forEach(x=>{if(better(x,best))best=x;});anchorMemo.set(p.id,best.id);return best.id;};
   const yr=p=>dateKey(p.born);
   const order=(a,b)=>(yr(a)-yr(b))||((a.created||0)-(b.created||0));
   /* dal renkleri: atanın her çocuğu bir dal başlatır, torunlar o rengi taşır */
   const branch=new Map();
   if(first){let origin=new Set(rootIds);
-    for(let g=0;g<60;g++){const ks=all.filter(c=>(c.parents||[]).some(x=>origin.has(x)));if(ks.length!==1)break;const k=ks[0],ksp=spouseOf(k);origin=new Set([k.id].concat(ksp?[ksp.id]:[]));}
+    for(let g=0;g<60;g++){const ks=all.filter(c=>(c.parents||[]).some(x=>origin.has(x)));if(ks.length!==1)break;const k=ks[0];origin=new Set([k.id,...spousesOf(k).map(z=>z.id)]);}
     const top=[...new Set(all.filter(c=>(c.parents||[]).some(x=>origin.has(x))))].sort(order);
     top.forEach((c,i)=>{const b=i%8;const q=[c];while(q.length){const x=q.shift();if(branch.has(x.id))continue;branch.set(x.id,b);kidsOf(x).forEach(k=>q.push(k));}});
-    all.forEach(p=>{if(!branch.has(p.id)){const s=spouseOf(p);if(s&&branch.has(s.id)&&blood.has(s.id))branch.set(p.id,branch.get(s.id));}});}
-  const descCount=n=>{const seenD=new Set();const q=[...n];while(q.length){const x=q.shift();kidsOf(x).forEach(k=>{if(!seenD.has(k.id)){seenD.add(k.id);q.push(k);const s=spouseOf(k);if(s&&!seenD.has(s.id))seenD.add(s.id);}});}return seenD.size;};
+    all.forEach(p=>{if(!branch.has(p.id)){const s=spousesOf(p).find(x=>branch.has(x.id)&&blood.has(x.id));if(s)branch.set(p.id,branch.get(s.id));}});}
+  const descCount=n=>{const seenD=new Set();const q=[...n];while(q.length){const x=q.shift();kidsOf(x).forEach(k=>{if(!seenD.has(k.id)){seenD.add(k.id);q.push(k);spousesOf(k).forEach(s2=>seenD.add(s2.id));}});}return seenD.size;};
   const seen=new Set();
   function build(aid){
     if(seen.has(aid)) return null; seen.add(aid);
-    const a=P(aid), s=spouseOf(a);
-    let mem=[a]; if(s&&anchorOf(s)===aid&&!seen.has(s.id)){ seen.add(s.id); mem=a.gender==="f"&&s.gender!=="f"?[s,a]:[a,s]; }
+    const a=P(aid);
+    const sps=spouseLinks(a).filter(l=>!seen.has(l.id)&&anchorOf(P(l.id))===aid).map(l=>P(l.id));
+    sps.forEach(x=>seen.add(x.id));
+    let mem;
+    if(!sps.length)mem=[a];
+    else if(sps.length===1)mem=a.gender==="f"&&sps[0].gender!=="f"?[sps[0],a]:[a,sps[0]];
+    else if(sps.length===2)mem=[sps[0],a,sps[1]];
+    else mem=[a,...sps];
     const ids=new Set(mem.map(m=>m.id));
     const uw=mem.length*CW+(mem.length-1)*CG;
     let hidden=0, kids=[];
     if(S.collapsed.has(aid)){ hidden=descCount(mem); }
-    else kids=all.filter(c=>(c.parents||[]).some(x=>ids.has(x))&&anchorOf(c)===c.id).sort(order).map(c=>build(c.id)).filter(Boolean);
-    /* çok çocuklu ailelerde, kendi çocuğu olmayanlar alt alta dizilir */
-    let items=kids.map(k=>({t:"n",n:k,w:k.w}));
-    const leaves=kids.filter(k=>!k.kids.length&&!k.hidden);
-    if(kids.length>=STACK_MIN&&leaves.length>=2){
-      const fi=kids.indexOf(leaves[0]);
-      const st={t:"s",list:leaves,w:Math.max(...leaves.map(k=>k.uw))+RAIL};
-      items=[];kids.forEach((k,i)=>{if(i===fi)items.push(st);if(!leaves.includes(k))items.push({t:"n",n:k,w:k.w});});
-    }
-    const kw=items.reduce((t2,k)=>t2+k.w,0)+Math.max(0,items.length-1)*SG;
-    return{mem,anchor:aid,kids,items,uw,kw,w:Math.max(uw,kw),hidden};
+    else kids=all.filter(c=>(c.parents||[]).some(x=>ids.has(x))&&anchorOf(c)===c.id).sort(order).map(c=>{const n=build(c.id);if(n)n.key=(P(c.id).parents||[]).filter(x=>ids.has(x)).sort().join(" ");return n;}).filter(Boolean);
+    /* çocuklar hangi evlilikten olduğuna göre gruplanır */
+    const keyPos=k=>{const ps=k.split(" ");const other=ps.find(x=>x!==aid)||ps[0];return mem.findIndex(m=>m.id===other);};
+    const keys=[...new Set(kids.map(k=>k.key))].sort((x,y)=>keyPos(x)-keyPos(y));
+    let items=[];
+    keys.forEach((key,gi)=>{const gk=kids.filter(k=>k.key===key);
+      /* çok çocuklu ailelerde, kendi çocuğu olmayanlar alt alta dizilir */
+      let its=gk.map(k=>({t:"n",n:k,w:k.w,g:key}));
+      const leaves=gk.filter(k=>!k.kids.length&&!k.hidden);
+      if(gk.length>=STACK_MIN&&leaves.length>=2){const fi=gk.indexOf(leaves[0]);const st={t:"s",list:leaves,w:Math.max(...leaves.map(k=>k.uw))+RAIL,g:key};
+        its=[];gk.forEach((k,i)=>{if(i===fi)its.push(st);if(!leaves.includes(k))its.push({t:"n",n:k,w:k.w,g:key});});}
+      if(gi>0)its[0].gap=SG*2;
+      items=items.concat(its);});
+    const kw=items.reduce((t2,k)=>t2+k.w+(k.gap||0),0)+Math.max(0,items.length-1)*SG;
+    return{mem,anchor:aid,kids,items,keys,uw,kw,w:Math.max(uw,kw),hidden};
   }
   /* katlanmış dalların altındakiler hiç kurulmaz */
   const hiddenIds=new Set();
-  S.collapsed.forEach(aid=>{const a=P(aid);if(!a)return;const mem=[a,spouseOf(a)].filter(Boolean);const q=[...mem];
-    while(q.length){const x=q.shift();kidsOf(x).forEach(k=>{if(!hiddenIds.has(k.id)&&!mem.includes(k)){hiddenIds.add(k.id);q.push(k);const s=spouseOf(k);if(s)hiddenIds.add(s.id);}});}});
+  S.collapsed.forEach(aid=>{const a=P(aid);if(!a)return;const mem=[a,...spousesOf(a)];const q=[...mem];
+    while(q.length){const x=q.shift();kidsOf(x).forEach(k=>{if(!hiddenIds.has(k.id)&&!mem.includes(k)){hiddenIds.add(k.id);q.push(k);spousesOf(k).forEach(s2=>hiddenIds.add(s2.id));}});}});
   hiddenIds.forEach(id=>seen.add(id));
   const roots=[];
   if(first){const n=build(anchorOf(first));n&&roots.push(n);}
   const anchors=[...new Set(all.map(anchorOf))].map(P).sort(order);
-  anchors.filter(a=>!hasPar(a)&&!(spouseOf(a)&&hasPar(spouseOf(a)))).forEach(a=>{const n=build(a.id);n&&roots.push(n);});
+  anchors.filter(a=>!hasPar(a)&&!spousesOf(a).some(hasPar)).forEach(a=>{const n=build(a.id);n&&roots.push(n);});
   anchors.forEach(a=>{const n=build(a.id);n&&roots.push(n);});
   all.forEach(p=>{if(!seen.has(p.id)){const n=build(p.id);n&&roots.push(n);}});
 
@@ -795,19 +826,25 @@ function computeLayout(){
     function place(n,x,d){
       const c=x+n.w/2, st=c-n.uw/2;
       const mem=rtl?[...n.mem].reverse():n.mem;
-      mem.forEach((m,i)=>pos.set(m.id,{x:st+i*(CW+CG),d}));
-      if(n.mem.length===2) weds.push({x1:st+CW,x2:st+CW+CG,d,id:n.mem[0].id,ids:n.mem.map(m=>m.id)});
-      if(n.hidden) folds.push({x:c,d,id:n.anchor,n:n.hidden,couple:n.mem.length===2});
+      const cardX=new Map();mem.forEach((m,i)=>{const cxm=st+i*(CW+CG);cardX.set(m.id,{x:cxm,i});pos.set(m.id,{x:cxm,d});});
+      const A=n.anchor, orig=k=>{/* çocuk çizgisinin çıktığı yer */const ps=k.split(" ");const other=ps.find(x=>x!==A);
+        if(!ps.includes(A)||!other){const c1=cardX.get(ps[0]);return{px:c1.x+CW/2,mid:false};}
+        const a1=cardX.get(A),b1=cardX.get(other);if(Math.abs(a1.i-b1.i)===1)return{px:(Math.max(a1.x,b1.x)-CG/2),mid:true};return{px:b1.x+CW/2,mid:false};};
+      n.mem.forEach(m=>{if(m.id===A)return;const a1=cardX.get(A),b1=cardX.get(m.id);const st2=marriageSt(P(A),m.id)||"m";
+        if(Math.abs(a1.i-b1.i)===1)weds.push({x1:Math.min(a1.x,b1.x)+CW,x2:Math.max(a1.x,b1.x),d,id:A,sp:m.id,ids:[A,m.id],st:st2});
+        else weds.push({bracket:true,xa:a1.x+CW/2,xs:b1.x+CW/2,d,id:A,sp:m.id,ids:[A,m.id],st:st2});});
+      if(n.hidden) folds.push({x:c,d,id:n.anchor,n:n.hidden});
       const its=rtl?[...n.items].reverse():n.items;
-      let cx=x+(n.w-n.kw)/2; const tops=[], stacks=[];
-      its.forEach(it=>{
-        if(it.t==="n"){place(it.n,cx,d+1);tops.push({x:pos.get(it.n.anchor).x+CW/2,id:it.n.anchor});}
+      let cx=x+(n.w-n.kw)/2; const grp=new Map();
+      its.forEach((it,ii)=>{const gp=rtl?(its[ii-1]&&its[ii-1].g!==it.g?SG*2:0):(it.gap||0);cx+=gp;
+        if(!grp.has(it.g))grp.set(it.g,{tops:[],stacks:[]});const G=grp.get(it.g);
+        if(it.t==="n"){place(it.n,cx,d+1);G.tops.push({x:pos.get(it.n.anchor).x+CW/2,id:it.n.anchor});}
         else{ const railX=rtl?cx+it.w-RAIL/2:cx+RAIL/2, inner=it.w-RAIL, pts=[];
-          it.list.forEach((k,i)=>{const dd=d+1+i*STEP;if(k.mem.length===2&&k.mem[0].id!==k.anchor)k.mem=[k.mem[1],k.mem[0]];const ux=rtl?cx+(inner-k.uw):cx+RAIL;place(k,ux,dd);
+          it.list.forEach((k,i)=>{const dd=d+1+i*STEP;if(k.mem.length>1&&k.mem[0].id!==k.anchor)k.mem=[k.anchor&&P(k.anchor),...k.mem.filter(m=>m.id!==k.anchor)];const ux=rtl?cx+(inner-k.uw):cx+RAIL;place(k,ux,dd);
             k.mem.forEach(m=>stackedIds.add(m.id));pts.push({d:dd,ex:rtl?ux+k.uw:ux,id:k.anchor});});
-          stacks.push({railX,pts}); }
+          G.stacks.push({railX,pts}); }
         cx+=it.w+SG;});
-      if(tops.length||stacks.length) edges.push({px:c,couple:n.mem.length===2,d,tops,stacks,pids:n.mem.map(m=>m.id)});
+      grp.forEach((G,key)=>{const o=orig(key);edges.push({px:o.px,mid:o.mid,d,tops:G.tops,stacks:G.stacks,pids:key.split(" ")});});
     }
     place(root,0,0); return{pos,edges,weds,folds,w:root.w};
   }
@@ -835,9 +872,9 @@ function computeLayout(){
   const pos=new Map(), edges=[], weds=[], folds=[];
   vis.forEach(L2=>{ const o=L2.off-minD, Y=d=>(d+o)*ROW, x=L2.x-minX;
     L2.pos.forEach((p,id)=>pos.set(id,{x:p.x+x,y:Y(p.d),row:Number.isInteger(p.d)?p.d+o:null}));
-    L2.weds.forEach(r=>weds.push({x1:r.x1+x,x2:r.x2+x,y:Y(r.d)+CH/2,id:r.id,ids:r.ids}));
+    L2.weds.forEach(r=>weds.push(r.bracket?{bracket:true,xa:r.xa+x,xs:r.xs+x,y:Y(r.d),id:r.id,sp:r.sp,ids:r.ids,st:r.st}:{x1:r.x1+x,x2:r.x2+x,y:Y(r.d)+CH/2,id:r.id,sp:r.sp,ids:r.ids,st:r.st}));
     L2.folds.forEach(f=>folds.push({x:f.x+x,y:Y(f.d)+CH+12,id:f.id,n:f.n}));
-    L2.edges.forEach(e=>{const y=Y(e.d);edges.push({px:e.px+x,py:e.couple?y+CH/2:y+CH,by:y+CH+(ROW-CH)/2,tops:e.tops.map(t2=>({x:t2.x+x,id:t2.id})),ty:y+ROW,pids:e.pids,
+    L2.edges.forEach(e=>{const y=Y(e.d);edges.push({px:e.px+x,py:e.mid?y+CH/2:y+CH,by:y+CH+(ROW-CH)/2,tops:e.tops.map(t2=>({x:t2.x+x,id:t2.id})),ty:y+ROW,pids:e.pids,
       stacks:e.stacks.map(sk=>({railX:sk.railX+x,pts:sk.pts.map(q=>({y:Y(q.d)+CH/2,ex:q.ex+x,id:q.id}))}))});}); });
   const links=[];
   all.forEach(c=>{ const cp=pos.get(c.id); if(!cp)return;
@@ -895,11 +932,11 @@ addEventListener("pointermove",e=>{
     if(gest.moved){T.x=gest.tx+dx;T.y=gest.ty+dy;applyT();}}
 });
 function up(e){ if(!ptrs.has(e.pointerId))return; ptrs.delete(e.pointerId);
-  if(ptrs.size===0&&gest){ if(!gest.moved){ if(gest.target){ if(gest.target.classList.contains("foldbtn")){toggleFold(gest.target.dataset.id,false);}else if(gest.target.classList.contains("wedbtn")){ if(S.canWrite){S.sel=null;action("child",gest.target.dataset.id);} } else select(gest.target.dataset.id);} else closeSheet(); } gest=null; vp.classList.remove("drag"); }
+  if(ptrs.size===0&&gest){ if(!gest.moved){ if(gest.target){ if(gest.target.classList.contains("foldbtn")){toggleFold(gest.target.dataset.id,false);}else if(gest.target.classList.contains("wedbtn")){ if(S.canWrite){S.sel=null;action("child",gest.target.dataset.id,gest.target.dataset.sp);} } else select(gest.target.dataset.id);} else closeSheet(); } gest=null; vp.classList.remove("drag"); }
   else if(ptrs.size===1){const [a]=[...ptrs.values()];gest={sx:a.x,sy:a.y,tx:T.x,ty:T.y,moved:true};}}
 addEventListener("pointerup",up); addEventListener("pointercancel",up);
 vp.addEventListener("wheel",e=>{e.preventDefault();zoomAt(Math.exp(-e.deltaY*(e.ctrlKey?.01:.0015)),e.clientX,e.clientY);},{passive:false});
-vp.addEventListener("keydown",e=>{if(e.key!=="Enter")return;if(e.target.classList.contains("card"))select(e.target.dataset.id);else if(e.target.classList.contains("wedbtn"))action("child",e.target.dataset.id);});
+vp.addEventListener("keydown",e=>{if(e.key!=="Enter")return;if(e.target.classList.contains("card"))select(e.target.dataset.id);else if(e.target.classList.contains("wedbtn"))action("child",e.target.dataset.id,e.target.dataset.sp);});
 $("z-in").onclick=()=>zoomAt(1.25,innerWidth/2,innerHeight/2);
 $("z-out").onclick=()=>zoomAt(.8,innerWidth/2,innerHeight/2);
 $("z-fit").onclick=fit;
@@ -943,14 +980,15 @@ function render(){
     e.stacks.forEach(k=>k.pts.forEach(q=>{const dr=Math.sign(k.railX-e.px)||1,r1=Math.min(R,Math.abs(k.railX-e.px)/2||R),d2=Math.sign(q.ex-k.railX);
       const top=Math.abs(k.railX-e.px)<1?`M${e.px} ${e.py}V${q.y-R}`:`M${e.px} ${e.py}V${e.by-r1}Q${e.px} ${e.by} ${e.px+dr*r1} ${e.by}H${k.railX-dr*r1}Q${k.railX} ${e.by} ${k.railX} ${e.by+r1}V${q.y-R}`;
       h+=`<path class="e${bc(q.id)}" data-k="${q.id}" data-p="${pd}" d="${top}Q${k.railX} ${q.y} ${k.railX+d2*R} ${q.y}H${q.ex}"/>`;}));});
-  L.weds.forEach(r=>h+=`<path class="wed" data-w="${r.ids.join(" ")}" d="M${r.x1} ${r.y}H${r.x2}"/>`);
+  L.weds.forEach(r=>{const cls="wed"+(r.st==="d"?" div":r.st==="w"?" wid":"");
+    h+=r.bracket?`<path class="${cls}" data-w="${r.ids.join(" ")}" d="M${r.xa} ${r.y}V${r.y-14}H${r.xs}V${r.y}"/>`:`<path class="${cls}" data-w="${r.ids.join(" ")}" d="M${r.x1} ${r.y}H${r.x2}"/>`;});
   (L.links||[]).forEach(l=>h+=`<path class="inlaw" data-k="${l.id}" data-p="${l.pids.join(" ")}" d="M${l.px} ${l.py}V${l.lane}H${l.cx}V${l.cy}"/>`);
   svg.innerHTML=h;
   world.querySelectorAll(".foldbtn").forEach(b=>b.remove());
   L.folds.forEach(f=>{const b=document.createElement("button");b.className="foldbtn";b.dataset.id=f.id;b.textContent="+"+t("people",f.n);b.title=t("unfold");b.style.left=f.x+"px";b.style.top=f.y+"px";world.appendChild(b);});
   $("gens").innerHTML=L.gens.map(g=>`<div class="gen"><b>${g.n}</b><span>${esc(t("genWord"))}</span></div>`).join("");placeGens();
   world.querySelectorAll(".wedbtn").forEach(b=>b.remove());
-  if(S.canWrite) L.weds.forEach(r=>{const p=P(r.id),s=p&&spouseOf(p);const b=document.createElement("button");b.className="wedbtn";b.dataset.id=r.id;b.textContent="+";
+  if(S.canWrite) L.weds.filter(r=>!r.bracket).forEach(r=>{const p=P(r.id),s=P(r.sp);const b=document.createElement("button");b.className="wedbtn";b.dataset.id=r.id;b.dataset.sp=r.sp;b.textContent="+";
     const lbl=t("jointChild",p?p.name:"",s?s.name:"");b.title=lbl;b.setAttribute("aria-label",lbl);b.style.left=(r.x1+r.x2)/2+"px";b.style.top=r.y+"px";world.appendChild(b);});
   applyFocus();
   if(S.ready&&!S.fitted&&n){S.fitted=true;startView();} else if(!S.fitted) applyT();
@@ -960,9 +998,9 @@ function render(){
 }
 
 /* ---------- Soy vurgusu, dal katlama, arama ---------- */
-function lineage(id){const set=new Set();const p=P(id);if(!p)return set;set.add(id);const s=spouseOf(p);if(s)set.add(s.id);
+function lineage(id){const set=new Set();const p=P(id);if(!p)return set;set.add(id);spousesOf(p).forEach(x=>set.add(x.id));const s=null;
   const up=[p];while(up.length){const x=up.shift();parentsOf(x).forEach(q=>{if(!set.has(q.id)){set.add(q.id);up.push(q);}});}
-  const dn=[p];if(s)dn.push(s);while(dn.length){const x=dn.shift();kidsOf(x).forEach(k=>{if(!set.has(k.id)){set.add(k.id);dn.push(k);const ks=spouseOf(k);if(ks)set.add(ks.id);}});}
+  const dn=[p];if(s)dn.push(s);while(dn.length){const x=dn.shift();kidsOf(x).forEach(k=>{if(!set.has(k.id)){set.add(k.id);dn.push(k);spousesOf(k).forEach(x=>set.add(x.id));}});}
   return set;}
 function applyFocus(){const on=!!S.sel&&sheetMode==="view";world.classList.toggle("focus",on);if(!on)return;const set=lineage(S.sel);
   world.querySelectorAll(".card").forEach(c=>c.classList.toggle("on",set.has(c.dataset.id)));
@@ -972,12 +1010,12 @@ function applyFocus(){const on=!!S.sel&&sheetMode==="view";world.classList.toggl
 function foldKey(){const T=CUR();return"secere-fold-"+(T?T.id:"x");}
 function loadFolds(){try{S.collapsed=new Set(JSON.parse(localStorage.getItem(foldKey())||"[]"));}catch(e){S.collapsed=new Set();}}
 function saveFolds(){try{localStorage.setItem(foldKey(),JSON.stringify([...S.collapsed]));}catch(e){}}
-function isFolded(p){const s=spouseOf(p);return S.collapsed.has(p.id)||(s&&S.collapsed.has(s.id));}
-function toggleFold(id,reopen=true){const p=P(id);if(!p)return;const s=spouseOf(p);
-  if(isFolded(p)){S.collapsed.delete(p.id);if(s)S.collapsed.delete(s.id);}else S.collapsed.add(p.id);
+function isFolded(p){return S.collapsed.has(p.id)||spousesOf(p).some(x=>S.collapsed.has(x.id));}
+function toggleFold(id,reopen=true){const p=P(id);if(!p)return;
+  if(isFolded(p)){S.collapsed.delete(p.id);spousesOf(p).forEach(x=>S.collapsed.delete(x.id));}else S.collapsed.add(p.id);
   saveFolds();render();if(reopen&&sheetMode==="view")showView(id,false);setTimeout(()=>centerOn(id),30);}
 function revealPerson(id){let changed=false;const q=[P(id)];const seenR=new Set();
-  while(q.length){const x=q.shift();if(!x||seenR.has(x.id))continue;seenR.add(x.id);parentsOf(x).forEach(pp=>{[pp.id,(spouseOf(pp)||{}).id].forEach(k=>{if(k&&S.collapsed.delete(k))changed=true;});q.push(pp);});}
+  while(q.length){const x=q.shift();if(!x||seenR.has(x.id))continue;seenR.add(x.id);parentsOf(x).forEach(pp=>{[pp.id,...spousesOf(pp).map(z=>z.id)].forEach(k=>{if(k&&S.collapsed.delete(k))changed=true;});q.push(pp);});}
   if(changed){saveFolds();render();}}
 const norm=v=>String(v||"").toLocaleLowerCase("tr").normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
 function showSearch(){if(sheetMode==="view")flushNote();S.sel=null;sheetMode="search";applyFocus();
@@ -991,6 +1029,101 @@ function showSearch(){if(sheetMode==="view")flushNote();S.sel=null;sheetMode="se
 $("find").onclick=showSearch;
 $("who").onclick=()=>{const T=CUR();if(!T)return;T.seenMembers=WHO.ids;saveDB();refreshWho();showMembers(true);};
 
+/* ---------- Akrabalık hesaplayıcı ---------- */
+const RW={
+ tr:{self:"Kendisi",father:"Baba",mother:"Anne",gpF_m:"Dede (babanın babası)",gpF_f:"Babaanne",gpM_m:"Dede (annenin babası)",gpM_f:"Anneanne",ggp_m:"Büyük dede",ggp_f:"Büyük nine",
+  anc:(n,g)=>(g==="f"?"Nine":"Dede")+" ("+n+" kuşak yukarı)",son:"Oğul",daughter:"Kız",grand:"Torun",ggrand:"Torunun çocuğu",desc:n=>n+" kuşak aşağı torun",
+  bro_o:"Ağabey",bro_y:"Erkek kardeş",sis_o:"Abla",sis_y:"Kız kardeş",sib:"Kardeş",half_m:"Üvey erkek kardeş",half_f:"Üvey kız kardeş",half:"Üvey kardeş",
+  amca:"Amca",hala:"Hala",dayi:"Dayı",teyze:"Teyze",nephew:"Yeğen",cousin:(u,g)=>"Kuzen ("+u.toLocaleLowerCase("tr")+(g==="f"?" kızı":g==="m"?" oğlu":" çocuğu")+")",
+  pSib:g=>g==="f"?"Büyük hala/teyze (dedenin ya da ninenin kız kardeşi)":"Büyük amca/dayı (dedenin ya da ninenin erkek kardeşi)",nephewKid:"Yeğenin çocuğu",
+  parentCousin:"Babanın ya da annenin kuzeni",cousinKid:"Kuzenin çocuğu",cousin2:"İkinci dereceden kuzen",far:(u,d)=>"Uzak akraba ("+u+" kuşak yukarı, "+d+" kuşak aşağı)",
+  husband:"Koca",wife:"Karı",spouse:"Eş",exSp:"Eski eş",fil:"Kayınpeder",mil:"Kayınvalide",bride:"Gelin",groom:"Damat",grandSp:"Torunun eşi",
+  yenge:"Yenge",eniste:"Enişte",kayinbirader:"Kayınbirader",baldiz:"Baldız",gorumce:"Görümce",bacanak:"Bacanak",elti:"Elti",stepF:"Üvey baba",stepM:"Üvey anne",stepS:"Üvey oğul",stepD:"Üvey kız",dunur:"Dünür",
+  none:"Ağaçta aralarında bir bağ bulunamadı.",chain:{father:"babası",mother:"annesi",parent:"ebeveyni",son:"oğlu",daughter:"kızı",child:"çocuğu",spouse:"eşi"}},
+ ug:{self:"ئۆزى",father:"دادىسى",mother:"ئانىسى",gpF_m:"بوۋىسى (دادا تەرەپ)",gpF_f:"مومىسى (دادا تەرەپ)",gpM_m:"بوۋىسى (ئانا تەرەپ)",gpM_f:"مومىسى (ئانا تەرەپ)",ggp_m:"چوڭ بوۋىسى",ggp_f:"چوڭ مومىسى",
+  anc:(n,g)=>(g==="f"?"موما":"بوۋا")+" ("+n+" ئەۋلاد يۇقىرى)",son:"ئوغلى",daughter:"قىزى",grand:"نەۋرىسى",ggrand:"چەۋرىسى",desc:n=>n+" ئەۋلاد تۆۋەن نەۋرە",
+  bro_o:"ئاكىسى",bro_y:"ئىنىسى",sis_o:"ئاچىسى",sis_y:"سىڭلىسى",sib:"قېرىندىشى",half_m:"ئۆگەي ئاكا-ئىنىسى",half_f:"ئۆگەي ئاچا-سىڭلىسى",half:"ئۆگەي قېرىندىشى",
+  amca:"تاغىسى (دادا تەرەپ)",hala:"ھاممىسى (دادا تەرەپ)",dayi:"تاغىسى (ئانا تەرەپ)",teyze:"ھاممىسى (ئانا تەرەپ)",nephew:"جىيەنى",cousin:(u,g)=>"نەۋرە قېرىندىشى ("+u+"نىڭ"+(g==="f"?" قىزى":g==="m"?" ئوغلى":" بالىسى")+")",
+  pSib:g=>g==="f"?"چوڭ ھاممىسى (بوۋا-مومىسىنىڭ ئاچا-سىڭلىسى)":"چوڭ تاغىسى (بوۋا-مومىسىنىڭ ئاكا-ئىنىسى)",nephewKid:"جىيەنىنىڭ بالىسى",
+  parentCousin:"دادىسى ياكى ئانىسىنىڭ نەۋرە قېرىندىشى",cousinKid:"نەۋرە قېرىندىشىنىڭ بالىسى",cousin2:"چەۋرە قېرىندىشى",far:(u,d)=>"يىراق تۇغقىنى ("+u+" ئەۋلاد يۇقىرى، "+d+" ئەۋلاد تۆۋەن)",
+  husband:"ئېرى",wife:"ئايالى",spouse:"جۈپتى",exSp:"ئىلگىرىكى جۈپتى",fil:"قېيناتىسى",mil:"قېينانىسى",bride:"كېلىنى",groom:"كۈيئوغلى",grandSp:"نەۋرىسىنىڭ جۈپتى",
+  yenge:"يەڭگىسى",eniste:"يەزنىسى",kayinbirader:"قېيىن ئاكا-ئىنىسى",baldiz:"قېيىن ئاچا-سىڭلىسى (ئايالىنىڭ)",gorumce:"قېيىن ئاچا-سىڭلىسى (ئېرىنىڭ)",bacanak:"باجىسى",elti:"ئېرىنىڭ ئاكا-ئىنىسىنىڭ ئايالى",stepF:"ئۆگەي دادىسى",stepM:"ئۆگەي ئانىسى",stepS:"ئۆگەي ئوغلى",stepD:"ئۆگەي قىزى",dunur:"قۇدىسى",
+  none:"دەرەختە ئۇلارنىڭ ئارىسىدا باغلىنىش تېپىلمىدى.",chain:{father:"دادىسى",mother:"ئانىسى",parent:"ئاتا-ئانىسى",son:"ئوغلى",daughter:"قىزى",child:"بالىسى",spouse:"جۈپتى"}}
+};
+function upMap(x){const m=new Map([[x.id,[x]]]);const q=[x];while(q.length){const c=q.shift();parentsOf(c).forEach(p=>{if(!m.has(p.id)){m.set(p.id,m.get(c.id).concat([p]));q.push(p);}});}return m;}
+function bloodRel(a,b){/* b, a'nın neyi? */
+  const W=RW[LANG];if(a.id===b.id)return W.self;
+  const ua=upMap(a),ub=upMap(b);let best=null;
+  ua.forEach((pa,id)=>{const pb=ub.get(id);if(pb){const sc=pa.length+pb.length;if(!best||sc<best.sc)best={sc,pa,pb};}});
+  if(!best)return null;
+  const u=best.pa.length-1,d=best.pb.length-1,g=b.gender;
+  const sideF=u>=1&&best.pa[1].gender!=="f";
+  if(d===0){if(u===1)return g==="f"?W.mother:W.father;if(u===2)return sideF?(g==="f"?W.gpF_f:W.gpF_m):(g==="f"?W.gpM_f:W.gpM_m);if(u===3)return g==="f"?W.ggp_f:W.ggp_m;return W.anc(u,g);}
+  if(u===0){if(d===1)return g==="f"?W.daughter:W.son;if(d===2)return W.grand;if(d===3)return W.ggrand;return W.desc(d);}
+  if(u===1&&d===1){const pa=new Set(parentsOf(a).map(x=>x.id)),pb=new Set(parentsOf(b).map(x=>x.id));
+    const full=pa.size===pb.size&&[...pa].every(x=>pb.has(x));
+    if(!full)return g==="f"?W.half_f:g==="m"?W.half_m:W.half;
+    const ka=dateKey(a.born),kb=dateKey(b.born);if(ka===99999999||kb===99999999||ka===kb)return g==="f"?(LANG==="ug"?"ئاچا-سىڭلىسى":"Kız kardeş"):g==="m"?(LANG==="ug"?"ئاكا-ئىنىسى":"Erkek kardeş"):W.sib;
+    const older=kb<ka;return g==="f"?(older?W.sis_o:W.sis_y):(older?W.bro_o:W.bro_y);}
+  if(u===2&&d===1)return sideF?(g==="f"?W.hala:W.amca):(g==="f"?W.teyze:W.dayi);
+  if(u===1&&d===2)return W.nephew;
+  if(u===2&&d===2){const ug=best.pb[1].gender;const uw=sideF?(ug==="f"?W.hala:W.amca):(ug==="f"?W.teyze:W.dayi);return W.cousin(uw.replace(/\s*\(.*\)$/,""),g);}
+  if(u===3&&d===1)return W.pSib(g);
+  if(u===1&&d===3)return W.nephewKid;
+  if(u===3&&d===2)return W.parentCousin;
+  if(u===2&&d===3)return W.cousinKid;
+  if(u===3&&d===3)return W.cousin2;
+  return W.far(u,d);
+}
+function bloodUD(a,b){const ua=upMap(a),ub=upMap(b);let best=null;ua.forEach((pa,id)=>{const pb=ub.get(id);if(pb){const sc=pa.length+pb.length;if(!best||sc<best.sc)best={sc,u:pa.length-1,d:pb.length-1,pa,pb};}});return best;}
+function relation(a,b){
+  const W=RW[LANG],g=b.gender;
+  const br=bloodRel(a,b);if(br)return br;
+  /* b, a'nın eşi */
+  const st=marriageSt(a,b.id);if(st)return st==="d"?W.exSp:(g==="f"?W.wife:g==="m"?W.husband:W.spouse);
+  /* b, a'nın bir akrabasının eşi */
+  for(const x of spousesOf(b)){const r=bloodUD(a,x);if(!r)continue;
+    if(r.u===0&&r.d===1)return g==="f"?W.bride:W.groom;
+    if(r.u===0&&r.d===2)return W.grandSp;
+    if(r.u===1&&r.d===0)return g==="f"?W.stepM:W.stepF;
+    if(r.u===1&&r.d===1)return x.gender==="f"?W.eniste:W.yenge;
+    if(r.u===2&&r.d===1)return x.gender==="f"?W.eniste:W.yenge;
+  }
+  /* b, a'nın eşinin akrabası */
+  for(const s of spousesOf(a)){const r=bloodUD(s,b);if(!r)continue;
+    if(r.u===1&&r.d===0)return g==="f"?W.mil:W.fil;
+    if(r.u===0&&r.d===1)return g==="f"?W.stepD:W.stepS;
+    if(r.u===1&&r.d===1){if(g==="m")return W.kayinbirader;return s.gender==="f"?W.baldiz:W.gorumce;}
+  }
+  /* bacanak / elti / dünür */
+  for(const s of spousesOf(a))for(const y of spousesOf(b)){const r=bloodUD(s,y);if(r&&r.u===1&&r.d===1){if(a.gender==="m"&&g==="m"&&s.gender==="f")return W.bacanak;if(a.gender==="f"&&g==="f"&&s.gender==="m")return W.elti;}}
+  for(const ka of kidsOf(a))for(const kb of kidsOf(b))if(marriageSt(ka,kb.id))return W.dunur;
+  return chainRel(a,b);
+}
+function chainRel(a,b){/* en kısa yol: "babası → kızı → eşi" */
+  const W=RW[LANG];const prev=new Map([[a.id,null]]);const q=[a];
+  while(q.length){const x=q.shift();if(x.id===b.id)break;
+    const nb=[...parentsOf(x).map(p=>[p,p.gender==="f"?"mother":p.gender==="m"?"father":"parent"]),...kidsOf(x).map(k=>[k,k.gender==="f"?"daughter":k.gender==="m"?"son":"child"]),...spousesOf(x).map(s=>[s,"spouse"])];
+    nb.forEach(([y,how])=>{if(!prev.has(y.id)){prev.set(y.id,[x.id,how]);q.push(y);}});}
+  if(!prev.has(b.id))return W.none;
+  const steps=[];let c=b.id;while(prev.get(c)){const [p,how]=prev.get(c);steps.unshift(W.chain[how]);c=p;}
+  return steps.join(" → ");
+}
+function showRelPick(bId){const b=P(bId);if(!b)return;if(sheetMode==="view")flushNote();sheetMode="search";
+  openSheet(`<div class="sh-head"><div style="min-width:0"><h2>${esc(t("relTitle"))}</h2><div style="color:var(--muted);font-size:13px" dir="auto">${esc(t("relPick",b.name))}</div></div><button class="x" id="sh-x">×</button></div>
+   <input type="search" id="q" dir="auto" placeholder="${esc(t("searchPh"))}" autocomplete="off"><div id="qlist"></div>`);
+  const q=$("q"),list=$("qlist");
+  const run=()=>{const v=norm(q.value.trim());const res=[...S.people.values()].filter(p=>p.id!==b.id&&(!v||norm(p.name).includes(v))).sort((x,y)=>String(x.name).localeCompare(String(y.name))).slice(0,40);
+    list.innerHTML=res.map(p=>`<button class="qrow" data-id="${esc(p.id)}"><span class="av ${p.gender||""}" style="width:30px;height:30px;font-size:13px">${esc(initial(p.name))}</span><span style="min-width:0"><b dir="auto">${esc(p.name||t("unnamed"))}</b><small dir="auto">${esc(parentsOf(p).map(x=>x.name).join(" & "))}</small></span></button>`).join("")||`<div class="warn">${esc(t("noResult"))}</div>`;
+    list.querySelectorAll(".qrow").forEach(x=>x.onclick=()=>showRelResult(P(x.dataset.id),b));};
+  q.addEventListener("input",run);run();setTimeout(()=>q.focus(),150);}
+function showRelResult(a,b){sheetMode="menu";const r1=relation(a,b),r2=relation(b,a);
+  const box=(x,y,r)=>`<div class="relbox"><div class="relline" dir="auto">${LANG==="ug"?`<b>${esc(y.name)}</b>، <b>${esc(x.name)}</b>نىڭ`:`<b>${esc(x.name)}</b> için <b>${esc(y.name)}</b>`}</div><div class="relword" dir="auto">${esc(r)}</div></div>`;
+  openSheet(`<div class="sh-head"><h2>${esc(t("relTitle"))}</h2><button class="x" id="sh-x">×</button></div>
+   ${box(a,b,r1)}${box(b,a,r2)}
+   <div class="acts"><button class="btn" id="rl-again">${esc(t("relAgain"))}</button><button class="btn pri" id="rl-done">${esc(t("back"))}</button></div>`);
+  $("rl-again").onclick=()=>showRelPick(b.id);$("rl-done").onclick=()=>select(b.id);}
+
 /* ---------- Alt panel ---------- */
 const sheet=$("sheet"); let sheetMode=null, noteTimer=null, lastNote="";
 function openSheet(html){sheet.innerHTML='<div class="grab"></div>'+html;sheet.classList.remove("off");const x=$("sh-x");if(x){x.onclick=closeSheet;x.setAttribute("aria-label",t("close"));}}
@@ -1003,7 +1136,15 @@ function relChips(p){
   const f=par.find(x=>x.gender==="m"),m=par.find(x=>x.gender==="f");
   if(f)out.push(chip(t("father"),f.name)); if(m)out.push(chip(t("mother"),m.name));
   par.filter(x=>x!==f&&x!==m).forEach(x=>out.push(chip(t("parent"),x.name)));
-  if(s)out.push(chip(t("spouse"),s.name));
+  spouseLinks(p).forEach(l=>{const x=P(l.id);out.push(chip(l.st==="d"?t("exSpouse"):l.st==="w"?t("lateSpouse"):t("spouse"),x.name));});
+  /* üvey anne/baba: anne ya da babanın, kendi anne-babası olmayan eşleri */
+  const parIds=new Set(par.map(x=>x.id));
+  const steps=[...new Map(par.flatMap(x=>spousesOf(x)).filter(x=>!parIds.has(x.id)&&x.id!==p.id).map(x=>[x.id,x])).values()];
+  steps.forEach(x=>out.push(chip(x.gender==="f"?t("stepMother"):x.gender==="m"?t("stepFather"):t("stepParent"),x.name)));
+  const sib=[...new Map(par.flatMap(x=>kidsOf(x)).filter(x=>x.id!==p.id).map(x=>[x.id,x])).values()];
+  const full=sib.filter(x=>par.length&&par.every(q=>(x.parents||[]).includes(q.id))&&(x.parents||[]).length===par.length);
+  if(full.length)out.push(chip(t("siblings"),t("people",full.length)));
+  if(sib.length>full.length)out.push(chip(t("halfSiblings"),t("people",sib.length-full.length)));
   if(k.length)out.push(chip(t("kids"),t("people",k.length)));
   return out.length?`<div class="rel">${out.join("")}</div>`:"";
 }
@@ -1018,14 +1159,16 @@ function showView(id,recenter=true){
     <textarea id="sh-note" dir="auto" placeholder="${esc(t("notePh"))}">${esc(p.note||"")}</textarea>
     <div class="saved" id="sh-saved"></div>
     <div class="acts">
-      <button class="btn pri wide" data-a="child">${t("addChild")}${s?` <span style="opacity:.7;font-weight:500" dir="auto">${esc(t("withX",s.name))}</span>`:""}</button>
-      ${s?"":`<button class="btn" data-a="spouse">${t("addSpouse")}</button>`}
+      <button class="btn pri wide" data-a="child">${t("addChild")}${s&&spousesOf(p).length===1?` <span style="opacity:.7;font-weight:500" dir="auto">${esc(t("withX",s.name))}</span>`:""}</button>
+      <button class="btn" data-a="spouse">${spousesOf(p).length?t("addAnotherSpouse"):t("addSpouse")}</button>
+      ${spousesOf(p).length?`<button class="btn" data-a="marr">${t("marriages")}</button>`:""}
+      <button class="btn" data-a="rel">${t("relBtn")}</button>
       ${par.length<2?`<button class="btn" data-a="parent">${pl}</button>`:""}
       <button class="btn" data-a="edit">${t("edit")}</button>
       ${kidsOf(p).length?`<button class="btn" data-a="fold">${isFolded(p)?esc(t("unfold")):esc(t("fold"))}</button>`:""}
       <button class="btn danger" data-a="del">${t("del")}</button>
     </div>`;
-  } else body=(p.note?`<span class="lb">${t("note")}</span><div class="ro-note" dir="auto">${esc(p.note)}</div>`:`<div class="warn">${t("noNote")}</div>`)+(kidsOf(p).length?`<button class="btn" data-a="fold" style="width:100%">${isFolded(p)?esc(t("unfold")):esc(t("fold"))}</button>`:"");
+  } else body=(p.note?`<span class="lb">${t("note")}</span><div class="ro-note" dir="auto">${esc(p.note)}</div>`:`<div class="warn">${t("noNote")}</div>`)+`<button class="btn" data-a="rel" style="width:100%;margin-bottom:8px">${esc(t("relBtn"))}</button>`+(kidsOf(p).length?`<button class="btn" data-a="fold" style="width:100%">${isFolded(p)?esc(t("unfold")):esc(t("fold"))}</button>`:"");
   openSheet(head+relChips(p)+body);
   const ta=$("sh-note");
   if(ta){ta.addEventListener("input",()=>{clearTimeout(noteTimer);$("sh-saved").textContent=t("typing");noteTimer=setTimeout(flushNote,900);});ta.addEventListener("blur",flushNote);}
@@ -1076,10 +1219,26 @@ function formView(title,sub,def,onSave){
     try{const nid=await onSave(f);closeSheet();if(nid){if(P(nid))select(nid);else S.pending=nid;}}catch(err){btn.disabled=false;}};
   setTimeout(()=>nm.focus(),180);
 }
-function action(a,id){
+function action(a,id,other){
   const p=P(id);if(!p)return; if(sheetMode==="view")flushNote();
   const back=()=>select(id);
-  if(a==="child"){const s=spouseOf(p);formView(t("tChild"),t("childOf",p.name,s&&s.name),{withNote:true,back},f=>addChild(id,f));}
+  if(a==="child"){const sps=spousesOf(p);
+    if(other===undefined&&sps.length>1){sheetMode="menu";
+      openSheet(`<div class="sh-head"><div><h2>${esc(t("tChild"))}</h2><div style="color:var(--muted);font-size:13px">${esc(t("whichParent"))}</div></div><button class="x" id="sh-x">×</button></div>
+       <div class="menu">${sps.map(x=>`<button class="btn" data-op="${esc(x.id)}" dir="auto">${esc(t("childOf",p.name,x.name))}</button>`).join("")}
+       <button class="btn" data-op="">${esc(t("otherParentUnknown"))}</button><button class="btn" id="op-back">${esc(t("back"))}</button></div>`);
+      sheet.querySelectorAll("[data-op]").forEach(b=>b.onclick=()=>action("child",id,b.dataset.op));$("op-back").onclick=back;return;}
+    const o=other===undefined?spouseOf(p):(other?P(other):null);
+    formView(t("tChild"),t("childOf",p.name,o&&o.name),{withNote:true,back},f=>addChild(id,f,o?o.id:null));}
+  if(a==="rel"){showRelPick(id);return;}
+  if(a==="marr"){sheetMode="menu";
+    openSheet(`<div class="sh-head"><div><h2>${esc(t("marriages"))}</h2><div style="color:var(--muted);font-size:13px" dir="auto">${esc(p.name)}</div></div><button class="x" id="sh-x">×</button></div>
+     <div class="mlist">${spouseLinks(p).map(l=>{const x=P(l.id);return`<div class="mrow"><div style="min-width:0"><b dir="auto">${esc(x.name)}</b></div>
+       <select data-ms="${esc(x.id)}" aria-label="${esc(t("marriages"))}"><option value="m"${l.st==="m"?" selected":""}>${esc(t("stMarried"))}</option><option value="d"${l.st==="d"?" selected":""}>${esc(t("stDivorced"))}</option><option value="w"${l.st==="w"?" selected":""}>${esc(t("stWidowed"))}</option><option value="x">${esc(t("stRemove"))}</option></select></div>`;}).join("")}</div>
+     <p style="color:var(--muted);font-size:13px;line-height:1.5">${esc(t("marrNote"))}</p>
+     <button class="btn" id="ms-back" style="width:100%">${esc(t("back"))}</button>`);
+    sheet.querySelectorAll("[data-ms]").forEach(sel=>sel.onchange=async()=>{await setMarriage(id,sel.dataset.ms,sel.value==="x"?null:sel.value);toast(t("saved"));action("marr",id);});
+    $("ms-back").onclick=back;return;}
   if(a==="spouse"){const g=p.gender==="m"?"f":p.gender==="f"?"m":"";formView(t("tSpouse"),t("forX",p.name),{withNote:true,gender:g,genderHint:g?t("hOpp"):"",back},f=>addSpouse(id,f));}
   if(a==="parent"){const o=parentsOf(p)[0];const g=o?(o.gender==="m"?"f":o.gender==="f"?"m":""):"";
     formView(g==="f"?t("addMother"):g==="m"?t("addFather"):t("addParents"),o?t("pairWith",p.name,o.name):t("forX",p.name),{withNote:true,gender:g,back},f=>addParent(id,f));}
