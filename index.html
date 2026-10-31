@@ -936,9 +936,13 @@ function computeLayout(){
     keys.forEach((key,gi)=>{const gk=kids.filter(k=>k.key===key);
       /* çok çocuklu ailelerde, kendi çocuğu olmayanlar alt alta dizilir */
       let its=gk.map(k=>({t:"n",n:k,w:k.w,g:key}));
-      const leaves=gk.filter(k=>!k.kids.length&&!k.hidden);
-      if(gk.length>=STACK_MIN&&leaves.length>=2){const fi=gk.indexOf(leaves[0]);const st={t:"s",list:leaves,w:Math.max(...leaves.map(k=>k.uw))+RAIL,g:key};
-        its=[];gk.forEach((k,i)=>{if(i===fi)its.push(st);if(!leaves.includes(k))its.push({t:"n",n:k,w:k.w,g:key});});}
+      /* KARDEŞ SIRASI KURALI (sabit): kardeşler her zaman doğum sırasıyla dizilir, en büyük en solda, en küçük en sağda
+         (Uygurca görünümde ağaç aynalandığı için tersi). Çocuğu olan kardeşler de bu sırayı bozmaz.
+         Sadece art arda gelen çocuksuz kardeşler alt alta toplanabilir; böylece sıra hiç değişmez. */
+      const isLeaf=k=>!k.kids.length&&!k.hidden;
+      if(gk.length>=STACK_MIN){its=[];let run=[];
+        const flush=()=>{if(run.length>=2)its.push({t:"s",list:run,w:Math.max(...run.map(k=>k.uw))+RAIL,g:key});else run.forEach(k=>its.push({t:"n",n:k,w:k.w,g:key}));run=[];};
+        gk.forEach(k=>{if(isLeaf(k))run.push(k);else{flush();its.push({t:"n",n:k,w:k.w,g:key});}});flush();}
       if(gi>0)its[0].gap=SG*2;
       items=items.concat(its);});
     const kw=items.reduce((t2,k)=>t2+k.w+(k.gap||0),0)+Math.max(0,items.length-1)*SG;
