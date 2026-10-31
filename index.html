@@ -588,7 +588,9 @@ function computeLayout(){
   const hasPar=p=>(p.parents||[]).some(x=>S.people.has(x));
   /* Ana aile: en önce eklenen atadan kan bağıyla inen herkes */
   const blood=new Set();
-  const first=all.filter(p=>!hasPar(p)).sort((a,b)=>(a.created||0)-(b.created||0))[0];
+  /* ana ata: ilk eklenen kişiden başlayıp anne-babası eklendikçe yukarı tırmanılır (önce baba) */
+  let first=[...all].sort((a,b)=>(a.created||0)-(b.created||0))[0];
+  for(let guard=0;first&&hasPar(first)&&guard<60;guard++){const ps=parentsOf(first);first=ps.find(x=>x.gender==="m")||ps[0];}
   const rootIds=new Set();
   if(first){const q=[first];rootIds.add(first.id);const sp=spouseOf(first);if(sp&&!hasPar(sp)){q.push(sp);rootIds.add(sp.id);}
     while(q.length){const x=q.shift();if(blood.has(x.id))continue;blood.add(x.id);kidsOf(x).forEach(k=>q.push(k));}}
@@ -600,7 +602,9 @@ function computeLayout(){
   const order=(a,b)=>(yr(a)-yr(b))||((a.created||0)-(b.created||0));
   /* dal renkleri: atanın her çocuğu bir dal başlatır, torunlar o rengi taşır */
   const branch=new Map();
-  if(first){const top=[...new Set(all.filter(c=>(c.parents||[]).some(x=>rootIds.has(x))))].sort(order);
+  if(first){let origin=new Set(rootIds);
+    for(let g=0;g<60;g++){const ks=all.filter(c=>(c.parents||[]).some(x=>origin.has(x)));if(ks.length!==1)break;const k=ks[0],ksp=spouseOf(k);origin=new Set([k.id].concat(ksp?[ksp.id]:[]));}
+    const top=[...new Set(all.filter(c=>(c.parents||[]).some(x=>origin.has(x))))].sort(order);
     top.forEach((c,i)=>{const b=i%8;const q=[c];while(q.length){const x=q.shift();if(branch.has(x.id))continue;branch.set(x.id,b);kidsOf(x).forEach(k=>q.push(k));}});
     all.forEach(p=>{if(!branch.has(p.id)){const s=spouseOf(p);if(s&&branch.has(s.id)&&blood.has(s.id))branch.set(p.id,branch.get(s.id));}});}
   const descCount=n=>{const seenD=new Set();const q=[...n];while(q.length){const x=q.shift();kidsOf(x).forEach(k=>{if(!seenD.has(k.id)){seenD.add(k.id);q.push(k);const s=spouseOf(k);if(s&&!seenD.has(s.id))seenD.add(s.id);}});}return seenD.size;};
@@ -699,8 +703,8 @@ function computeLayout(){
   let W=0,H=0; pos.forEach(p=>{W=Math.max(W,p.x+CW);H=Math.max(H,p.y+CH);});
   /* kuşak satırları: atanın satırı 1. kuşak */
   const rows=new Set(); pos.forEach(p=>{if(p.row!=null)rows.add(p.row);});
-  const mainRow=first&&pos.get(first.id)?pos.get(first.id).row:Math.min(...rows,0);
-  const gens=[...rows].sort((a,b)=>a-b).map(r=>({y:r*ROW,n:r-mainRow+1}));
+  const topRow=rows.size?Math.min(...rows):0;
+  const gens=[...rows].sort((a,b)=>a-b).map(r=>({y:r*ROW,n:r-topRow+1}));
   return{pos,edges,weds,links,folds,W,H,gens,branch,blood,first:first&&first.id};
 }
 
