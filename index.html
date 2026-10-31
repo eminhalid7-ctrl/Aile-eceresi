@@ -7,6 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#1E2724">
 <link rel="manifest" href="manifest.webmanifest">
+<script>try{var k=localStorage.getItem("secere-skin");if(k)document.documentElement.setAttribute("data-skin",k);}catch(e){}</script>
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-180.png">
 <title>Aile Şeceresi</title>
@@ -29,6 +30,12 @@
   --paper:#141A18; --dot:#28302D; --ink:#E6ECE8; --muted:#9AA7A1; --line:#5D6A65;
   --card:#1D2522; --card-edge:#2F3935; --male:#6FB0D2; --female:#E08AAA; --unknown:#A9AE98;
   --gold:#E2AE4A; --gold-soft:#3A3120; --danger:#E27A6C; --sheet:#1A211F; --shadow:rgba(0,0,0,.45); --band:rgba(255,255,255,.035); --br0:#5CC2B2; --br1:#E2AE4A; --br2:#B892CC; --br3:#E5876C; --br4:#A6C462; --br5:#7FA6DA; --br6:#DE8DAB; --br7:#6CC48C; color-scheme:dark}
+/* temalar: sistem teması (varsayılan) + seçilebilir uyumlu paletler */
+:root[data-skin="kasgar"]{--paper:#EAF1F3;--dot:#C8D6DB;--ink:#13303A;--muted:#4F6A73;--line:#86A1AA;--card:#FFFFFF;--card-edge:#CFDDE2;--male:#1F6E9C;--female:#B04A6E;--unknown:#7F8E93;--gold:#138A8A;--gold-soft:#D5EEEC;--danger:#B23A3A;--sheet:#FFFFFF;--shadow:rgba(19,48,58,.14);--band:rgba(19,48,58,.045);--br0:#1F7A8C; --br1:#C2872F; --br2:#6B5AA6; --br3:#C0563F; --br4:#4E8A3A; --br5:#2F5DA8; --br6:#A84C7A; --br7:#2A9D8F;color-scheme:light}
+:root[data-skin="gece"]{--paper:#0F1420;--dot:#1E2635;--ink:#E8ECF4;--muted:#98A2B6;--line:#56627A;--card:#182033;--card-edge:#273149;--male:#7FB3E6;--female:#E79AB8;--unknown:#A4ABBA;--gold:#E6B85C;--gold-soft:#3A3220;--danger:#EE8070;--sheet:#141B2B;--shadow:rgba(0,0,0,.5);--band:rgba(255,255,255,.035);--br0:#6FD0C0; --br1:#E6B85C; --br2:#B9A0E6; --br3:#F09A7E; --br4:#A8D46F; --br5:#86AEEA; --br6:#E79AC0; --br7:#7BD69B;color-scheme:dark}
+:root[data-skin="col"]{--paper:#F3EDE3;--dot:#DCCFBB;--ink:#3A2A1E;--muted:#7A6553;--line:#B09A82;--card:#FFFBF5;--card-edge:#E4D6C2;--male:#2F6D8C;--female:#A8475C;--unknown:#8C7F6E;--gold:#B5652B;--gold-soft:#F2DCC8;--danger:#A33B2E;--sheet:#FFFBF5;--shadow:rgba(58,42,30,.14);--band:rgba(58,42,30,.045);--br0:#2F7F73; --br1:#B5652B; --br2:#7A4E8C; --br3:#8C5A2B; --br4:#5E7A24; --br5:#3F6390; --br6:#9B4F6B; --br7:#A0832A;color-scheme:light}
+:root[data-skin="bahar"]{--paper:#EEF3EA;--dot:#CFDCC8;--ink:#1F2A1D;--muted:#5B6B57;--line:#94A68C;--card:#FFFFFF;--card-edge:#D5E0CF;--male:#2E6E8E;--female:#C0507A;--unknown:#8A927F;--gold:#4C8C3A;--gold-soft:#DDEFD5;--danger:#B03A3A;--sheet:#FFFFFF;--shadow:rgba(31,42,29,.13);--band:rgba(31,42,29,.045);--br0:#3E8E5E; --br1:#C27A2C; --br2:#8456A8; --br3:#C5534A; --br4:#5A8A2A; --br5:#3B6BB0; --br6:#B44C86; --br7:#2F9C8A;color-scheme:light}
+:root[data-skin="murekkep"]{--paper:#FFFFFF;--dot:#E2E2E2;--ink:#000000;--muted:#333333;--line:#555555;--card:#FFFFFF;--card-edge:#222222;--male:#0B4F8A;--female:#8A0B4A;--unknown:#444444;--gold:#000000;--gold-soft:#EDEDED;--danger:#A00000;--sheet:#FFFFFF;--shadow:rgba(0,0,0,.18);--band:rgba(0,0,0,.05);--br0:#00695C; --br1:#8D5A00; --br2:#4A2C8A; --br3:#A12A12; --br4:#3B5E00; --br5:#0D3F8C; --br6:#86154E; --br7:#00664A;color-scheme:light}
 html,body{height:100%;margin:0}
 :root{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
 [hidden]{display:none!important}
@@ -79,6 +86,15 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-body);overflow
 .legend .lg{display:flex;align-items:center;gap:10px;margin-top:8px;line-height:1.35}
 .legend .lg svg{flex:none}
 .legend p{margin:10px 0 0;color:var(--muted);line-height:1.45;font-size:13px}
+.skins{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.skin{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:12px;border-radius:14px;border:2px solid var(--card-edge);background:var(--sp);color:var(--si);font:inherit;cursor:pointer;text-align:start}
+.skin.on{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+.skin b{font-weight:600;font-size:14px}
+.skin .sw{display:flex;gap:4px}.skin .sw i{width:18px;height:6px;border-radius:3px}
+.skin .mini{display:flex;align-items:center;width:100%}
+.skin .mc{flex:none;width:42px;height:22px;border-radius:7px;background:var(--sc);display:grid;place-items:center;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.skin .mc em{width:12px;height:12px;border-radius:50%}
+.skin .ml{flex:1;height:2.5px;margin:0 3px}
 .agerow{display:flex;align-items:center;gap:10px;margin:-4px 0 14px}
 .agerow .agebox{padding:7px 14px;min-width:40px}
 .bday{background:var(--gold-soft);color:var(--ink);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-weight:600}
@@ -320,7 +336,7 @@ Object.assign(TX.tr,{
  copy:"Kopyala",copied:"Kopyalandı",wa:"WhatsApp ile gönder",
  tMembers:"Üyeler",invite:"Yeni davet oluştur",inviteFor:"Kimin için",inviteForPh:"Örn. Halid",perm:"Yetki",
  permViewer:"Sadece görsün",permEditor:"Düzenleyebilsin",permAdmin:"Yönetici",makeInvite:"Davet linki oluştur",
- inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",addAsParent:(n,g)=>n+" de "+(g==="f"?"annesi":g==="m"?"babası":"ebeveyni")+" olsun",
+ inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",themes:"Tema ve renkler",addAsParent:(n,g)=>n+" de "+(g==="f"?"annesi":g==="m"?"babası":"ebeveyni")+" olsun",
  legendT:"Çizgiler ne anlama geliyor?",lgChild:"Renkli düz çizgi: anne-babadan çocuklarına. Her renk dedenin bir çocuğunun soyu.",lgMarried:"Altın çizgi: evli çift.",lgDivorced:"Kesik çizgi: boşanmış çift (sadece sen \"Boşandı\" olarak işaretlersen).",lgInlaw:"Noktalı çizgi: dışarıdan gelen gelin ya da damadın kendi anne-babasına bağlantısı. Üvey değildir.",
  lgStep:"\"Üvey\" sadece açıkça girilmiş bilgiyle gösterilir: iki kişinin de anne ve babası kayıtlıysa ve sadece biri ortaksa üvey kardeş sayılır. Bir ebeveyni eksik girilmiş kişi asla üvey sayılmaz.",instTitle:"Uygulamayı telefona yükle",instTitleJoin:"Hoş geldin! Uygulamayı telefona yükle",instText:"Yüklersen ana ekranında kendi simgesiyle durur, tam ekran ve internetsiz de açılır. Bir daha link gerekmez.",installBtn:"Yükle",installed:"Uygulama yüklendi",later:"Sonra",
  andStep1:"Chrome'da sağ üstteki ⋮ menüsüne dokun.",andStep2:"\"Uygulamayı yükle\" ya da \"Ana ekrana ekle\"yi seç. Ana ekranda simgesi çıkar, girişin hatırlanır.",
@@ -355,7 +371,7 @@ Object.assign(TX.ug,{
  copy:"كۆچۈرۈش",copied:"كۆچۈرۈلدى",wa:"WhatsApp ئارقىلىق ئەۋەتىش",
  tMembers:"ئەزالار",invite:"يېڭى تەكلىپ قۇرۇش",inviteFor:"كىم ئۈچۈن",inviteForPh:"مەسىلەن: خالىد",perm:"ھوقۇق",
  permViewer:"پەقەت كۆرسۇن",permEditor:"تەھرىرلىيەلىسۇن",permAdmin:"باشقۇرغۇچى",makeInvite:"تەكلىپ ئۇلىنىشى قۇرۇش",
- inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",addAsParent:(n,g)=>n+" مۇ "+(g==="f"?"ئانىسى":g==="m"?"دادىسى":"ئاتا-ئانىسى")+" بولسۇن",
+ inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",themes:"تېما ۋە رەڭلەر",addAsParent:(n,g)=>n+" مۇ "+(g==="f"?"ئانىسى":g==="m"?"دادىسى":"ئاتا-ئانىسى")+" بولسۇن",
  legendT:"سىزىقلار نېمىنى بىلدۈرىدۇ؟",lgChild:"رەڭلىك تۈز سىزىق: ئاتا-ئانىدىن بالىلىرىغا. ھەر بىر رەڭ بوۋىنىڭ بىر بالىسىنىڭ نەسلى.",lgMarried:"ئالتۇن رەڭ سىزىق: نىكاھلىق جۈپتلەر.",lgDivorced:"ئۈزۈك سىزىق: ئاجراشقان جۈپتلەر (پەقەت سىز «ئاجراشقان» دەپ بەلگىلىسىڭىز).",lgInlaw:"چېكىتلىك سىزىق: سىرتتىن كەلگەن كېلىن ياكى كۈيئوغۇلنىڭ ئۆز ئاتا-ئانىسىغا باغلىنىشى. ئۆگەي ئەمەس.",
  lgStep:"«ئۆگەي» پەقەت ئېنىق كىرگۈزۈلگەن ئۇچۇر بىلەنلا كۆرسىتىلىدۇ: ئىككى كىشىنىڭ ھەر ئىككىسىنىڭ ئاتا-ئانىسى خاتىرىلەنگەن بولۇپ، پەقەت بىرىلا ئورتاق بولسا ئۆگەي قېرىنداش ھېسابلىنىدۇ. ئاتا-ئانىسىنىڭ بىرى كەم كىرگۈزۈلگەن كىشى ھەرگىز ئۆگەي ھېسابلانمايدۇ.",instTitle:"ئەپنى تېلېفونغا قاچىلاش",instTitleJoin:"خۇش كەلدىڭىز! ئەپنى تېلېفونغا قاچىلاڭ",instText:"قاچىلىسىڭىز ئاساسىي ئېكراندا ئۆز بەلگىسى بىلەن تۇرىدۇ، تولۇق ئېكران ۋە تورسىز ئېچىلىدۇ. قايتا ئۇلىنىش كېرەك بولمايدۇ.",installBtn:"قاچىلاش",installed:"ئەپ قاچىلاندى",later:"كېيىن",
  andStep1:"Chrome نىڭ ئوڭ ئۈستىدىكى ⋮ تىزىملىكىنى بېسىڭ.",andStep2:"«ئەپنى قاچىلاش» ياكى «ئاساسىي ئېكرانغا قوشۇش» نى تاللاڭ. ئاساسىي ئېكراندا بەلگىسى چىقىدۇ، كىرىشىڭىز ئەستە قالىدۇ.",
@@ -646,6 +662,7 @@ function showTreeMenu(){
     ${others.length?`<span class="lb" style="margin-top:6px">${esc(t("switchTree"))}</span>`+others.map(o=>`<button class="btn" data-sw="${esc(o.id)}" dir="auto">${esc(o.title||t("title"))} · ${esc(roleName(o.role))}</button>`).join(""):""}
     ${isStandalone()?"":`<button class="btn pri" id="m-inst">${esc(t("instTitle"))}</button>`}
     <button class="btn" id="m-hist">${esc(t("history"))}</button>
+    <button class="btn" id="m-theme">${esc(t("themes"))}</button>
     <button class="btn" id="m-exp">${esc(t("exportT"))}</button>
     <button class="btn" id="m-bd">${esc(t("bdNotif"))}${bdOn()?` <span class="pill">${esc(t("on"))}</span>`:""}</button>
     ${T.role==="admin"?`<button class="btn" id="m-bak">${esc(t("backup"))}${backupDue(T)?` <span class="pill">${esc(t("backupDue"))}</span>`:""}</button>`:""}
@@ -661,7 +678,7 @@ function showTreeMenu(){
   if($("m-mem"))$("m-mem").onclick=showMembers;
   sheet.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{const id=b.dataset.go;closeSheet();revealPerson(id);select(id);});
   if($("m-inst"))$("m-inst").onclick=()=>showInstall(false);
-  $("m-hist").onclick=showHistory;$("m-exp").onclick=showExport;$("m-bd").onclick=showBdNotif;
+  $("m-hist").onclick=showHistory;$("m-exp").onclick=showExport;$("m-theme").onclick=showThemes;$("m-bd").onclick=showBdNotif;
   if($("m-bak"))$("m-bak").onclick=showBackup;
   if($("m-rec"))$("m-rec").onclick=async()=>{let tk=null;
     try{const rows=await rpc("list_members_v2",{p_tree:T.id,p_token:T.token});const key=keyOf(T);
@@ -1175,8 +1192,9 @@ function drawTree(){
   const W=L.W+PAD*2, H=L.H+PAD*2+HEAD;
   const cv=document.createElement("canvas");cv.width=Math.round(W*scale);cv.height=Math.round(H*scale);
   const c=cv.getContext("2d");c.scale(scale,scale);
-  const col={bg:"#F4F6F1",band:"rgba(30,39,36,.045)",line:"#8C9792",gold:"#B67D12",muted:"#5E6B66",ink:"#1E2724",card:"#FFFFFF",edge:"#D3D9D2",m:"#2B6A8A",f:"#A8466A",u:"#8A8F7C",
-    br:["#2F7F73","#B07A1E","#7A4E8C","#B4553A","#5E7A24","#3F6390","#9B4F6B","#2E7D4F"]};
+  const cs=getComputedStyle(document.documentElement),v=n=>cs.getPropertyValue(n).trim();
+  const col={bg:v("--paper"),band:v("--band"),line:v("--line"),gold:v("--gold"),muted:v("--muted"),ink:v("--ink"),card:v("--card"),edge:v("--card-edge"),m:v("--male"),f:v("--female"),u:v("--unknown"),
+    br:[0,1,2,3,4,5,6,7].map(i=>v("--br"+i))};
   const font=(w,sz)=>`${w} ${sz}px Figtree, "Noto Sans Arabic", system-ui, sans-serif`;
   c.fillStyle=col.bg;c.fillRect(0,0,W,H);
   c.fillStyle=col.ink;c.font=`400 34px "Young Serif", Georgia, serif`;c.textBaseline="alphabetic";
@@ -1273,6 +1291,22 @@ function showInstall(afterJoin){if(isStandalone())return;const T=CUR();sheetMode
   $("in-later").onclick=closeSheet;
   if($("lk-copy")){const link=linkFor(T.id,T.token,T.key);$("lk-copy").onclick=()=>copyText(link,"lk-box");}
   if($("in-go"))$("in-go").onclick=async()=>{const ev=installEvt;installEvt=null;try{ev.prompt();const r=await ev.userChoice;if(r&&r.outcome==="accepted")closeSheet();}catch(e){}};}
+
+/* ---------- Temalar ---------- */
+const SKINS=Object.assign({auto:{tr:"Sistem (açık/koyu)",ug:"سىستېما (يورۇق/قاراڭغۇ)",paper:"#ECEFE9",ink:"#1E2724",gold:"#B67D12",m:"#2B6A8A",f:"#A8466A",b:["#2F7F73","#B07A1E","#7A4E8C"],card:"#FBFCFA"}},{"kasgar": {"tr": "Kaşgar", "ug": "قەشقەر", "paper": "#EAF1F3", "ink": "#13303A", "gold": "#138A8A", "m": "#1F6E9C", "f": "#B04A6E", "b": ["#1F7A8C", "#C2872F", "#6B5AA6"], "card": "#FFFFFF"}, "gece": {"tr": "Gece", "ug": "كېچە", "paper": "#0F1420", "ink": "#E8ECF4", "gold": "#E6B85C", "m": "#7FB3E6", "f": "#E79AB8", "b": ["#6FD0C0", "#E6B85C", "#B9A0E6"], "card": "#182033"}, "col": {"tr": "Çöl", "ug": "چۆل", "paper": "#F3EDE3", "ink": "#3A2A1E", "gold": "#B5652B", "m": "#2F6D8C", "f": "#A8475C", "b": ["#2F7F73", "#B5652B", "#7A4E8C"], "card": "#FFFBF5"}, "bahar": {"tr": "Bahar", "ug": "باھار", "paper": "#EEF3EA", "ink": "#1F2A1D", "gold": "#4C8C3A", "m": "#2E6E8E", "f": "#C0507A", "b": ["#3E8E5E", "#C27A2C", "#8456A8"], "card": "#FFFFFF"}, "murekkep": {"tr": "Yüksek kontrast", "ug": "يۇقىرى سېلىشتۇرما", "paper": "#FFFFFF", "ink": "#000000", "gold": "#000000", "m": "#0B4F8A", "f": "#8A0B4A", "b": ["#00695C", "#8D5A00", "#4A2C8A"], "card": "#FFFFFF"}});
+function curSkin(){try{return localStorage.getItem("secere-skin")||"auto";}catch(e){return"auto";}}
+function applySkin(k){if(k==="auto")document.documentElement.removeAttribute("data-skin");else document.documentElement.setAttribute("data-skin",k);
+  try{localStorage.setItem("secere-skin",k==="auto"?"":k);}catch(e){}
+  const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",getComputedStyle(document.documentElement).getPropertyValue("--paper").trim()||"#1E2724");}
+function showThemes(){sheetMode="menu";const cur=curSkin();
+  openSheet(`<div class="sh-head"><h2>${esc(t("themes"))}</h2><button class="x" id="sh-x">×</button></div>
+   <div class="skins">${Object.entries(SKINS).map(([k,v])=>`<button class="skin${cur===k?" on":""}" data-skin="${k}" style="--sp:${v.paper};--si:${v.ink};--sc:${v.card}">
+     <span class="sw"><i style="background:${v.b[0]}"></i><i style="background:${v.b[1]}"></i><i style="background:${v.b[2]}"></i></span>
+     <span class="mini"><span class="mc"><em style="background:${v.m}"></em></span><span class="ml" style="background:${v.gold}"></span><span class="mc"><em style="background:${v.f}"></em></span></span>
+     <b>${esc(v[LANG])}</b></button>`).join("")}</div>
+   <button class="btn" id="th-back" style="width:100%;margin-top:12px">${esc(t("back"))}</button>`);
+  $("th-back").onclick=showTreeMenu;
+  sheet.querySelectorAll("[data-skin]").forEach(b=>b.onclick=()=>{applySkin(b.dataset.skin);showThemes();});}
 
 /* ---------- Alt panel ---------- */
 const sheet=$("sheet"); let sheetMode=null, noteTimer=null, lastNote="";
@@ -1408,7 +1442,7 @@ $("first-add").onclick=()=>formView(t("tFirst"),t("firstSub"),{withNote:true},as
 
 let tt;function toast(m){const el=$("toast");el.textContent=m;el.hidden=false;clearTimeout(tt);tt=setTimeout(()=>el.hidden=true,2600);}
 addEventListener("resize",()=>{if(!S.people.size)fit();});
-applyLang(); applyT(); render(); bootData();
+applySkin(curSkin()); applyLang(); applyT(); render(); bootData();
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
 })();
 </script>
