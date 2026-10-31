@@ -61,6 +61,13 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-body);overflow
 #edges .wed{stroke:var(--gold);stroke-width:2.6}
 .yrs{display:grid;grid-template-columns:1fr 1fr 0.8fr;gap:8px;margin-bottom:14px}
 .yrs .field{margin:0;min-width:0}
+.drow{display:grid;grid-template-columns:0.8fr 1.4fr 1fr;gap:6px}
+.drow select{font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--card-edge);border-radius:12px;padding:10px 8px;min-width:0}
+.drow input{min-width:0}
+.agerow{display:flex;align-items:center;gap:10px;margin:-4px 0 14px}
+.agerow .agebox{padding:7px 14px;min-width:40px}
+.bday{background:var(--gold-soft);color:var(--ink);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-weight:600}
+.bdl{display:flex;flex-direction:column;gap:6px;margin-bottom:6px}
 .agebox{border:1px dashed var(--card-edge);border-radius:12px;padding:11px 12px;font-size:16px;font-weight:600;color:var(--ink);background:var(--card);min-height:20px;text-align:center}
 #edges .inlaw{stroke:var(--muted);stroke-width:1.8;stroke-dasharray:2 6}
 .card{position:absolute;width:156px;height:64px;display:flex;align-items:center;gap:10px;padding:0 12px;
@@ -279,6 +286,7 @@ function guessGender(full){
 
 /* ---------- Ek metinler ---------- */
 Object.assign(TX.tr,{
+ bornD:"Doğum tarihi",badDates:"Vefat tarihi doğumdan önce olamaz.",diedD:"Vefat tarihi (varsa)",dayPh:"Gün",monthPh:"Ay",yearPh:"Yıl",bdayToday:"Bugün doğum günü!",upcoming:"Yaklaşan doğum günleri",inDays:n=>n===0?"bugün":n===1?"yarın":n+" gün sonra",turns:a=>a+" yaşına giriyor",
  genWord:". kuşak",fold:"Dalı kapat",unfold:"Dalı aç",search:"Ara",searchPh:"İsim yaz…",noResult:"Bulunamadı",
  roleAdmin:"yönetici",roleEditor:"düzenleyebilir",roleViewer:"görüntüleyebilir",
  synced:"eşitlendi",syncing:"eşitleniyor…",pending:"internet gelince gönderilecek",offline2:"çevrimdışı",
@@ -301,6 +309,7 @@ Object.assign(TX.tr,{
  readOnlyNote:"Bu ağacı sadece görüntüleyebilirsin."
 });
 Object.assign(TX.ug,{
+ bornD:"تۇغۇلغان ۋاقتى",badDates:"ۋاپات ۋاقتى تۇغۇلۇشتىن بۇرۇن بولالمايدۇ.",diedD:"ۋاپات بولغان ۋاقتى (بولسا)",dayPh:"كۈن",monthPh:"ئاي",yearPh:"يىل",bdayToday:"بۈگۈن تۇغۇلغان كۈنى!",upcoming:"يېقىنلاشقان تۇغۇلغان كۈنلەر",inDays:n=>n===0?"بۈگۈن":n===1?"ئەتە":n+" كۈندىن كېيىن",turns:a=>a+" ياشقا كىرىدۇ",
  genWord:"-ئەۋلاد",fold:"شاخنى يىغىش",unfold:"شاخنى ئېچىش",search:"ئىزدەش",searchPh:"ئىسىم يېزىڭ…",noResult:"تېپىلمىدى",
  roleAdmin:"باشقۇرغۇچى",roleEditor:"تەھرىرلىيەلەيدۇ",roleViewer:"كۆرەلەيدۇ",
  synced:"ماسلاشتۇرۇلدى",syncing:"ماسلاشتۇرۇلۇۋاتىدۇ…",pending:"تور ئۇلانغاندا يوللىنىدۇ",offline2:"تورسىز",
@@ -474,10 +483,14 @@ function linkBox(link,msg){
 }
 function wireLinkBox(link){$("lk-copy").onclick=()=>copyText(link,"lk-box");$("lk-box").onclick=e=>e.target.select();}
 
+function upcomingHtml(){const list=[...S.people.values()].map(p=>({p,n:daysToBday(p)})).filter(x=>x.n!=null&&x.n<=30).sort((a,b)=>a.n-b.n).slice(0,6);
+  if(!list.length)return"";return`<span class="lb">${esc(t("upcoming"))}</span><div class="bdl">${list.map(({p,n})=>{const a=ageOf(p);
+    return`<button class="qrow" data-go="${esc(p.id)}"><span class="av ${p.gender||""}" style="width:30px;height:30px;font-size:13px">${esc(initial(p.name))}</span><span style="min-width:0"><b dir="auto">${esc(p.name)}</b><small>${esc(fmtD(p.born).replace(/\s?\d{4}$/,""))} · ${esc(t("inDays",n))}${a!=null?" · "+esc(t("turns",n===0?a:a+1)):""}</small></span></button>`;}).join("")}</div>`;}
 function showTreeMenu(){
   const T=CUR(); if(!T)return; if(sheetMode==="view")flushNote(); S.sel=null; sheetMode="menu";
   const others=Object.values(DB.trees).filter(x=>x.id!==T.id);
   openSheet(`<div class="sh-head"><div style="min-width:0"><h2 dir="auto">${esc(T.title||t("title"))}</h2><div style="color:var(--muted);font-size:13px">${esc(t("yourRole"))}: ${esc(roleName(T.role))}</div></div><button class="x" id="sh-x">×</button></div>
+   ${upcomingHtml()}
    <div class="menu">
     ${T.role==="admin"?`<button class="btn pri" id="m-mem">${esc(t("members"))}</button>`:""}
     ${T.role==="admin"?`<button class="btn" id="m-rec">${esc(t("recovery"))}</button>`:""}
@@ -486,6 +499,7 @@ function showTreeMenu(){
     <button class="btn danger" id="m-leave">${esc(t("removeDevice"))}</button>
    </div>`);
   if($("m-mem"))$("m-mem").onclick=showMembers;
+  sheet.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{const id=b.dataset.go;closeSheet();revealPerson(id);select(id);});
   if($("m-rec"))$("m-rec").onclick=()=>{const link=linkFor(T.id,T.token,T.key);sheetMode="menu";
     openSheet(`<div class="sh-head"><h2>${esc(t("recovery"))}</h2><button class="x" id="sh-x">×</button></div><div class="warn">${esc(t("recText"))}</div>
       <textarea id="lk-box" class="linkbox" readonly dir="ltr">${esc(link)}</textarea><div class="acts"><button class="btn" id="m-b">${esc(t("back"))}</button><button class="btn pri" id="lk-copy">${esc(t("copy"))}</button></div>`);
@@ -553,11 +567,24 @@ function bootData(){
 }
 
 /* ---------- Yaş ---------- */
-function yearOf(v){const n=parseInt(String(v||"").replace(/[^0-9]/g,""),10);return Number.isFinite(n)&&n>0?n:null;}
-function ageOf(p){const b=yearOf(p.born);if(!b)return null;const d=yearOf(p.died);const a=(d||new Date().getFullYear())-b;return a>=0&&a<=125?a:null;}
-function lifeText(p){const b=yearOf(p.born);if(!b)return "";const d=yearOf(p.died);const a=ageOf(p);
-  if(d)return esc(b+"–"+d)+(a!=null?" · "+t("ageDied",a):"");
-  return esc(String(b))+(a!=null?" · "+t("ageNow",a):"");}
+/* tarih: "1976", "1976-05" ya da "1976-05-14" */
+function parseD(v){const m=String(v||"").match(/(\d{4})(?:\D+(\d{1,2}))?(?:\D+(\d{1,2}))?/);if(!m)return null;
+  const y=+m[1],mo=m[2]?+m[2]:null,d=m[3]?+m[3]:null;if(y<1)return null;return{y,m:mo>=1&&mo<=12?mo:null,d:mo&&d>=1&&d<=31?d:null};}
+function yearOf(v){const d=parseD(v);return d?d.y:null;}
+function dateKey(v){const d=parseD(v);return d?d.y*10000+(d.m||0)*100+(d.d||0):99999999;}
+function ageOf(p){const b=parseD(p.born);if(!b)return null;const now=new Date();const e=parseD(p.died)||{y:now.getFullYear(),m:now.getMonth()+1,d:now.getDate()};
+  let a=e.y-b.y;if(b.m&&e.m&&(e.m<b.m||(e.m===b.m&&b.d&&e.d&&e.d<b.d)))a--;return a>=0&&a<=125?a:null;}
+const MONTHS={tr:["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"],
+  ug:["يانۋار","فېۋرال","مارت","ئاپرېل","ماي","ئىيۇن","ئىيۇل","ئاۋغۇست","سېنتەبىر","ئۆكتەبىر","نويابىر","دېكابىر"]};
+function fmtD(v,short){const d=parseD(v);if(!d)return"";const pad=n=>String(n).padStart(2,"0");
+  if(d.m&&d.d)return short?pad(d.d)+"."+pad(d.m)+"."+d.y:d.d+" "+MONTHS[LANG][d.m-1]+" "+d.y;
+  if(d.m)return MONTHS[LANG][d.m-1]+" "+d.y;return String(d.y);}
+function bdayToday(p){const b=parseD(p.born);if(!b||!b.m||!b.d||p.died)return false;const n=new Date();return n.getMonth()+1===b.m&&n.getDate()===b.d;}
+function daysToBday(p){const b=parseD(p.born);if(!b||!b.m||!b.d||parseD(p.died))return null;const n=new Date();n.setHours(0,0,0,0);
+  let nx=new Date(n.getFullYear(),b.m-1,b.d);if(nx<n)nx=new Date(n.getFullYear()+1,b.m-1,b.d);return Math.round((nx-n)/864e5);}
+function lifeText(p,full){const b=parseD(p.born);if(!b)return "";const d=parseD(p.died);const a=ageOf(p);const cake=bdayToday(p)?"🎂 ":"";
+  if(d)return esc(full?fmtD(p.born)+" – "+fmtD(p.died):b.y+"–"+d.y)+(a!=null?" · "+t("ageDied",a):"");
+  return cake+esc(full?fmtD(p.born):fmtD(p.born,true))+(a!=null?" · "+t("ageNow",a):"");}
 
 /* ---------- İşlemler ---------- */
 const P=id=>id?S.people.get(id):null;
@@ -598,7 +625,7 @@ function computeLayout(){
     const ba=blood.has(p.id),bb=blood.has(s.id); if(ba&&!bb) return p.id; if(bb&&!ba) return s.id;
     const a=hasPar(p),b=hasPar(s); if(a&&!b) return p.id; if(b&&!a) return s.id;
     return ((p.created||0)<(s.created||0)||((p.created||0)===(s.created||0)&&p.id<s.id))?p.id:s.id;};
-  const yr=p=>{const n=parseInt(String(p.born||"").replace(/[^0-9]/g,""),10);return Number.isFinite(n)&&n>0?n:99999;};
+  const yr=p=>dateKey(p.born);
   const order=(a,b)=>(yr(a)-yr(b))||((a.created||0)-(b.created||0));
   /* dal renkleri: atanın her çocuğu bir dal başlatır, torunlar o rengi taşır */
   const branch=new Map();
@@ -860,7 +887,7 @@ function relChips(p){
 function showView(id,recenter=true){
   const p=P(id);if(!p)return; sheetMode="view"; lastNote=p.note||"";
   const s=spouseOf(p), par=parentsOf(p);
-  const head=`<div class="sh-head"><span class="av ${p.gender||""}">${esc(initial(p.name))}</span><div style="min-width:0"><h2 dir="auto">${esc(p.name||t("unnamed"))}</h2><div style="color:var(--muted);font-size:13px">${p.gender==="m"?t("male"):p.gender==="f"?t("female"):t("noGender")}${lifeText(p)?" · "+lifeText(p):""}</div></div><button class="x" id="sh-x">×</button></div>`;
+  const head=`<div class="sh-head"><span class="av ${p.gender||""}">${esc(initial(p.name))}</span><div style="min-width:0"><h2 dir="auto">${esc(p.name||t("unnamed"))}</h2><div style="color:var(--muted);font-size:13px">${p.gender==="m"?t("male"):p.gender==="f"?t("female"):t("noGender")}${lifeText(p,true)?" · "+lifeText(p,true):""}</div></div><button class="x" id="sh-x">×</button></div>`+(bdayToday(p)?`<div class="bday">🎂 ${esc(t("bdayToday"))}</div>`:"");
   let body;
   if(S.canWrite){
     const pl=par.length?(par[0].gender==="m"?t("addMother"):par[0].gender==="f"?t("addFather"):t("addParent")):t("addParents");
@@ -887,6 +914,13 @@ async function flushNote(){clearTimeout(noteTimer);const ta=$("sh-note");if(!ta|
   if(v===lastNote){const sv=$("sh-saved");if(sv&&sv.textContent===t("typing"))sv.textContent="";return;}
   lastNote=v;const id=S.sel;try{await store.update(id,{note:v});const sv=$("sh-saved");if(sv&&S.sel===id)sv.textContent=t("saved");}catch(e){}}
 
+function dateRow(k,label,val){const d=parseD(val)||{};
+  return`<div class="field"><span class="lb">${esc(label)}</span><div class="drow">
+   <input type="text" inputmode="numeric" id="f-${k}d" maxlength="2" placeholder="${esc(t("dayPh"))}" value="${d.d||""}" dir="ltr" aria-label="${esc(t("dayPh"))}">
+   <select id="f-${k}m" aria-label="${esc(t("monthPh"))}"><option value="">${esc(t("monthPh"))}</option>${MONTHS[LANG].map((m,i)=>`<option value="${i+1}"${d.m===i+1?" selected":""}>${esc(m)}</option>`).join("")}</select>
+   <input type="text" inputmode="numeric" id="f-${k}y" maxlength="4" placeholder="${esc(t("yearPh"))}" value="${d.y||""}" dir="ltr" aria-label="${esc(t("yearPh"))}"></div></div>`;}
+function readDate(k){const y=($("f-"+k+"y").value||"").replace(/\D/g,"");if(y.length!==4)return"";const m=+$("f-"+k+"m").value||0;const d=+($("f-"+k+"d").value||"").replace(/\D/g,"")||0;
+  const pad=n=>String(n).padStart(2,"0");return y+(m?"-"+pad(m)+(d>=1&&d<=31?"-"+pad(d):""):"");}
 function formView(title,sub,def,onSave){
   sheetMode="form";
   openSheet(`<div class="sh-head"><div style="min-width:0"><h2>${esc(title)}</h2>${sub?`<div style="color:var(--muted);font-size:13px" dir="auto">${esc(sub)}</div>`:""}</div><button class="x" id="sh-x">×</button></div>
@@ -895,16 +929,16 @@ function formView(title,sub,def,onSave){
     <div class="field"><span class="lb">${t("gender")}</span>
       <div class="seg"><input type="radio" name="g" id="g-m" value="m"><label for="g-m">${t("male")}</label><input type="radio" name="g" id="g-f" value="f"><label for="g-f">${t("female")}</label></div>
       <div class="hint" id="g-hint"></div></div>
-    <div class="yrs"><div class="field"><label class="lb" for="f-born">${t("bornY")}</label><input type="text" inputmode="numeric" id="f-born" placeholder="1952" value="${esc(def.born||"")}" dir="ltr"></div>
-    <div class="field"><label class="lb" for="f-died">${t("diedY")}</label><input type="text" inputmode="numeric" id="f-died" placeholder="—" value="${esc(def.died||"")}" dir="ltr"></div>
-    <div class="field"><span class="lb">${t("age")}</span><div class="agebox" id="f-age">—</div></div></div>
+    ${dateRow("b",t("bornD"),def.born)}
+    ${dateRow("d",t("diedD"),def.died)}
+    <div class="agerow"><span class="lb" style="margin:0">${t("age")}</span><div class="agebox" id="f-age">—</div></div>
     ${def.withNote?`<div class="field"><label class="lb" for="f-note">${t("noteOpt")}</label><textarea id="f-note" dir="auto" placeholder="${esc(t("notePh2"))}"></textarea></div>`:""}
     <div class="acts"><button type="button" class="btn" id="f-cancel">${t("cancel")}</button><button type="submit" class="btn pri">${t("save")}</button></div>
   </form>`);
   const nm=$("f-name"),hint=$("g-hint");let manual=!!def.gender;
   if(def.gender)$("g-"+def.gender).checked=true;
-  const ageUpd=()=>{const a=ageOf({born:$("f-born").value,died:$("f-died").value});$("f-age").textContent=a==null?"—":a;};
-  $("f-born").addEventListener("input",ageUpd);$("f-died").addEventListener("input",ageUpd);ageUpd();
+  const ageUpd=()=>{const a=ageOf({born:readDate("b"),died:readDate("d")});$("f-age").textContent=a==null?"—":a;};
+  sheet.querySelectorAll(".drow input,.drow select").forEach(x=>{x.addEventListener("input",ageUpd);x.addEventListener("change",ageUpd);});ageUpd();
   const upd=()=>{if(manual)return;const g=guessGender(nm.value);sheet.querySelectorAll('input[name=g]').forEach(r=>r.checked=r.value===g);
     hint.className="hint"+(g?" ok":"");hint.textContent=g?t("hGuess"):(nm.value.trim()?t("hNoGuess"):"");};
   if(def.gender){hint.textContent=def.genderHint||"";}else upd();
@@ -913,7 +947,8 @@ function formView(title,sub,def,onSave){
   $("f-cancel").onclick=()=>def.back?def.back():closeSheet();
   $("pf").onsubmit=async e=>{e.preventDefault();const name=nm.value.trim();if(!name){nm.focus();return;}
     const g=(sheet.querySelector('input[name=g]:checked')||{}).value||"";
-    const f={name,gender:g,born:$("f-born").value.trim(),died:$("f-died").value.trim(),note:def.withNote?$("f-note").value:""};
+    const f={name,gender:g,born:readDate("b"),died:readDate("d"),note:def.withNote?$("f-note").value:""};
+    if(f.born&&f.died&&dateKey(f.died)<dateKey(f.born)){toast(t("badDates"));return;}
     const btn=sheet.querySelector('[type=submit]');btn.disabled=true;
     try{const nid=await onSave(f);closeSheet();if(nid){if(P(nid))select(nid);else S.pending=nid;}}catch(err){btn.disabled=false;}};
   setTimeout(()=>nm.focus(),180);
