@@ -95,6 +95,9 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-body);overflow
 #tools button,#zoom button{width:40px;height:40px;border:0;border-radius:10px;background:transparent;color:var(--ink);font:600 20px/1 var(--f-body);cursor:pointer;display:grid;place-items:center}
 #tools button:hover,#zoom button:hover{background:var(--paper)}
 #tools button:focus-visible,#zoom button:focus-visible{outline:2px solid var(--gold)}
+#who{position:relative}
+#who .badge{position:absolute;top:2px;inset-inline-end:0;min-width:16px;height:16px;padding:0 4px;box-sizing:border-box;border-radius:8px;background:var(--ink);color:var(--paper);font:700 10px/16px var(--f-body);text-align:center}
+#who .badge.new{background:var(--gold);color:#fff}
 #tools .lang{font-size:13px;width:auto;padding:0 10px}
 #tools .lock.on{color:var(--gold)}
 .err{color:var(--danger);font-size:13px;min-height:16px;margin-top:6px}
@@ -181,6 +184,7 @@ a.btn{text-decoration:none}
 
 <div id="brand" class="chip" role="button" tabindex="0"><h1 id="brand-title"></h1><span id="count"></span></div>
 <div id="tools" class="chip">
+  <button id="who" hidden><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7.5" cy="7" r="3"/><path d="M2 17c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="14" cy="6" r="2.3"/><path d="M14.5 11c2.2.3 3.5 2.1 3.5 4.5"/></svg><span class="badge" id="who-n"></span></button>
   <button id="find"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg></button>
   <button id="lang" class="lang"></button>
   <button id="lock" class="lock">
@@ -296,12 +300,12 @@ Object.assign(TX.tr,{
  importMac:n=>"Bu bilgisayardaki "+n+" kişiyi ağaca aktar",importFile:"Yedek dosyasından aktar (isteğe bağlı)",create:"Oluştur",creating:"Oluşturuluyor…",
  tJoin:"Davete katıl",joinText:"Sana gönderilen davet linkini buraya yapıştır.",joinPh:"Davet linki",join:"Katıl",joining:"Bağlanıyor…",badLink:"Bu davet linki geçersiz.",noAccess:"Bu davet iptal edilmiş ya da geçersiz.",netErr:"Sunucuya ulaşılamadı. İnternetini kontrol et.",
  joined:"Ağaca katıldın",created:"Ağaç oluşturuldu",
- tTree:"Ağaç",yourRole:"Yetkin",members:"Üyeler ve davetler",recovery:"Kurtarma linkim",otherTree:"Başka bir ağaca katıl / yeni ağaç",switchTree:"Ağaçlarım",removeDevice:"Bu ağacı bu cihazdan kaldır",
+ tTree:"Ağaç",yourRole:"Yetkin",members:"Üyeler ve davet linkleri",recovery:"Kurtarma linkim",otherTree:"Başka bir ağaca katıl / yeni ağaç",switchTree:"Ağaçlarım",removeDevice:"Bu ağacı bu cihazdan kaldır",
  recText:"Bu link senin anahtarın. Telefonunu kaybedersen bu linkle ağaca tekrar yönetici olarak girersin. Kimseyle paylaşma, güvenli bir yere kaydet.",
  copy:"Kopyala",copied:"Kopyalandı",wa:"WhatsApp ile gönder",
  tMembers:"Üyeler",invite:"Yeni davet oluştur",inviteFor:"Kimin için",inviteForPh:"Örn. Halid",perm:"Yetki",
  permViewer:"Sadece görsün",permEditor:"Düzenleyebilsin",permAdmin:"Yönetici",makeInvite:"Davet linki oluştur",
- inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu link tek kişiliktir: ilk açan kişinin telefonuna özel olur, sonra başkası kullanamaz. Kullanılana kadar Üyeler listesinden tekrar görebilirsin. Her akrabaya ayrı davet oluştur.",unused:"link henüz kullanılmadı",showLink:"Linki göster",usedLink:"Bu davet linki daha önce kullanılmış ya da iptal edilmiş. Yöneticiden yeni bir davet iste.",
+ inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",whoTitle:n=>"Ağaca girenler: "+n,joinedPeople:"Ağaca girenler",invAdminTxt:"Her şeyi yapar, üyeleri yönetir",invEditorTxt:"Kişi ekler ve düzenler",invViewerTxt:"Sadece görür",showLink:"Linki göster",makeLink:"Link oluştur",delLink:"Linki sil",delOldLink:"Eski linki sil",linkFor:r=>r+" linki",confirmDelLink:r=>"\""+r+"\" linki çalışmaz hale gelecek. Bu linkle daha önce girenlerin erişimi devam eder, istersen onları aşağıdan tek tek kaldırırsın.",linkDeleted:"Link silindi",noName:"İsimsiz üye",joinNameText:"Ağaca katılmak üzeresin. Adını yaz ki yönetici seni tanısın.",joinNamePh:"Örn. Halid",
  me:"sen",lastSeen:"son giriş",never:"henüz girmedi",remove:"Kaldır",removed:"Erişimi kaldırıldı",back:"Geri",
  confirmRemove:x=>x+" ağaca erişimini kaybedecek. Emin misin?",yes:"Evet",
  confirmLeave:"Bu ağaç bu cihazdan silinecek. Buluttaki ağaç ve diğer üyeler etkilenmez. Kurtarma linkin yoksa geri dönemezsin.",
@@ -324,7 +328,7 @@ Object.assign(TX.ug,{
  copy:"كۆچۈرۈش",copied:"كۆچۈرۈلدى",wa:"WhatsApp ئارقىلىق ئەۋەتىش",
  tMembers:"ئەزالار",invite:"يېڭى تەكلىپ قۇرۇش",inviteFor:"كىم ئۈچۈن",inviteForPh:"مەسىلەن: خالىد",perm:"ھوقۇق",
  permViewer:"پەقەت كۆرسۇن",permEditor:"تەھرىرلىيەلىسۇن",permAdmin:"باشقۇرغۇچى",makeInvite:"تەكلىپ ئۇلىنىشى قۇرۇش",
- inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىش بىر كىشىلىك: تۇنجى ئاچقان كىشىنىڭ تېلېفونىغا خاس بولىدۇ، كېيىن باشقىلار ئىشلىتەلمەيدۇ. ئىشلىتىلگۈچە ئەزالار تىزىملىكىدىن قايتا كۆرەلەيسىز. ھەر بىر تۇغقانغا ئايرىم تەكلىپ قۇرۇڭ.",unused:"ئۇلىنىش تېخى ئىشلىتىلمىدى",showLink:"ئۇلىنىشنى كۆرسىتىش",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئىشلىتىلگەن ياكى بىكار قىلىنغان. باشقۇرغۇچىدىن يېڭى تەكلىپ سوراڭ.",
+ inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",whoTitle:n=>"دەرەخكە كىرگەنلەر: "+n,joinedPeople:"دەرەخكە كىرگەنلەر",invAdminTxt:"ھەممىنى قىلالايدۇ، ئەزالارنى باشقۇرىدۇ",invEditorTxt:"كىشى قوشىدۇ ۋە تەھرىرلەيدۇ",invViewerTxt:"پەقەت كۆرىدۇ",showLink:"ئۇلىنىشنى كۆرسىتىش",makeLink:"ئۇلىنىش قۇرۇش",delLink:"ئۇلىنىشنى ئۆچۈرۈش",delOldLink:"كونا ئۇلىنىشنى ئۆچۈرۈش",linkFor:r=>r+" ئۇلىنىشى",confirmDelLink:r=>"\""+r+"\" ئۇلىنىشى ئىشلىمەيدىغان بولىدۇ. ئىلگىرى كىرگەنلەرنىڭ ھوقۇقى داۋاملىشىدۇ، خالىسىڭىز تۆۋەندىن بىر-بىرلەپ چىقىرىۋېتەلەيسىز.",linkDeleted:"ئۇلىنىش ئۆچۈرۈلدى",noName:"ئىسىمسىز ئەزا",joinNameText:"دەرەخكە قوشۇلماقچى بولۇۋاتىسىز. باشقۇرغۇچى تونۇسۇن ئۈچۈن ئىسمىڭىزنى يېزىڭ.",joinNamePh:"مەسىلەن: خالىد",
  me:"سىز",lastSeen:"ئاخىرقى كىرىش",never:"تېخى كىرمىدى",remove:"چىقىرىۋېتىش",removed:"ھوقۇقى بىكار قىلىندى",back:"قايتىش",
  confirmRemove:x=>x+" دەرەخكە كىرەلمەيدۇ. جەزملەشتۈرەمسىز؟",yes:"ھەئە",
  confirmLeave:"بۇ دەرەخ بۇ ئۈسكۈنىدىن ئۆچۈرۈلىدۇ. بۇلۇتتىكى دەرەخ ۋە باشقا ئەزالارغا تەسىر يەتمەيدۇ. ئەسلىگە كەلتۈرۈش ئۇلىنىشىڭىز بولمىسا قايتالمايسىز.",
@@ -387,6 +391,12 @@ function merge(base,local,remote){
     const v=changed?l:r; if(v)out[id]=v;});
   return out;
 }
+let WHO={n:0,ids:[]};
+async function refreshWho(){const T=CUR();const b=$("who");if(!T||T.role!=="admin"){b.hidden=true;return;}b.hidden=false;
+  try{const rows=await rpc("list_members",{p_tree:T.id,p_token:T.token});const ppl=rows.filter(m=>m.kind!=="invite"&&!m.is_me);
+    const seenIds=new Set(T.seenMembers||[]);const fresh=ppl.filter(m=>!seenIds.has(m.id)).length;
+    const n=$("who-n");n.textContent=fresh?"+"+fresh:(ppl.length||"");n.classList.toggle("new",!!fresh);n.hidden=!ppl.length&&!fresh;
+    WHO={ids:ppl.map(m=>m.id)};b.title=t("whoTitle",ppl.length);b.setAttribute("aria-label",b.title);}catch(e){}}
 async function pull(){
   const T=CUR(); if(!T)return;
   try{
@@ -397,7 +407,7 @@ async function pull(){
       T.people=T.dirty?merge(T.base||{},T.people,doc.people||{}):(doc.people||{});
       T.base=doc.people||{}; T.version=r.version; T.title=doc.title||T.title;
     }
-    saveDB(); SYNC=T.dirty?"syncing":"ok"; setPeopleFromCur(); renderStatus();
+    saveDB(); SYNC=T.dirty?"syncing":"ok"; setPeopleFromCur(); renderStatus(); refreshWho();
     if(T.dirty)push();
   }catch(e){ SYNC=e.code==="no_access"?"noaccess":"pending"; renderStatus(); if(e.code==="no_access")toast(t("noAccess")); }
 }
@@ -420,13 +430,13 @@ async function createTree(title,label,people){
   DB.trees[id]={id,token,key:b64u.enc(key),role:"admin",title,people:T0.people,base:JSON.parse(JSON.stringify(T0.people)),version:1,dirty:false};
   DB.cur=id; saveDB(); S.fitted=false; SYNC="ok"; setPeopleFromCur(); renderStatus(); showOnboarding(false);
 }
-async function joinTree(link){
+async function joinTree(link,name){
   const p=parseLink(link); if(!p)throw Object.assign(new Error("bad"),{code:"bad"});
   let token=p.token;
   /* davet tek kişilik: ilk açan cihaz kendi anahtarını alır, link bir daha çalışmaz */
   if(!(DB.trees[p.id]&&DB.trees[p.id].token===p.token)){
     const nt=newToken(); let res;
-    try{res=await rpc("claim_invite",{p_tree:p.id,p_token:p.token,p_new_token:nt});}
+    try{res=await rpc("claim_invite",{p_tree:p.id,p_token:p.token,p_new_token:nt,p_label:seal({n:name||""},b64u.dec(p.key))});}
     catch(e){if(e.code==="no_access")throw Object.assign(new Error("x"),{code:"used"});throw e;}
     if(res==="ok")token=nt;
   }
@@ -471,14 +481,16 @@ async function obNew(){
 }
 function obJoin(prefill){
   const b=$("ob-body");
-  b.innerHTML=`<h2>${esc(t("tJoin"))}</h2><p>${esc(t("joinText"))}</p>
-   <form id="jf" class="obf"><textarea id="j-link" dir="ltr" placeholder="${esc(t("joinPh"))}" style="min-height:90px">${esc(prefill||"")}</textarea>
+  b.innerHTML=`<h2>${esc(t("tJoin"))}</h2><p>${esc(t(prefill?"joinNameText":"joinText"))}</p>
+   <form id="jf" class="obf">
+   <textarea id="j-link" dir="ltr" placeholder="${esc(t("joinPh"))}" style="min-height:90px"${prefill?" hidden":""}>${esc(prefill||"")}</textarea>
+   <label class="lb" for="j-name">${esc(t("yourName"))}</label><input type="text" id="j-name" dir="auto" placeholder="${esc(t("joinNamePh"))}">
    <div class="err" id="j-err"></div>
    <div class="acts"><button type="button" class="btn" id="j-back">${esc(t("back"))}</button><button class="btn pri" type="submit" id="j-go">${esc(t("join"))}</button></div></form>`;
   $("j-back").onclick=obHome;
   $("jf").onsubmit=async e=>{e.preventDefault();const go=$("j-go");go.disabled=true;go.textContent=t("joining");
-    try{await joinTree($("j-link").value);toast(t("joined"));}catch(err){$("j-err").textContent=errText(err);go.disabled=false;go.textContent=t("join");}};
-  if(prefill)setTimeout(()=>$("jf").requestSubmit(),50);
+    try{await joinTree($("j-link").value,$("j-name").value.trim());toast(t("joined"));}catch(err){$("j-err").textContent=errText(err);go.disabled=false;go.textContent=t("join");}};
+  setTimeout(()=>{const x=$(prefill?"j-name":"j-link");if(x)x.focus();},150);
 }
 
 function copyText(txt,inputId){
@@ -522,25 +534,44 @@ function showTreeMenu(){
     $("l-yes").onclick=()=>{delete DB.trees[T.id];DB.cur=Object.keys(DB.trees)[0]||null;saveDB();closeSheet();S.fitted=false;
       if(DB.cur){setPeopleFromCur();renderStatus();pull();}else{S.people=new Map();render();showOnboarding(true);obHome();}};};
 }
-async function showMembers(){
+async function showMembers(peopleFirst){
   const T=CUR(); sheetMode="menu";
-  openSheet(`<div class="sh-head"><h2>${esc(t("tMembers"))}</h2><button class="x" id="sh-x">×</button></div><div id="mem-list" class="mlist">${esc(t("loading"))}</div>
-    <button class="btn pri wide" id="mem-inv" style="width:100%;margin-top:12px">${esc(t("invite"))}</button>
-    <button class="btn" id="mem-back" style="width:100%;margin-top:8px">${esc(t("back"))}</button>`);
-  $("mem-back").onclick=showTreeMenu; $("mem-inv").onclick=showInvite;
+  openSheet(`<div class="sh-head"><h2>${esc(t("tMembers"))}</h2><button class="x" id="sh-x">×</button></div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+    <div style="order:${peopleFirst?2:1};display:flex;flex-direction:column;gap:6px"><span class="lb" style="margin-top:6px">${esc(t("inviteLinks"))}</span><div id="inv-list" class="mlist">${esc(t("loading"))}</div></div>
+    <div style="order:${peopleFirst?1:2};display:flex;flex-direction:column;gap:6px"><span class="lb" style="margin-top:6px">${esc(t("joinedPeople"))}</span><div id="mem-list" class="mlist"></div></div></div>
+    <button class="btn" id="mem-back" style="width:100%;margin-top:12px">${esc(t("back"))}</button>`);
+  $("mem-back").onclick=showTreeMenu;
   let rows=[];
-  try{rows=await rpc("list_members",{p_tree:T.id,p_token:T.token});}catch(e){$("mem-list").textContent=errText(e);return;}
-  const key=keyOf(T); const lab=l=>{try{return open_(l,key)||{};}catch(e){return {};}}; const nameOf=l=>lab(l).n||"—";
+  try{rows=await rpc("list_members",{p_tree:T.id,p_token:T.token});}catch(e){$("inv-list").textContent=errText(e);return;}
+  const key=keyOf(T); const lab=l=>{try{return open_(l,key)||{};}catch(e){return {};}};
   const fmt=d=>d?new Date(d).toLocaleDateString(LANG==="ug"?"ug":"tr"):t("never");
-  $("mem-list").innerHTML=rows.map(m=>`<div class="mrow"><div style="min-width:0"><b dir="auto">${esc(nameOf(m.label))}${m.is_me?` <span class="pill">${esc(t("me"))}</span>`:""}</b>
-     <small>${esc(roleName(m.role))} · ${m.last_seen?esc(t("lastSeen"))+": "+esc(fmt(m.last_seen)):`<span class="pill">${esc(t("unused"))}</span>`}</small></div>
-     ${!m.last_seen&&lab(m.label).tk?`<button class="btn sm" data-show="${m.id}" data-tk="${esc(lab(m.label).tk)}" data-n="${esc(nameOf(m.label))}">${esc(t("showLink"))}</button>`:""}
+  const invites=rows.filter(m=>m.kind==="invite"), people=rows.filter(m=>m.kind!=="invite");
+  const roles=[["admin",t("permAdmin"),t("invAdminTxt")],["editor",t("permEditor"),t("invEditorTxt")],["viewer",t("permViewer"),t("invViewerTxt")]];
+  $("inv-list").innerHTML=roles.map(([r,title,desc])=>{
+    const mine=invites.filter(m=>m.role===r), ok=mine.find(m=>lab(m.label).tk), old=mine.filter(m=>m!==ok);
+    return`<div class="mrow"><div><b>${esc(title)}</b><small>${esc(desc)}</small></div>
+      ${ok?`<button class="btn pri sm" data-show="${ok.id}" data-tk="${esc(lab(ok.label).tk)}" data-r="${r}">${esc(t("showLink"))}</button>
+            <button class="btn danger sm" data-del="${ok.id}" data-r="${r}">${esc(t("delLink"))}</button>`
+          :`<button class="btn sm" data-make="${r}">${esc(t("makeLink"))}</button>`}
+      ${old.map(o=>`<button class="btn danger sm" data-del="${o.id}" data-r="${r}">${esc(t("delOldLink"))}</button>`).join("")}</div>`;}).join("");
+  $("mem-list").innerHTML=people.map(m=>`<div class="mrow"><div style="min-width:0"><b dir="auto">${esc(lab(m.label).n||t("noName"))}${m.is_me?` <span class="pill">${esc(t("me"))}</span>`:""}</b>
+     <small>${esc(roleName(m.role))} · ${esc(t("lastSeen"))}: ${esc(fmt(m.last_seen))}</small></div>
      ${m.is_me?"":`<select data-role="${m.id}" aria-label="${esc(t("perm"))}"><option value="viewer"${m.role==="viewer"?" selected":""}>${esc(t("permViewer"))}</option><option value="editor"${m.role==="editor"?" selected":""}>${esc(t("permEditor"))}</option><option value="admin"${m.role==="admin"?" selected":""}>${esc(t("permAdmin"))}</option></select>
-     <button class="btn danger sm" data-rm="${m.id}" data-n="${esc(nameOf(m.label))}">${esc(t("remove"))}</button>`}</div>`).join("");
-  sheet.querySelectorAll("[data-show]").forEach(b=>b.onclick=()=>{const link=linkFor(T.id,b.dataset.tk,T.key);sheetMode="menu";
-    openSheet(`<div class="sh-head"><h2 dir="auto">${esc(t("inviteReady",b.dataset.n))}</h2><button class="x" id="sh-x">×</button></div>
+     <button class="btn danger sm" data-rm="${m.id}" data-n="${esc(lab(m.label).n||t("noName"))}">${esc(t("remove"))}</button>`}</div>`).join("");
+  const roleTitle=r=>(roles.find(x=>x[0]===r)||[])[1]||"";
+  const showLink=(tk,r)=>{const link=linkFor(T.id,tk,T.key);sheetMode="menu";
+    openSheet(`<div class="sh-head"><h2>${esc(t("linkFor",roleTitle(r)))}</h2><button class="x" id="sh-x">×</button></div>
       <p style="color:var(--muted);line-height:1.5;margin:0 0 12px">${esc(t("inviteNote"))}</p>${linkBox(link,t("waMsg",T.title||t("title"),link))}
-      <button class="btn" id="i-done" style="width:100%;margin-top:8px">${esc(t("back"))}</button>`);wireLinkBox(link);$("i-done").onclick=showMembers;});
+      <button class="btn" id="i-done" style="width:100%;margin-top:8px">${esc(t("back"))}</button>`);wireLinkBox(link);$("i-done").onclick=showMembers;};
+  sheet.querySelectorAll("[data-show]").forEach(b=>b.onclick=()=>showLink(b.dataset.tk,b.dataset.r));
+  sheet.querySelectorAll("[data-make]").forEach(b=>b.onclick=async()=>{b.disabled=true;const r=b.dataset.make,tok=newToken();
+    try{await rpc("add_member",{p_tree:T.id,p_token:T.token,p_new_token:tok,p_role:r,p_label:seal({tk:tok},keyOf(T))});showLink(tok,r);}catch(e){toast(errText(e));b.disabled=false;}});
+  sheet.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{sheetMode="menu";
+    openSheet(`<div class="sh-head"><h2>${esc(t("delLink"))}</h2><button class="x" id="sh-x">×</button></div><div class="warn">${esc(t("confirmDelLink",roleTitle(b.dataset.r)))}</div>
+     <div class="acts"><button class="btn" id="r-no">${esc(t("cancel"))}</button><button class="btn danger solid" id="r-yes">${esc(t("delLink"))}</button></div>`);
+    $("r-no").onclick=showMembers;
+    $("r-yes").onclick=async()=>{try{await rpc("update_member",{p_tree:T.id,p_token:T.token,p_member:b.dataset.del,p_role:"remove"});toast(t("linkDeleted"));}catch(e){toast(errText(e));}showMembers();};});
   sheet.querySelectorAll("[data-role]").forEach(s=>s.onchange=async()=>{try{await rpc("update_member",{p_tree:T.id,p_token:T.token,p_member:s.dataset.role,p_role:s.value});toast(t("saved"));}catch(e){toast(errText(e));}});
   sheet.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{const n=b.dataset.n;sheetMode="menu";
     openSheet(`<div class="sh-head"><h2>${esc(t("remove"))}</h2><button class="x" id="sh-x">×</button></div><div class="warn" dir="auto">${esc(t("confirmRemove",n))}</div>
@@ -548,29 +579,6 @@ async function showMembers(){
     $("r-no").onclick=showMembers;
     $("r-yes").onclick=async()=>{try{await rpc("update_member",{p_tree:T.id,p_token:T.token,p_member:b.dataset.rm,p_role:"remove"});toast(t("removed"));}catch(e){toast(errText(e));}showMembers();};});
 }
-function showInvite(){
-  const T=CUR(); sheetMode="menu";
-  openSheet(`<div class="sh-head"><h2>${esc(t("invite"))}</h2><button class="x" id="sh-x">×</button></div>
-   <form id="if"><div class="field"><label class="lb" for="i-name">${esc(t("inviteFor"))}</label><input type="text" id="i-name" dir="auto" required placeholder="${esc(t("inviteForPh"))}"></div>
-   <div class="field"><span class="lb">${esc(t("perm"))}</span><div class="seg perm">
-     <input type="radio" name="ir" id="ir-v" value="viewer" checked><label for="ir-v">${esc(t("permViewer"))}</label>
-     <input type="radio" name="ir" id="ir-e" value="editor"><label for="ir-e">${esc(t("permEditor"))}</label>
-     <input type="radio" name="ir" id="ir-a" value="admin"><label for="ir-a">${esc(t("permAdmin"))}</label></div></div>
-   <div class="err" id="i-err"></div>
-   <div class="acts"><button type="button" class="btn" id="i-back">${esc(t("back"))}</button><button class="btn pri" type="submit" id="i-go">${esc(t("makeInvite"))}</button></div></form>`);
-  $("i-back").onclick=showMembers;
-  $("if").onsubmit=async e=>{e.preventDefault();const name=$("i-name").value.trim();if(!name)return;const role=sheet.querySelector("input[name=ir]:checked").value;
-    const tok=newToken();$("i-go").disabled=true;
-    try{await rpc("add_member",{p_tree:T.id,p_token:T.token,p_new_token:tok,p_role:role,p_label:seal({n:name,tk:tok},keyOf(T))});
-      const link=linkFor(T.id,tok,T.key);
-      openSheet(`<div class="sh-head"><h2 dir="auto">${esc(t("inviteReady",name))}</h2><button class="x" id="sh-x">×</button></div>
-        <p style="color:var(--muted);line-height:1.5;margin:0 0 12px">${esc(t("inviteNote"))}</p>${linkBox(link,t("waMsg",T.title||t("title"),link))}
-        <button class="btn" id="i-done" style="width:100%;margin-top:8px">${esc(t("back"))}</button>`);
-      wireLinkBox(link);$("i-done").onclick=showMembers;
-    }catch(err){$("i-err").textContent=errText(err);$("i-go").disabled=false;}};
-  setTimeout(()=>{const x=$("i-name");if(x)x.focus();},150);
-}
-
 function bootData(){
   const p=parseLink(location.hash);
   if(p){ history.replaceState(null,"",location.pathname+location.search);
@@ -882,6 +890,7 @@ function showSearch(){if(sheetMode==="view")flushNote();S.sel=null;sheetMode="se
     list.querySelectorAll(".qrow").forEach(b=>b.onclick=()=>{const id=b.dataset.id;closeSheet();revealPerson(id);select(id);});};
   q.addEventListener("input",run);run();setTimeout(()=>q.focus(),150);}
 $("find").onclick=showSearch;
+$("who").onclick=()=>{const T=CUR();if(!T)return;T.seenMembers=WHO.ids;saveDB();refreshWho();showMembers(true);};
 
 /* ---------- Alt panel ---------- */
 const sheet=$("sheet"); let sheetMode=null, noteTimer=null, lastNote="";
