@@ -1246,8 +1246,23 @@ function relation(a,b){
   /* bacanak / elti / dünür */
   for(const s of spousesOf(a))for(const y of spousesOf(b)){const r=bloodUD(s,y);if(r&&r.u===1&&r.d===1){if(a.gender==="m"&&g==="m"&&s.gender==="f")return W.bacanak;if(a.gender==="f"&&g==="f"&&s.gender==="m")return W.elti;}}
   for(const ka of kidsOf(a))for(const kb of kidsOf(b))if(marriageSt(ka,kb.id))return W.dunur;
+  /* özel adı olmayan durumlar: bilinen akrabalık sözcüğüyle birleştirilir
+     1) b, a'nın bir kan akrabasının eşi  → "Amca kızının eşi"
+     2) b, a'nın eşinin kan akrabası     → "Eşinin amca oğlu" */
+  for(const x of spousesOf(b)){const w=relBase(a,x);if(w)return LANG==="ug"?w+"نىڭ "+(g==="f"?"ئايالى":g==="m"?"ئېرى":"جۈپتى"):capTr(genTr(w))+" eşi";}
+  for(const s of spousesOf(a)){const w=relBase(s,b);if(w)return LANG==="ug"?(s.gender==="f"?"ئايالىنىڭ ":s.gender==="m"?"ئېرىنىڭ ":"جۈپتىنىڭ ")+w:"Eşinin "+w;}
   return chainRel(a,b);
 }
+/* birleştirmede kullanılacak sözcük (Türkçede iyelik ekli: "amcası", "amca kızı") */
+function relBase(a,x){const r=bloodUD(a,x);if(!r||r.u>3||r.d>3||(r.u===0&&r.d===0))return null;let w=bloodRel(a,x);if(!w)return null;
+  if(r.u===2&&r.d===2){const m=w.match(/\((.*)\)/);w=m?m[1]:w;return LANG==="ug"?w:w.toLocaleLowerCase("tr");}
+  w=w.replace(/\s*\(.*\)\s*$/,"");if(LANG==="ug")return w;
+  return possTr(w.toLocaleLowerCase("tr"));}
+function lastVowelTr(w){const m=w.match(/[aeıioöuü](?=[^aeıioöuü]*$)/);return m?m[0]:"a";}
+function harmTr(w){const v=lastVowelTr(w);return"aı".includes(v)?"ı":"ei".includes(v)?"i":"ou".includes(v)?"u":"ü";}
+function possTr(w){const SP={"oğul":"oğlu","kız":"kızı"};if(SP[w])return SP[w];return w+(/[aeıioöuü]$/.test(w)?"s":"")+harmTr(w);}
+function genTr(w){return w+(/[aeıioöuü]$/.test(w)?"n":"")+harmTr(w)+"n";}
+function capTr(w){return w.charAt(0).toLocaleUpperCase("tr")+w.slice(1);}
 function chainRel(a,b){/* en kısa yol: "babası → kızı → eşi" */
   const W=RW[LANG];const prev=new Map([[a.id,null]]);const q=[a];
   while(q.length){const x=q.shift();if(x.id===b.id)break;
