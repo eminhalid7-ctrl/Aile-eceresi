@@ -362,7 +362,7 @@ Object.assign(TX.tr,{
  stMarried:"Evli",stDivorced:"Boşandı",stWidowed:"Eşi vefat etti",stRemove:"Evlilik kaydını kaldır",marrNote:"Boşanan çiftlerin çizgisi kesikli görünür. Çocuklar hangi evlilikten olduğuna göre o çiftin altında durur. Üvey anne-baba ve üvey kardeşler kendiliğinden bulunur.",history:"Değişiklik geçmişi",undo:"Geri al",undone:"geri alındı",undoneToast:"Geri alındı",someone:"Biri",noHistory:"Henüz bir değişiklik yok.",
  hAdd:n=>n+" eklendi",hDel:n=>n+" silindi",hEdit:(n,f)=>n+": "+f+" değişti",hMore:n=>"(+"+n+" bağlantı)",hUndo:x=>"Geri alındı: "+x,confirmUndo:x=>"\""+x+"\" değişikliği geri alınacak. Herkesin ağacında da eski haline döner.",
  fName:"isim",fGender:"cinsiyet",fBorn:"doğum tarihi",fDied:"vefat tarihi",fNote:"açıklama",fParents:"anne-baba",fSpouse:"eş",
- backup:"Yedek",backupDue:"yedek al",backupText:"Ağacın tamamını bir dosya olarak bu cihaza indirir. Bilgisayarından indirirsen yedek bilgisayarında, İndirilenler klasöründe durur. Bu dosya şifresizdir, kimseyle paylaşma.",
+ backup:"Yedek",verT:"Sunucudaki eski sürümler",verText:"Ağaç her kaydedildiğinde bir önceki hâli sunucuda saklanır (son 300 kayıt). Biri ağacı bozarsa buradan istediğin âna dönebilirsin. Geri yükleme de değişiklik geçmişine yazılır, istersen geri alırsın.",verOpen:"Bu âna dön",verNone:"Henüz eski sürüm yok. Bir sonraki kayıttan itibaren birikecek.",verRestore:"Geri yükle",verConfirm:(n,d,c)=>d+" tarihindeki hâl geri yüklenecek: "+n+" kişi (şu an "+c+" kişi).",backupDue:"yedek al",backupText:"Ağacın tamamını bir dosya olarak bu cihaza indirir. Bilgisayarından indirirsen yedek bilgisayarında, İndirilenler klasöründe durur. Bu dosya şifresizdir, kimseyle paylaşma.",
  lastBackup:"Son yedek",backupDl:"Yedeği bilgisayara indir",backupRestore:"Yedekten geri yükle",backupDone:"Yedek indirildi",badBackup:"Bu dosya bir Aile Şeceresi yedeği değil.",
  confirmRestore:(n,d)=>d+" tarihli yedekteki "+n+" kişi ağaca geri yüklenecek. Şu anki hali değişir, ama istersen Değişiklik geçmişi'nden geri alabilirsin.",restored:"Yedek geri yüklendi",nameNeeded:"Lütfen adını yaz.",askNameT:"Adın ne?",whoTitle:n=>"Ağaca girenler: "+n,joinedPeople:"Ağaca girenler",invAdminTxt:"Her şeyi yapar, üyeleri yönetir",invEditorTxt:"Kişi ekler ve düzenler",invViewerTxt:"Sadece görür",showLink:"Linki göster",makeLink:"Link oluştur",delLink:"Linki sil",delOldLink:"Eski linki sil",linkFor:r=>r+" linki",confirmDelLink:r=>"\""+r+"\" linki çalışmaz hale gelecek. Bu linkle daha önce girenlerin erişimi devam eder, istersen onları aşağıdan tek tek kaldırırsın.",linkDeleted:"Link silindi",noName:"İsimsiz üye",joinNameText:"Ağaca girmek için adını yaz. Yönetici seni bu isimle görecek.",joinNamePh:"Adın ve soyadın",
  me:"sen",lastSeen:"son giriş",never:"henüz girmedi",remove:"Kaldır",removed:"Erişimi kaldırıldı",back:"Geri",
@@ -400,7 +400,7 @@ Object.assign(TX.ug,{
  stMarried:"نىكاھلىق",stDivorced:"ئاجراشقان",stWidowed:"جۈپتى ۋاپات بولغان",stRemove:"نىكاھ خاتىرىسىنى ئۆچۈرۈش",marrNote:"ئاجراشقانلارنىڭ سىزىقى ئۈزۈك كۆرۈنىدۇ. بالىلار قايسى نىكاھتىن بولسا شۇ جۈپتنىڭ ئاستىدا تۇرىدۇ. ئۆگەي ئاتا-ئانا ۋە ئۆگەي قېرىنداشلار ئۆزلۈكىدىن تېپىلىدۇ.",history:"ئۆزگىرىش تارىخى",undo:"قايتۇرۇش",undone:"قايتۇرۇلدى",undoneToast:"قايتۇرۇلدى",someone:"بىرى",noHistory:"تېخى ئۆزگىرىش يوق.",
  hAdd:n=>n+" قوشۇلدى",hDel:n=>n+" ئۆچۈرۈلدى",hEdit:(n,f)=>n+": "+f+" ئۆزگەردى",hMore:n=>"(+"+n+" باغلىنىش)",hUndo:x=>"قايتۇرۇلدى: "+x,confirmUndo:x=>"\""+x+"\" ئۆزگىرىشى قايتۇرۇلىدۇ. ھەممەيلەننىڭ دەرىخىدىمۇ ئەسلىگە قايتىدۇ.",
  fName:"ئىسىم",fGender:"جىنس",fBorn:"تۇغۇلغان ۋاقىت",fDied:"ۋاپات ۋاقتى",fNote:"چۈشەندۈرۈش",fParents:"ئاتا-ئانا",fSpouse:"جۈپتى",
- backup:"زاپاس",backupDue:"زاپاسلاڭ",backupText:"پۈتۈن دەرەخنى بىر ھۆججەت قىلىپ بۇ ئۈسكۈنىگە چۈشۈرىدۇ. كومپيۇتېردىن چۈشۈرسىڭىز، زاپاس كومپيۇتېرىڭىزدا ساقلىنىدۇ. بۇ ھۆججەت شىفىرلانمىغان، ھېچكىمگە بەرمەڭ.",
+ backup:"زاپاس",verT:"مۇلازىمېتىردىكى كونا نۇسخىلار",verText:"دەرەخ ھەر قېتىم ساقلانغاندا ئالدىنقى ھالىتى مۇلازىمېتىردا ساقلىنىدۇ (ئاخىرقى 300). بىرى دەرەخنى بۇزۇۋەتسە، بۇ يەردىن خالىغان ۋاقىتقا قايتالايسىز.",verOpen:"بۇ ۋاقىتقا قايتىش",verNone:"تېخى كونا نۇسخا يوق.",verRestore:"ئەسلىگە كەلتۈرۈش",verConfirm:(n,d,c)=>d+" دىكى ھالىتى ئەسلىگە كەلتۈرۈلىدۇ: "+n+" كىشى (ھازىر "+c+" كىشى).",backupDue:"زاپاسلاڭ",backupText:"پۈتۈن دەرەخنى بىر ھۆججەت قىلىپ بۇ ئۈسكۈنىگە چۈشۈرىدۇ. كومپيۇتېردىن چۈشۈرسىڭىز، زاپاس كومپيۇتېرىڭىزدا ساقلىنىدۇ. بۇ ھۆججەت شىفىرلانمىغان، ھېچكىمگە بەرمەڭ.",
  lastBackup:"ئاخىرقى زاپاس",backupDl:"زاپاسنى كومپيۇتېرغا چۈشۈرۈش",backupRestore:"زاپاستىن ئەسلىگە كەلتۈرۈش",backupDone:"زاپاس چۈشۈرۈلدى",badBackup:"بۇ ھۆججەت ئائىلە شەجەرىسى زاپىسى ئەمەس.",
  confirmRestore:(n,d)=>d+" دىكى زاپاستىكى "+n+" كىشى دەرەخكە قايتۇرۇلىدۇ. ھازىرقى ھالىتى ئۆزگىرىدۇ، خالىسىڭىز ئۆزگىرىش تارىخىدىن قايتۇرالايسىز.",restored:"زاپاس ئەسلىگە كەلتۈرۈلدى",nameNeeded:"ئىسمىڭىزنى يېزىڭ.",askNameT:"ئىسمىڭىز نېمە؟",whoTitle:n=>"دەرەخكە كىرگەنلەر: "+n,joinedPeople:"دەرەخكە كىرگەنلەر",invAdminTxt:"ھەممىنى قىلالايدۇ، ئەزالارنى باشقۇرىدۇ",invEditorTxt:"كىشى قوشىدۇ ۋە تەھرىرلەيدۇ",invViewerTxt:"پەقەت كۆرىدۇ",showLink:"ئۇلىنىشنى كۆرسىتىش",makeLink:"ئۇلىنىش قۇرۇش",delLink:"ئۇلىنىشنى ئۆچۈرۈش",delOldLink:"كونا ئۇلىنىشنى ئۆچۈرۈش",linkFor:r=>r+" ئۇلىنىشى",confirmDelLink:r=>"\""+r+"\" ئۇلىنىشى ئىشلىمەيدىغان بولىدۇ. ئىلگىرى كىرگەنلەرنىڭ ھوقۇقى داۋاملىشىدۇ، خالىسىڭىز تۆۋەندىن بىر-بىرلەپ چىقىرىۋېتەلەيسىز.",linkDeleted:"ئۇلىنىش ئۆچۈرۈلدى",noName:"ئىسىمسىز ئەزا",joinNameText:"دەرەخكە قوشۇلماقچى بولۇۋاتىسىز. باشقۇرغۇچى تونۇسۇن ئۈچۈن ئىسمىڭىزنى يېزىڭ.",joinNamePh:"ئىسىم-فامىلىڭىز",
  me:"سىز",lastSeen:"ئاخىرقى كىرىش",never:"تېخى كىرمىدى",remove:"چىقىرىۋېتىش",removed:"ھوقۇقى بىكار قىلىندى",back:"قايتىش",
@@ -697,10 +697,29 @@ function showBackup(){const T=CUR();sheetMode="menu";
      <div class="warn">${esc(t("confirmRestore",n,d.exportedAt?new Date(d.exportedAt).toLocaleDateString(LANG==="ug"?"ug":"tr"):"?"))}</div>
      <div class="acts"><button class="btn" id="r-no">${esc(t("cancel"))}</button><button class="btn danger solid" id="r-yes">${esc(t("backupRestore"))}</button></div>`);
     $("r-no").onclick=showBackup;
-    $("r-yes").onclick=()=>{BATCH=rid();const ids=new Set([...Object.keys(T.people),...Object.keys(d.people)]);
-      ids.forEach(id=>{const cur=T.people[id]||null,nx=d.people[id]||null;if(JSON.stringify(cur)===JSON.stringify(nx))return;
-        if(nx){T.people[id]={...nx,updatedAt:Date.now()};logOp(id,cur,T.people[id]);}else{delete T.people[id];logOp(id,cur,null);}});
-      BATCH=null;S.fitted=false;touch();closeSheet();toast(t("restored"));};};
+    $("r-yes").onclick=()=>{applyPeople(d.people);closeSheet();toast(t("restored"));};};
+}
+/* başka bir hâli (yedek ya da sunucudaki eski sürüm) tek seferde uygula; geçmişte tek kayıt olur, geri alınabilir */
+function applyPeople(np){const T=CUR();BATCH=rid();const ids=new Set([...Object.keys(T.people),...Object.keys(np)]);
+  ids.forEach(id=>{const cur=T.people[id]||null,nx=np[id]||null;if(JSON.stringify(cur)===JSON.stringify(nx))return;
+    if(nx){T.people[id]={...nx,updatedAt:Date.now()};logOp(id,cur,T.people[id]);}else{delete T.people[id];logOp(id,cur,null);}});
+  BATCH=null;S.fitted=false;touch();}
+/* sunucuda her kayıttan önceki hâl saklanır (son 300); sadece yönetici görür */
+async function showVersions(){const T=CUR();sheetMode="menu";
+  const head=`<div class="sh-head"><h2>${esc(t("verT"))}</h2><button class="x" id="sh-x">×</button></div><p style="color:var(--muted);line-height:1.5;margin:0 0 12px">${esc(t("verText"))}</p>`;
+  openSheet(head+`<div class="warn">…</div>`);
+  let rows;try{rows=await rpc("list_versions",{p_tree:T.id,p_token:T.token});}catch(e){openSheet(head+`<div class="err">${esc(errText(e))}</div><button class="btn" id="v-back" style="width:100%">${esc(t("back"))}</button>`);$("v-back").onclick=showSettings;return;}
+  const loc=LANG==="ug"?"ug":"tr";const fmt=d=>new Date(d).toLocaleString(loc,{day:"numeric",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"});
+  openSheet(head+`<div class="mlist">${rows.length?rows.map(r=>`<div class="mrow"><div style="min-width:0"><b>${esc(fmt(r.saved_at))}</b><small>#${r.version}</small></div><button class="btn sm" data-ver="${r.version}">${esc(t("verOpen"))}</button></div>`).join(""):`<div class="warn">${esc(t("verNone"))}</div>`}</div>
+    <button class="btn" id="v-back" style="width:100%;margin-top:10px">${esc(t("back"))}</button>`);
+  $("v-back").onclick=showSettings;
+  sheet.querySelectorAll("[data-ver]").forEach(b=>b.onclick=async()=>{b.disabled=true;let doc;
+    try{const blob=await rpc("get_version",{p_tree:T.id,p_token:T.token,p_version:+b.dataset.ver});doc=open_(blob,keyOf(T));}catch(e){b.disabled=false;toast(errText(e));return;}
+    const r=rows.find(x=>x.version===+b.dataset.ver);const np=doc.people||{};const n=Object.keys(np).length;
+    openSheet(`<div class="sh-head"><h2>${esc(t("verT"))}</h2><button class="x" id="sh-x">×</button></div>
+      <div class="warn">${esc(t("verConfirm",n,fmt(r.saved_at),S.people.size))}</div>
+      <div class="acts"><button class="btn" id="v-no">${esc(t("cancel"))}</button><button class="btn danger solid" id="v-yes">${esc(t("verRestore"))}</button></div>`);
+    $("v-no").onclick=showVersions;$("v-yes").onclick=()=>{applyPeople(np);closeSheet();toast(t("restored"));};});
 }
 function showTreeMenu(){
   const T=CUR(); if(!T)return; if(sheetMode==="view")flushNote(); S.sel=null; sheetMode="menu";
@@ -749,7 +768,7 @@ function showSettings(){
     <span class="lb" style="margin-top:8px">${esc(t("setPhone"))}</span>
     ${isStandalone()?"":`<button class="btn pri" id="s-inst">${esc(t("instTitle"))}</button>`}
     <button class="btn" id="s-bd">${esc(t("bdNotif"))}${bdOn()?` <span class="pill">${esc(t("on"))}</span>`:""}</button>
-    ${T&&T.role==="admin"?`<span class="lb" style="margin-top:8px">${esc(t("setData"))}</span><button class="btn" id="s-bak">${esc(t("backup"))}${backupDue(T)?` <span class="pill">${esc(t("backupDue"))}</span>`:""}</button>`:""}
+    ${T&&T.role==="admin"?`<span class="lb" style="margin-top:8px">${esc(t("setData"))}</span><button class="btn" id="s-bak">${esc(t("backup"))}${backupDue(T)?` <span class="pill">${esc(t("backupDue"))}</span>`:""}</button><button class="btn" id="s-ver">${esc(t("verT"))}</button>`:""}
     <span class="lb" style="margin-top:8px">${esc(t("setTrees"))}</span>
     ${others.map(o=>`<button class="btn" data-sw="${esc(o.id)}" dir="auto">${esc(o.title||t("title"))} · ${esc(roleName(o.role))}</button>`).join("")}
     <button class="btn" id="s-other">${esc(t("otherTree"))}</button>
@@ -759,7 +778,7 @@ function showSettings(){
   $("s-theme").onclick=showThemes;$("s-colors").onclick=showColors;
   $("s-lang").onclick=()=>{$("lang").click();showSettings();};
   if($("s-inst"))$("s-inst").onclick=()=>showInstall(false);
-  $("s-bd").onclick=showBdNotif;if($("s-bak"))$("s-bak").onclick=showBackup;
+  $("s-bd").onclick=showBdNotif;if($("s-bak"))$("s-bak").onclick=showBackup;if($("s-ver"))$("s-ver").onclick=showVersions;
   sheet.querySelectorAll("[data-sw]").forEach(b=>b.onclick=()=>{DB.cur=b.dataset.sw;saveDB();S.fitted=false;closeSheet();setPeopleFromCur();renderStatus();pull();});
   $("s-other").onclick=()=>{closeSheet();showOnboarding(true);obHome();};
   if($("s-leave"))$("s-leave").onclick=()=>{sheetMode="menu";openSheet(`<div class="sh-head"><h2>${esc(t("removeDevice"))}</h2><button class="x" id="sh-x">×</button></div><div class="warn">${esc(t("confirmLeave"))}</div>
