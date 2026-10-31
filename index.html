@@ -73,6 +73,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-body);overflow
 .relline{color:var(--muted);font-size:14px;line-height:1.4}
 .relline b{color:var(--ink);font-weight:600}
 .relword{font-family:var(--f-display);font-size:26px;line-height:1.2;margin-top:4px;text-wrap:balance}
+.steps{margin:0 0 12px;padding-inline-start:20px;line-height:1.6;display:flex;flex-direction:column;gap:6px}
 .agerow{display:flex;align-items:center;gap:10px;margin:-4px 0 14px}
 .agerow .agebox{padding:7px 14px;min-width:40px}
 .bday{background:var(--gold-soft);color:var(--ink);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-weight:600}
@@ -233,7 +234,7 @@ a.btn{text-decoration:none}
 const TX={
 tr:{title:"Aile Şeceresi",loading:"Yükleniyor…",people:n=>n+" kişi",empty:"Boş",viewOnly:"sadece görüntüleme",editing:"düzenleme açık",offline:"bilgisayara bağlanılamıyor",
  zin:"Yakınlaştır",zout:"Uzaklaştır",fit:"Tüm ağacı göster",langBtn:"ئۇيغۇرچە",langTitle:"Uygurcaya geç",lockOff:"Düzenlemeyi aç",lockOn:"Düzenleme açık",
- emptyTitle:"Ağaç henüz boş",emptyText:"En büyük atadan başla. Sonra kişiye dokunup çocuklarını, eşini ya da anne-babasını ekleyerek ağacı büyüt.",emptyLocked:"Ağacı sadece şifreyi bilen kişi düzenleyebilir.",firstAdd:"İlk kişiyi ekle",
+ emptyTitle:"Ağaç henüz boş",emptyText:"En büyük atadan başla. Sonra kişiye dokunup çocuklarını, eşini ya da anne-babasını ekleyerek ağacı büyüt.",emptyLocked:"Ağaç henüz boş. Kişileri yöneticiler ekleyecek.",firstAdd:"İlk kişiyi ekle",
  father:"Babası",mother:"Annesi",parent:"Ebeveyni",spouse:"Eşi",kids:"Çocukları",male:"Erkek",female:"Kadın",noGender:"Cinsiyet belirtilmedi",
  note:"Açıklama",notePh:"Bu kişi hakkında not: memleketi, mesleği, hatıraları…",typing:"Yazılıyor…",saved:"Kaydedildi",
  addChild:"+ Çocuk ekle",withX:x=>"("+x+" ile)",addSpouse:"Eş ekle",addMother:"Anne ekle",addFather:"Baba ekle",addParent:"Ebeveyn ekle",addParents:"Anne / Baba ekle",
@@ -248,7 +249,7 @@ tr:{title:"Aile Şeceresi",loading:"Yükleniyor…",people:n=>n+" kişi",empty:"
  unlocked:"Düzenleme açıldı",tLocked:"Düzenleme açık",lockedText:"Bu cihazda ağacı düzenleyebilirsin. İşin bitince kilitleyebilirsin.",lockNow:"Kilitle",lockedDone:"Kilitlendi"},
 ug:{title:"ئائىلە شەجەرىسى",loading:"يۈكلىنىۋاتىدۇ…",people:n=>n+" كىشى",empty:"قۇرۇق",viewOnly:"پەقەت كۆرۈش",editing:"تەھرىرلەش ئوچۇق",offline:"كومپيۇتېرغا ئۇلانغىلى بولمىدى",
  zin:"چوڭايتىش",zout:"كىچىكلىتىش",fit:"پۈتۈن دەرەخنى كۆرسىتىش",langBtn:"Türkçe",langTitle:"تۈركچىگە ئالماشتۇرۇش",lockOff:"تەھرىرلەشنى ئېچىش",lockOn:"تەھرىرلەش ئوچۇق",
- emptyTitle:"دەرەخ تېخى قۇرۇق",emptyText:"ئەڭ چوڭ ئەجدادتىن باشلاڭ. ئاندىن كىشىنى بېسىپ، بالىسى، جۈپتى ياكى ئاتا-ئانىسىنى قوشۇپ دەرەخنى چوڭايتىڭ.",emptyLocked:"دەرەخنى پەقەت مەخپىي نومۇرنى بىلىدىغان كىشى تەھرىرلىيەلەيدۇ.",firstAdd:"تۇنجى كىشىنى قوشۇش",
+ emptyTitle:"دەرەخ تېخى قۇرۇق",emptyText:"ئەڭ چوڭ ئەجدادتىن باشلاڭ. ئاندىن كىشىنى بېسىپ، بالىسى، جۈپتى ياكى ئاتا-ئانىسىنى قوشۇپ دەرەخنى چوڭايتىڭ.",emptyLocked:"دەرەخ تېخى قۇرۇق. كىشىلەرنى باشقۇرغۇچىلار قوشىدۇ.",firstAdd:"تۇنجى كىشىنى قوشۇش",
  father:"دادىسى",mother:"ئانىسى",parent:"ئاتا-ئانىسى",spouse:"جۈپتى",kids:"بالىلىرى",male:"ئەر",female:"ئايال",noGender:"جىنسى بەلگىلەنمىگەن",
  note:"چۈشەندۈرۈش",notePh:"بۇ كىشى ھەققىدە خاتىرە: يۇرتى، كەسپى، ئەسلىمىلىرى…",typing:"يېزىلىۋاتىدۇ…",saved:"ساقلاندى",
  addChild:"+ بالا قوشۇش",withX:x=>"("+x+" بىلەن)",addSpouse:"جۈپتىنى قوشۇش",addMother:"ئانىسىنى قوشۇش",addFather:"دادىسىنى قوشۇش",addParent:"ئاتا-ئانا قوشۇش",addParents:"ئاتا ياكى ئانا قوشۇش",
@@ -314,7 +315,10 @@ Object.assign(TX.tr,{
  copy:"Kopyala",copied:"Kopyalandı",wa:"WhatsApp ile gönder",
  tMembers:"Üyeler",invite:"Yeni davet oluştur",inviteFor:"Kimin için",inviteForPh:"Örn. Halid",perm:"Yetki",
  permViewer:"Sadece görsün",permEditor:"Düzenleyebilsin",permAdmin:"Yönetici",makeInvite:"Davet linki oluştur",
- inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",thisDevice:"bu cihaz",founderErr:"Kurucu yönetici kaldırılamaz.",founder:"kurucu",devApp:"uygulama",devBrowser:"tarayıcı",admNote:n=>"Şu an "+n+" yönetici cihaz var. Her satır bir telefon ya da bilgisayar. Kurucu (ağacı ilk açan cihaz) silinemez. Tanımadığın bir yönetici varsa yanındaki Kaldır'a bas.",bdNotif:"Doğum günü bildirimleri",on:"açık",bdToday:"Bugün doğum günü",bdText:"Açarsan, ağaçta doğum günü olan biri olduğunda bu telefona bildirim gelir. Uygulama yüklüyse telefon gün içinde kendisi kontrol eder; değilse uygulamayı açtığında bildirir.",bdNoSupport:"Bu tarayıcı bildirimleri desteklemiyor. Uygulamayı ana ekrana yükleyip oradan aç.",bdOnBtn:"Bildirimleri aç",bdOff:"Bildirimleri kapat",bdDenied:"Bildirim izni verilmedi. Telefon ayarlarından bu uygulamaya bildirim izni verebilirsin.",bdEnabled:"Doğum günü bildirimleri açıldı",exportT:"Ağacı resim / PDF olarak al",exportText:"Ağacın tamamı, şu an açık olan dallarla birlikte tek bir resim olarak çizilir. Kapalı dalları önce açmayı unutma.",exportPng:"Resim olarak indir (PNG)",exportPdf:"Yazdır / PDF olarak kaydet",exported:"Resim indirildi",relBtn:"Akrabalık: kimin nesi?",relTitle:"Akrabalık",relPick:x=>x+" kime göre? Diğer kişiyi seç.",relAgain:"Başka kişiyle karşılaştır",exSpouse:"Eski eşi",lateSpouse:"Merhum eşi",stepMother:"Üvey annesi",stepFather:"Üvey babası",stepParent:"Üvey ebeveyni",siblings:"Kardeşleri",halfSiblings:"Üvey kardeşleri",
+ inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",instTitle:"Uygulamayı telefona yükle",instTitleJoin:"Hoş geldin! Uygulamayı telefona yükle",instText:"Yüklersen ana ekranında kendi simgesiyle durur, tam ekran ve internetsiz de açılır. Bir daha link gerekmez.",installBtn:"Yükle",installed:"Uygulama yüklendi",later:"Sonra",
+ andStep1:"Chrome'da sağ üstteki ⋮ menüsüne dokun.",andStep2:"\"Uygulamayı yükle\" ya da \"Ana ekrana ekle\"yi seç. Ana ekranda simgesi çıkar, girişin hatırlanır.",
+ iosStep1:"Safari'de alttaki Paylaş düğmesine (kare ve yukarı ok) dokun.",iosStep2:"\"Ana Ekrana Ekle\"yi seç ve Ekle'ye bas.",iosStep3:"Ana ekrandaki Şecere simgesinden uygulamayı aç, \"Davet linkim var\"a bas ve aşağıdaki kişisel linkini yapıştır. iPhone ana ekran uygulamasını Safari'den ayrı tuttuğu için bu bir kereye mahsus gerekli.",
+ myLink:"Kişisel giriş linkin",myLinkNote:"Bu link sadece senin içindir, kimseyle paylaşma.",iosJoinHint:"iPhone kullanıyorsan: önce Paylaş → Ana Ekrana Ekle ile uygulamayı ekle, sonra ana ekrandaki simgeden açıp bu linki orada yapıştır. Burada katılırsan, sonra sana verilecek kişisel linki uygulamada yapıştırman gerekir.",thisDevice:"bu cihaz",founderErr:"Kurucu yönetici kaldırılamaz.",founder:"kurucu",devApp:"uygulama",devBrowser:"tarayıcı",admNote:n=>"Şu an "+n+" yönetici cihaz var. Her satır bir telefon ya da bilgisayar. Kurucu (ağacı ilk açan cihaz) silinemez. Tanımadığın bir yönetici varsa yanındaki Kaldır'a bas.",bdNotif:"Doğum günü bildirimleri",on:"açık",bdToday:"Bugün doğum günü",bdText:"Açarsan, ağaçta doğum günü olan biri olduğunda bu telefona bildirim gelir. Uygulama yüklüyse telefon gün içinde kendisi kontrol eder; değilse uygulamayı açtığında bildirir.",bdNoSupport:"Bu tarayıcı bildirimleri desteklemiyor. Uygulamayı ana ekrana yükleyip oradan aç.",bdOnBtn:"Bildirimleri aç",bdOff:"Bildirimleri kapat",bdDenied:"Bildirim izni verilmedi. Telefon ayarlarından bu uygulamaya bildirim izni verebilirsin.",bdEnabled:"Doğum günü bildirimleri açıldı",exportT:"Ağacı resim / PDF olarak al",exportText:"Ağacın tamamı, şu an açık olan dallarla birlikte tek bir resim olarak çizilir. Kapalı dalları önce açmayı unutma.",exportPng:"Resim olarak indir (PNG)",exportPdf:"Yazdır / PDF olarak kaydet",exported:"Resim indirildi",relBtn:"Akrabalık: kimin nesi?",relTitle:"Akrabalık",relPick:x=>x+" kime göre? Diğer kişiyi seç.",relAgain:"Başka kişiyle karşılaştır",exSpouse:"Eski eşi",lateSpouse:"Merhum eşi",stepMother:"Üvey annesi",stepFather:"Üvey babası",stepParent:"Üvey ebeveyni",siblings:"Kardeşleri",halfSiblings:"Üvey kardeşleri",
  addAnotherSpouse:"Başka eş ekle",marriages:"Evlilikler",whichParent:"Çocuğun diğer ebeveyni kim?",otherParentUnknown:"Diğer ebeveyn bilinmiyor / ağaçta yok",
  stMarried:"Evli",stDivorced:"Boşandı",stWidowed:"Eşi vefat etti",stRemove:"Evlilik kaydını kaldır",marrNote:"Boşanan çiftlerin çizgisi kesikli görünür. Çocuklar hangi evlilikten olduğuna göre o çiftin altında durur. Üvey anne-baba ve üvey kardeşler kendiliğinden bulunur.",history:"Değişiklik geçmişi",undo:"Geri al",undone:"geri alındı",undoneToast:"Geri alındı",someone:"Biri",noHistory:"Henüz bir değişiklik yok.",
  hAdd:n=>n+" eklendi",hDel:n=>n+" silindi",hEdit:(n,f)=>n+": "+f+" değişti",hMore:n=>"(+"+n+" bağlantı)",hUndo:x=>"Geri alındı: "+x,confirmUndo:x=>"\""+x+"\" değişikliği geri alınacak. Herkesin ağacında da eski haline döner.",
@@ -344,7 +348,10 @@ Object.assign(TX.ug,{
  copy:"كۆچۈرۈش",copied:"كۆچۈرۈلدى",wa:"WhatsApp ئارقىلىق ئەۋەتىش",
  tMembers:"ئەزالار",invite:"يېڭى تەكلىپ قۇرۇش",inviteFor:"كىم ئۈچۈن",inviteForPh:"مەسىلەن: خالىد",perm:"ھوقۇق",
  permViewer:"پەقەت كۆرسۇن",permEditor:"تەھرىرلىيەلىسۇن",permAdmin:"باشقۇرغۇچى",makeInvite:"تەكلىپ ئۇلىنىشى قۇرۇش",
- inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",thisDevice:"بۇ ئۈسكۈنە",founderErr:"قۇرغۇچى باشقۇرغۇچىنى چىقىرىۋەتكىلى بولمايدۇ.",founder:"قۇرغۇچى",devApp:"ئەپ",devBrowser:"توركۆرگۈ",admNote:n=>"ھازىر "+n+" باشقۇرغۇچى ئۈسكۈنە بار. ھەر بىر قۇر بىر تېلېفون ياكى كومپيۇتېر. قۇرغۇچىنى (دەرەخنى تۇنجى ئاچقان ئۈسكۈنە) ئۆچۈرگىلى بولمايدۇ. تونۇمايدىغان باشقۇرغۇچى بولسا «چىقىرىۋېتىش» نى بېسىڭ.",bdNotif:"تۇغۇلغان كۈن ئۇقتۇرۇشى",on:"ئوچۇق",bdToday:"بۈگۈن تۇغۇلغان كۈنى",bdText:"ئاچسىڭىز، دەرەختە تۇغۇلغان كۈنى بولغان كىشى بولسا بۇ تېلېفونغا ئۇقتۇرۇش كېلىدۇ. ئەپ قاچىلانغان بولسا تېلېفون ئۆزى تەكشۈرىدۇ؛ بولمىسا ئەپنى ئاچقاندا ئۇقتۇرىدۇ.",bdNoSupport:"بۇ توركۆرگۈ ئۇقتۇرۇشنى قوللىمايدۇ. ئەپنى ئاساسىي ئېكرانغا قاچىلاپ ئېچىڭ.",bdOnBtn:"ئۇقتۇرۇشنى ئېچىش",bdOff:"ئۇقتۇرۇشنى تاقاش",bdDenied:"ئۇقتۇرۇش ئىجازىتى بېرىلمىدى. تېلېفون تەڭشىكىدىن ئىجازەت بېرەلەيسىز.",bdEnabled:"تۇغۇلغان كۈن ئۇقتۇرۇشى ئېچىلدى",exportT:"دەرەخنى رەسىم / PDF قىلىش",exportText:"پۈتۈن دەرەخ، ھازىر ئوچۇق شاخلار بىلەن بىرگە بىر رەسىم قىلىپ سىزىلىدۇ. يىغىلغان شاخلارنى ئاۋۋال ئېچىڭ.",exportPng:"رەسىم قىلىپ چۈشۈرۈش (PNG)",exportPdf:"بېسىش / PDF قىلىپ ساقلاش",exported:"رەسىم چۈشۈرۈلدى",relBtn:"تۇغقاندارچىلىق: كىمنىڭ نېمىسى؟",relTitle:"تۇغقاندارچىلىق",relPick:x=>x+" كىمگە نىسبەتەن؟ يەنە بىر كىشىنى تاللاڭ.",relAgain:"باشقا كىشى بىلەن سېلىشتۇرۇش",exSpouse:"ئىلگىرىكى جۈپتى",lateSpouse:"مەرھۇم جۈپتى",stepMother:"ئۆگەي ئانىسى",stepFather:"ئۆگەي دادىسى",stepParent:"ئۆگەي ئاتا-ئانىسى",siblings:"قېرىنداشلىرى",halfSiblings:"ئۆگەي قېرىنداشلىرى",
+ inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",instTitle:"ئەپنى تېلېفونغا قاچىلاش",instTitleJoin:"خۇش كەلدىڭىز! ئەپنى تېلېفونغا قاچىلاڭ",instText:"قاچىلىسىڭىز ئاساسىي ئېكراندا ئۆز بەلگىسى بىلەن تۇرىدۇ، تولۇق ئېكران ۋە تورسىز ئېچىلىدۇ. قايتا ئۇلىنىش كېرەك بولمايدۇ.",installBtn:"قاچىلاش",installed:"ئەپ قاچىلاندى",later:"كېيىن",
+ andStep1:"Chrome نىڭ ئوڭ ئۈستىدىكى ⋮ تىزىملىكىنى بېسىڭ.",andStep2:"«ئەپنى قاچىلاش» ياكى «ئاساسىي ئېكرانغا قوشۇش» نى تاللاڭ. ئاساسىي ئېكراندا بەلگىسى چىقىدۇ، كىرىشىڭىز ئەستە قالىدۇ.",
+ iosStep1:"Safari دا ئاستىدىكى ھەمبەھىرلەش كۇنۇپكىسىنى (چاسا ۋە يۇقىرى يا ئوق) بېسىڭ.",iosStep2:"«ئاساسىي ئېكرانغا قوشۇش» نى تاللاپ، قوشۇشنى بېسىڭ.",iosStep3:"ئاساسىي ئېكراندىكى شەجەرە بەلگىسىدىن ئەپنى ئېچىپ، «تەكلىپ ئۇلىنىشىم بار» نى بېسىڭ ۋە تۆۋەندىكى شەخسىي ئۇلىنىشنى چاپلاڭ. iPhone ئاساسىي ئېكران ئەپىنى Safari دىن ئايرىم ساقلىغاچقا، بۇ بىر قېتىملا لازىم.",
+ myLink:"شەخسىي كىرىش ئۇلىنىشىڭىز",myLinkNote:"بۇ ئۇلىنىش پەقەت سىز ئۈچۈن، ھېچكىمگە بەرمەڭ.",iosJoinHint:"iPhone ئىشلەتسىڭىز: ئاۋۋال ھەمبەھىرلەش → ئاساسىي ئېكرانغا قوشۇش ئارقىلىق ئەپنى قوشۇڭ، ئاندىن ئاساسىي ئېكراندىكى بەلگىدىن ئېچىپ بۇ ئۇلىنىشنى شۇ يەردە چاپلاڭ.",thisDevice:"بۇ ئۈسكۈنە",founderErr:"قۇرغۇچى باشقۇرغۇچىنى چىقىرىۋەتكىلى بولمايدۇ.",founder:"قۇرغۇچى",devApp:"ئەپ",devBrowser:"توركۆرگۈ",admNote:n=>"ھازىر "+n+" باشقۇرغۇچى ئۈسكۈنە بار. ھەر بىر قۇر بىر تېلېفون ياكى كومپيۇتېر. قۇرغۇچىنى (دەرەخنى تۇنجى ئاچقان ئۈسكۈنە) ئۆچۈرگىلى بولمايدۇ. تونۇمايدىغان باشقۇرغۇچى بولسا «چىقىرىۋېتىش» نى بېسىڭ.",bdNotif:"تۇغۇلغان كۈن ئۇقتۇرۇشى",on:"ئوچۇق",bdToday:"بۈگۈن تۇغۇلغان كۈنى",bdText:"ئاچسىڭىز، دەرەختە تۇغۇلغان كۈنى بولغان كىشى بولسا بۇ تېلېفونغا ئۇقتۇرۇش كېلىدۇ. ئەپ قاچىلانغان بولسا تېلېفون ئۆزى تەكشۈرىدۇ؛ بولمىسا ئەپنى ئاچقاندا ئۇقتۇرىدۇ.",bdNoSupport:"بۇ توركۆرگۈ ئۇقتۇرۇشنى قوللىمايدۇ. ئەپنى ئاساسىي ئېكرانغا قاچىلاپ ئېچىڭ.",bdOnBtn:"ئۇقتۇرۇشنى ئېچىش",bdOff:"ئۇقتۇرۇشنى تاقاش",bdDenied:"ئۇقتۇرۇش ئىجازىتى بېرىلمىدى. تېلېفون تەڭشىكىدىن ئىجازەت بېرەلەيسىز.",bdEnabled:"تۇغۇلغان كۈن ئۇقتۇرۇشى ئېچىلدى",exportT:"دەرەخنى رەسىم / PDF قىلىش",exportText:"پۈتۈن دەرەخ، ھازىر ئوچۇق شاخلار بىلەن بىرگە بىر رەسىم قىلىپ سىزىلىدۇ. يىغىلغان شاخلارنى ئاۋۋال ئېچىڭ.",exportPng:"رەسىم قىلىپ چۈشۈرۈش (PNG)",exportPdf:"بېسىش / PDF قىلىپ ساقلاش",exported:"رەسىم چۈشۈرۈلدى",relBtn:"تۇغقاندارچىلىق: كىمنىڭ نېمىسى؟",relTitle:"تۇغقاندارچىلىق",relPick:x=>x+" كىمگە نىسبەتەن؟ يەنە بىر كىشىنى تاللاڭ.",relAgain:"باشقا كىشى بىلەن سېلىشتۇرۇش",exSpouse:"ئىلگىرىكى جۈپتى",lateSpouse:"مەرھۇم جۈپتى",stepMother:"ئۆگەي ئانىسى",stepFather:"ئۆگەي دادىسى",stepParent:"ئۆگەي ئاتا-ئانىسى",siblings:"قېرىنداشلىرى",halfSiblings:"ئۆگەي قېرىنداشلىرى",
  addAnotherSpouse:"باشقا جۈپت قوشۇش",marriages:"نىكاھلار",whichParent:"بالىنىڭ يەنە بىر ئاتا-ئانىسى كىم؟",otherParentUnknown:"يەنە بىرى نامەلۇم / دەرەختە يوق",
  stMarried:"نىكاھلىق",stDivorced:"ئاجراشقان",stWidowed:"جۈپتى ۋاپات بولغان",stRemove:"نىكاھ خاتىرىسىنى ئۆچۈرۈش",marrNote:"ئاجراشقانلارنىڭ سىزىقى ئۈزۈك كۆرۈنىدۇ. بالىلار قايسى نىكاھتىن بولسا شۇ جۈپتنىڭ ئاستىدا تۇرىدۇ. ئۆگەي ئاتا-ئانا ۋە ئۆگەي قېرىنداشلار ئۆزلۈكىدىن تېپىلىدۇ.",history:"ئۆزگىرىش تارىخى",undo:"قايتۇرۇش",undone:"قايتۇرۇلدى",undoneToast:"قايتۇرۇلدى",someone:"بىرى",noHistory:"تېخى ئۆزگىرىش يوق.",
  hAdd:n=>n+" قوشۇلدى",hDel:n=>n+" ئۆچۈرۈلدى",hEdit:(n,f)=>n+": "+f+" ئۆزگەردى",hMore:n=>"(+"+n+" باغلىنىش)",hUndo:x=>"قايتۇرۇلدى: "+x,confirmUndo:x=>"\""+x+"\" ئۆزگىرىشى قايتۇرۇلىدۇ. ھەممەيلەننىڭ دەرىخىدىمۇ ئەسلىگە قايتىدۇ.",
@@ -532,7 +539,7 @@ async function obNew(){
 }
 function obJoin(prefill){
   const b=$("ob-body");
-  b.innerHTML=`<h2>${esc(t("tJoin"))}</h2><p>${esc(t(prefill?"joinNameText":"joinText"))}</p>
+  b.innerHTML=`<h2>${esc(t("tJoin"))}</h2><p>${esc(t(prefill?"joinNameText":"joinText"))}</p>${isIOS()&&!isStandalone()?`<div class="warn" style="font-size:13.5px;text-align:start">${esc(t("iosJoinHint"))}</div>`:""}
    <form id="jf" class="obf">
    <textarea id="j-link" dir="ltr" placeholder="${esc(t("joinPh"))}" style="min-height:90px"${prefill?" hidden":""}>${esc(prefill||"")}</textarea>
    <label class="lb" for="j-name">${esc(t("yourName"))}</label><input type="text" id="j-name" dir="auto" required placeholder="${esc(t("joinNamePh"))}">
@@ -540,7 +547,7 @@ function obJoin(prefill){
    <div class="acts"><button type="button" class="btn" id="j-back">${esc(t("back"))}</button><button class="btn pri" type="submit" id="j-go">${esc(t("join"))}</button></div></form>`;
   $("j-back").onclick=obHome;
   $("jf").onsubmit=async e=>{e.preventDefault();if(!$("j-name").value.trim()){$("j-err").textContent=t("nameNeeded");$("j-name").focus();return;}const go=$("j-go");go.disabled=true;go.textContent=t("joining");
-    try{await joinTree($("j-link").value,$("j-name").value.trim());toast(t("joined"));}catch(err){$("j-err").textContent=errText(err);go.disabled=false;go.textContent=t("join");}};
+    try{await joinTree($("j-link").value,$("j-name").value.trim());toast(t("joined"));setTimeout(()=>showInstall(true),500);}catch(err){$("j-err").textContent=errText(err);go.disabled=false;go.textContent=t("join");}};
   setTimeout(()=>{const x=$(prefill?"j-name":"j-link");if(x)x.focus();},150);
 }
 
@@ -628,6 +635,7 @@ function showTreeMenu(){
     ${T.role==="admin"?`<button class="btn pri" id="m-mem">${esc(t("members"))}</button>`:""}
     ${T.role==="admin"?`<button class="btn" id="m-rec">${esc(t("recovery"))}</button>`:""}
     ${others.length?`<span class="lb" style="margin-top:6px">${esc(t("switchTree"))}</span>`+others.map(o=>`<button class="btn" data-sw="${esc(o.id)}" dir="auto">${esc(o.title||t("title"))} · ${esc(roleName(o.role))}</button>`).join(""):""}
+    ${isStandalone()?"":`<button class="btn pri" id="m-inst">${esc(t("instTitle"))}</button>`}
     <button class="btn" id="m-hist">${esc(t("history"))}</button>
     <button class="btn" id="m-exp">${esc(t("exportT"))}</button>
     <button class="btn" id="m-bd">${esc(t("bdNotif"))}${bdOn()?` <span class="pill">${esc(t("on"))}</span>`:""}</button>
@@ -637,6 +645,7 @@ function showTreeMenu(){
    </div>`);
   if($("m-mem"))$("m-mem").onclick=showMembers;
   sheet.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{const id=b.dataset.go;closeSheet();revealPerson(id);select(id);});
+  if($("m-inst"))$("m-inst").onclick=()=>showInstall(false);
   $("m-hist").onclick=showHistory;$("m-exp").onclick=showExport;$("m-bd").onclick=showBdNotif;
   if($("m-bak"))$("m-bak").onclick=showBackup;
   if($("m-rec"))$("m-rec").onclick=async()=>{let tk=null;
@@ -1223,6 +1232,26 @@ function showBdNotif(){sheetMode="menu";const sup="Notification" in window;const
     await syncBdays();toast(t("bdEnabled"));notifyToday();showBdNotif();};
   if($("bd-off"))$("bd-off").onclick=async()=>{try{localStorage.setItem("secere-bd","0");const reg=await navigator.serviceWorker.ready;reg.periodicSync&&reg.periodicSync.unregister("bday");}catch(e){}await syncBdays();showBdNotif();};
 }
+
+/* ---------- Telefona yükleme ---------- */
+let installEvt=null;
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();installEvt=e;});
+addEventListener("appinstalled",()=>{installEvt=null;toast(t("installed"));});
+const isStandalone=()=>(matchMedia&&matchMedia("(display-mode: standalone)").matches)||navigator.standalone===true;
+const isIOS=()=>/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+function showInstall(afterJoin){if(isStandalone())return;const T=CUR();sheetMode="menu";
+  let body;
+  if(isIOS()){const link=T?linkFor(T.id,T.token,T.key):"";
+    body=`<ol class="steps"><li>${esc(t("iosStep1"))}</li><li>${esc(t("iosStep2"))}</li><li>${esc(t("iosStep3"))}</li></ol>
+     ${T?`<span class="lb">${esc(t("myLink"))}</span><textarea id="lk-box" class="linkbox" readonly dir="ltr">${esc(link)}</textarea>
+     <div class="warn" style="font-size:13px">${esc(t("myLinkNote"))}</div><button class="btn pri" id="lk-copy" style="width:100%">${esc(t("copy"))}</button>`:""}`;}
+  else if(installEvt)body=`<p style="color:var(--muted);line-height:1.5;margin:0 0 12px">${esc(t("instText"))}</p><button class="btn pri" id="in-go" style="width:100%">${esc(t("installBtn"))}</button>`;
+  else body=`<ol class="steps"><li>${esc(t("andStep1"))}</li><li>${esc(t("andStep2"))}</li></ol>`;
+  openSheet(`<div class="sh-head"><h2>${esc(afterJoin?t("instTitleJoin"):t("instTitle"))}</h2><button class="x" id="sh-x">×</button></div>${body}
+   <button class="btn" id="in-later" style="width:100%;margin-top:8px">${esc(t("later"))}</button>`);
+  $("in-later").onclick=closeSheet;
+  if($("lk-copy")){const link=linkFor(T.id,T.token,T.key);$("lk-copy").onclick=()=>copyText(link,"lk-box");}
+  if($("in-go"))$("in-go").onclick=async()=>{const ev=installEvt;installEvt=null;try{ev.prompt();const r=await ev.userChoice;if(r&&r.outcome==="accepted")closeSheet();}catch(e){}};}
 
 /* ---------- Alt panel ---------- */
 const sheet=$("sheet"); let sheetMode=null, noteTimer=null, lastNote="";
