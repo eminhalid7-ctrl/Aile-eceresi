@@ -927,6 +927,9 @@ function computeLayout(){
     if(S.collapsed.has(aid)){ hidden=descCount(mem); }
     else kids=all.filter(c=>(c.parents||[]).some(x=>ids.has(x))&&anchorOf(c)===c.id).sort(order).map(c=>{const n=build(c.id);if(n)n.key=(P(c.id).parents||[]).filter(x=>ids.has(x)).sort().join(" ");return n;}).filter(Boolean);
     /* çocuklar hangi evlilikten olduğuna göre gruplanır */
+    /* tek ebeveyni girilmiş çocuk: o ebeveynin tek eşi varsa ve o çiftin çocukları varsa, kardeşlerinin arasına doğum sırasıyla girer
+       (sadece yerleşim; anne-baba kaydı değişmez) */
+    if(mem.length===2){const pk=mem.map(m=>m.id).sort().join(" ");if(kids.some(k=>k.key===pk))kids.forEach(k=>{if(k.key&&!k.key.includes(" "))k.key=pk;});}
     const keyPos=k=>{const ps=k.split(" ");const other=ps.find(x=>x!==aid)||ps[0];return mem.findIndex(m=>m.id===other);};
     const keys=[...new Set(kids.map(k=>k.key))].sort((x,y)=>keyPos(x)-keyPos(y));
     let items=[];
