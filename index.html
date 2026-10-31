@@ -74,6 +74,11 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-body);overflow
 .relline b{color:var(--ink);font-weight:600}
 .relword{font-family:var(--f-display);font-size:26px;line-height:1.2;margin-top:4px;text-wrap:balance}
 .steps{margin:0 0 12px;padding-inline-start:20px;line-height:1.6;display:flex;flex-direction:column;gap:6px}
+.legend{background:var(--paper);border-radius:12px;padding:10px 12px;font-size:14px}
+.legend summary{cursor:pointer;font-weight:600}
+.legend .lg{display:flex;align-items:center;gap:10px;margin-top:8px;line-height:1.35}
+.legend .lg svg{flex:none}
+.legend p{margin:10px 0 0;color:var(--muted);line-height:1.45;font-size:13px}
 .agerow{display:flex;align-items:center;gap:10px;margin:-4px 0 14px}
 .agerow .agebox{padding:7px 14px;min-width:40px}
 .bday{background:var(--gold-soft);color:var(--ink);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-weight:600}
@@ -315,7 +320,9 @@ Object.assign(TX.tr,{
  copy:"Kopyala",copied:"Kopyalandı",wa:"WhatsApp ile gönder",
  tMembers:"Üyeler",invite:"Yeni davet oluştur",inviteFor:"Kimin için",inviteForPh:"Örn. Halid",perm:"Yetki",
  permViewer:"Sadece görsün",permEditor:"Düzenleyebilsin",permAdmin:"Yönetici",makeInvite:"Davet linki oluştur",
- inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",instTitle:"Uygulamayı telefona yükle",instTitleJoin:"Hoş geldin! Uygulamayı telefona yükle",instText:"Yüklersen ana ekranında kendi simgesiyle durur, tam ekran ve internetsiz de açılır. Bir daha link gerekmez.",installBtn:"Yükle",installed:"Uygulama yüklendi",later:"Sonra",
+ inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",addAsParent:(n,g)=>n+" de "+(g==="f"?"annesi":g==="m"?"babası":"ebeveyni")+" olsun",
+ legendT:"Çizgiler ne anlama geliyor?",lgChild:"Renkli düz çizgi: anne-babadan çocuklarına. Her renk dedenin bir çocuğunun soyu.",lgMarried:"Altın çizgi: evli çift.",lgDivorced:"Kesik çizgi: boşanmış çift (sadece sen \"Boşandı\" olarak işaretlersen).",lgInlaw:"Noktalı çizgi: dışarıdan gelen gelin ya da damadın kendi anne-babasına bağlantısı. Üvey değildir.",
+ lgStep:"\"Üvey\" sadece açıkça girilmiş bilgiyle gösterilir: iki kişinin de anne ve babası kayıtlıysa ve sadece biri ortaksa üvey kardeş sayılır. Bir ebeveyni eksik girilmiş kişi asla üvey sayılmaz.",instTitle:"Uygulamayı telefona yükle",instTitleJoin:"Hoş geldin! Uygulamayı telefona yükle",instText:"Yüklersen ana ekranında kendi simgesiyle durur, tam ekran ve internetsiz de açılır. Bir daha link gerekmez.",installBtn:"Yükle",installed:"Uygulama yüklendi",later:"Sonra",
  andStep1:"Chrome'da sağ üstteki ⋮ menüsüne dokun.",andStep2:"\"Uygulamayı yükle\" ya da \"Ana ekrana ekle\"yi seç. Ana ekranda simgesi çıkar, girişin hatırlanır.",
  iosStep1:"Safari'de alttaki Paylaş düğmesine (kare ve yukarı ok) dokun.",iosStep2:"\"Ana Ekrana Ekle\"yi seç ve Ekle'ye bas.",iosStep3:"Ana ekrandaki Şecere simgesinden uygulamayı aç, \"Davet linkim var\"a bas ve aşağıdaki kişisel linkini yapıştır. iPhone ana ekran uygulamasını Safari'den ayrı tuttuğu için bu bir kereye mahsus gerekli.",
  myLink:"Kişisel giriş linkin",myLinkNote:"Bu link sadece senin içindir, kimseyle paylaşma.",iosJoinHint:"iPhone kullanıyorsan: önce Paylaş → Ana Ekrana Ekle ile uygulamayı ekle, sonra ana ekrandaki simgeden açıp bu linki orada yapıştır. Burada katılırsan, sonra sana verilecek kişisel linki uygulamada yapıştırman gerekir.",thisDevice:"bu cihaz",founderErr:"Kurucu yönetici kaldırılamaz.",founder:"kurucu",devApp:"uygulama",devBrowser:"tarayıcı",admNote:n=>"Şu an "+n+" yönetici cihaz var. Her satır bir telefon ya da bilgisayar. Kurucu (ağacı ilk açan cihaz) silinemez. Tanımadığın bir yönetici varsa yanındaki Kaldır'a bas.",bdNotif:"Doğum günü bildirimleri",on:"açık",bdToday:"Bugün doğum günü",bdText:"Açarsan, ağaçta doğum günü olan biri olduğunda bu telefona bildirim gelir. Uygulama yüklüyse telefon gün içinde kendisi kontrol eder; değilse uygulamayı açtığında bildirir.",bdNoSupport:"Bu tarayıcı bildirimleri desteklemiyor. Uygulamayı ana ekrana yükleyip oradan aç.",bdOnBtn:"Bildirimleri aç",bdOff:"Bildirimleri kapat",bdDenied:"Bildirim izni verilmedi. Telefon ayarlarından bu uygulamaya bildirim izni verebilirsin.",bdEnabled:"Doğum günü bildirimleri açıldı",exportT:"Ağacı resim / PDF olarak al",exportText:"Ağacın tamamı, şu an açık olan dallarla birlikte tek bir resim olarak çizilir. Kapalı dalları önce açmayı unutma.",exportPng:"Resim olarak indir (PNG)",exportPdf:"Yazdır / PDF olarak kaydet",exported:"Resim indirildi",relBtn:"Akrabalık: kimin nesi?",relTitle:"Akrabalık",relPick:x=>x+" kime göre? Diğer kişiyi seç.",relAgain:"Başka kişiyle karşılaştır",exSpouse:"Eski eşi",lateSpouse:"Merhum eşi",stepMother:"Üvey annesi",stepFather:"Üvey babası",stepParent:"Üvey ebeveyni",siblings:"Kardeşleri",halfSiblings:"Üvey kardeşleri",
@@ -348,7 +355,9 @@ Object.assign(TX.ug,{
  copy:"كۆچۈرۈش",copied:"كۆچۈرۈلدى",wa:"WhatsApp ئارقىلىق ئەۋەتىش",
  tMembers:"ئەزالار",invite:"يېڭى تەكلىپ قۇرۇش",inviteFor:"كىم ئۈچۈن",inviteForPh:"مەسىلەن: خالىد",perm:"ھوقۇق",
  permViewer:"پەقەت كۆرسۇن",permEditor:"تەھرىرلىيەلىسۇن",permAdmin:"باشقۇرغۇچى",makeInvite:"تەكلىپ ئۇلىنىشى قۇرۇش",
- inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",instTitle:"ئەپنى تېلېفونغا قاچىلاش",instTitleJoin:"خۇش كەلدىڭىز! ئەپنى تېلېفونغا قاچىلاڭ",instText:"قاچىلىسىڭىز ئاساسىي ئېكراندا ئۆز بەلگىسى بىلەن تۇرىدۇ، تولۇق ئېكران ۋە تورسىز ئېچىلىدۇ. قايتا ئۇلىنىش كېرەك بولمايدۇ.",installBtn:"قاچىلاش",installed:"ئەپ قاچىلاندى",later:"كېيىن",
+ inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",addAsParent:(n,g)=>n+" مۇ "+(g==="f"?"ئانىسى":g==="m"?"دادىسى":"ئاتا-ئانىسى")+" بولسۇن",
+ legendT:"سىزىقلار نېمىنى بىلدۈرىدۇ؟",lgChild:"رەڭلىك تۈز سىزىق: ئاتا-ئانىدىن بالىلىرىغا. ھەر بىر رەڭ بوۋىنىڭ بىر بالىسىنىڭ نەسلى.",lgMarried:"ئالتۇن رەڭ سىزىق: نىكاھلىق جۈپتلەر.",lgDivorced:"ئۈزۈك سىزىق: ئاجراشقان جۈپتلەر (پەقەت سىز «ئاجراشقان» دەپ بەلگىلىسىڭىز).",lgInlaw:"چېكىتلىك سىزىق: سىرتتىن كەلگەن كېلىن ياكى كۈيئوغۇلنىڭ ئۆز ئاتا-ئانىسىغا باغلىنىشى. ئۆگەي ئەمەس.",
+ lgStep:"«ئۆگەي» پەقەت ئېنىق كىرگۈزۈلگەن ئۇچۇر بىلەنلا كۆرسىتىلىدۇ: ئىككى كىشىنىڭ ھەر ئىككىسىنىڭ ئاتا-ئانىسى خاتىرىلەنگەن بولۇپ، پەقەت بىرىلا ئورتاق بولسا ئۆگەي قېرىنداش ھېسابلىنىدۇ. ئاتا-ئانىسىنىڭ بىرى كەم كىرگۈزۈلگەن كىشى ھەرگىز ئۆگەي ھېسابلانمايدۇ.",instTitle:"ئەپنى تېلېفونغا قاچىلاش",instTitleJoin:"خۇش كەلدىڭىز! ئەپنى تېلېفونغا قاچىلاڭ",instText:"قاچىلىسىڭىز ئاساسىي ئېكراندا ئۆز بەلگىسى بىلەن تۇرىدۇ، تولۇق ئېكران ۋە تورسىز ئېچىلىدۇ. قايتا ئۇلىنىش كېرەك بولمايدۇ.",installBtn:"قاچىلاش",installed:"ئەپ قاچىلاندى",later:"كېيىن",
  andStep1:"Chrome نىڭ ئوڭ ئۈستىدىكى ⋮ تىزىملىكىنى بېسىڭ.",andStep2:"«ئەپنى قاچىلاش» ياكى «ئاساسىي ئېكرانغا قوشۇش» نى تاللاڭ. ئاساسىي ئېكراندا بەلگىسى چىقىدۇ، كىرىشىڭىز ئەستە قالىدۇ.",
  iosStep1:"Safari دا ئاستىدىكى ھەمبەھىرلەش كۇنۇپكىسىنى (چاسا ۋە يۇقىرى يا ئوق) بېسىڭ.",iosStep2:"«ئاساسىي ئېكرانغا قوشۇش» نى تاللاپ، قوشۇشنى بېسىڭ.",iosStep3:"ئاساسىي ئېكراندىكى شەجەرە بەلگىسىدىن ئەپنى ئېچىپ، «تەكلىپ ئۇلىنىشىم بار» نى بېسىڭ ۋە تۆۋەندىكى شەخسىي ئۇلىنىشنى چاپلاڭ. iPhone ئاساسىي ئېكران ئەپىنى Safari دىن ئايرىم ساقلىغاچقا، بۇ بىر قېتىملا لازىم.",
  myLink:"شەخسىي كىرىش ئۇلىنىشىڭىز",myLinkNote:"بۇ ئۇلىنىش پەقەت سىز ئۈچۈن، ھېچكىمگە بەرمەڭ.",iosJoinHint:"iPhone ئىشلەتسىڭىز: ئاۋۋال ھەمبەھىرلەش → ئاساسىي ئېكرانغا قوشۇش ئارقىلىق ئەپنى قوشۇڭ، ئاندىن ئاساسىي ئېكراندىكى بەلگىدىن ئېچىپ بۇ ئۇلىنىشنى شۇ يەردە چاپلاڭ.",thisDevice:"بۇ ئۈسكۈنە",founderErr:"قۇرغۇچى باشقۇرغۇچىنى چىقىرىۋەتكىلى بولمايدۇ.",founder:"قۇرغۇچى",devApp:"ئەپ",devBrowser:"توركۆرگۈ",admNote:n=>"ھازىر "+n+" باشقۇرغۇچى ئۈسكۈنە بار. ھەر بىر قۇر بىر تېلېفون ياكى كومپيۇتېر. قۇرغۇچىنى (دەرەخنى تۇنجى ئاچقان ئۈسكۈنە) ئۆچۈرگىلى بولمايدۇ. تونۇمايدىغان باشقۇرغۇچى بولسا «چىقىرىۋېتىش» نى بېسىڭ.",bdNotif:"تۇغۇلغان كۈن ئۇقتۇرۇشى",on:"ئوچۇق",bdToday:"بۈگۈن تۇغۇلغان كۈنى",bdText:"ئاچسىڭىز، دەرەختە تۇغۇلغان كۈنى بولغان كىشى بولسا بۇ تېلېفونغا ئۇقتۇرۇش كېلىدۇ. ئەپ قاچىلانغان بولسا تېلېفون ئۆزى تەكشۈرىدۇ؛ بولمىسا ئەپنى ئاچقاندا ئۇقتۇرىدۇ.",bdNoSupport:"بۇ توركۆرگۈ ئۇقتۇرۇشنى قوللىمايدۇ. ئەپنى ئاساسىي ئېكرانغا قاچىلاپ ئېچىڭ.",bdOnBtn:"ئۇقتۇرۇشنى ئېچىش",bdOff:"ئۇقتۇرۇشنى تاقاش",bdDenied:"ئۇقتۇرۇش ئىجازىتى بېرىلمىدى. تېلېفون تەڭشىكىدىن ئىجازەت بېرەلەيسىز.",bdEnabled:"تۇغۇلغان كۈن ئۇقتۇرۇشى ئېچىلدى",exportT:"دەرەخنى رەسىم / PDF قىلىش",exportText:"پۈتۈن دەرەخ، ھازىر ئوچۇق شاخلار بىلەن بىرگە بىر رەسىم قىلىپ سىزىلىدۇ. يىغىلغان شاخلارنى ئاۋۋال ئېچىڭ.",exportPng:"رەسىم قىلىپ چۈشۈرۈش (PNG)",exportPdf:"بېسىش / PDF قىلىپ ساقلاش",exported:"رەسىم چۈشۈرۈلدى",relBtn:"تۇغقاندارچىلىق: كىمنىڭ نېمىسى؟",relTitle:"تۇغقاندارچىلىق",relPick:x=>x+" كىمگە نىسبەتەن؟ يەنە بىر كىشىنى تاللاڭ.",relAgain:"باشقا كىشى بىلەن سېلىشتۇرۇش",exSpouse:"ئىلگىرىكى جۈپتى",lateSpouse:"مەرھۇم جۈپتى",stepMother:"ئۆگەي ئانىسى",stepFather:"ئۆگەي دادىسى",stepParent:"ئۆگەي ئاتا-ئانىسى",siblings:"قېرىنداشلىرى",halfSiblings:"ئۆگەي قېرىنداشلىرى",
@@ -641,6 +650,12 @@ function showTreeMenu(){
     <button class="btn" id="m-bd">${esc(t("bdNotif"))}${bdOn()?` <span class="pill">${esc(t("on"))}</span>`:""}</button>
     ${T.role==="admin"?`<button class="btn" id="m-bak">${esc(t("backup"))}${backupDue(T)?` <span class="pill">${esc(t("backupDue"))}</span>`:""}</button>`:""}
     <button class="btn" id="m-other">${esc(t("otherTree"))}</button>
+    <details class="legend"><summary>${esc(t("legendT"))}</summary>
+      <div class="lg"><svg width="44" height="14"><path d="M2 7H42" stroke="var(--br0)" stroke-width="2.4" fill="none"/></svg><span>${esc(t("lgChild"))}</span></div>
+      <div class="lg"><svg width="44" height="14"><path d="M2 7H42" stroke="var(--gold)" stroke-width="2.6" fill="none"/></svg><span>${esc(t("lgMarried"))}</span></div>
+      <div class="lg"><svg width="44" height="14"><path d="M2 7H42" stroke="var(--muted)" stroke-width="2.6" stroke-dasharray="3 5" fill="none"/></svg><span>${esc(t("lgDivorced"))}</span></div>
+      <div class="lg"><svg width="44" height="14"><path d="M2 7H42" stroke="var(--muted)" stroke-width="1.8" stroke-dasharray="2 6" stroke-linecap="round" fill="none"/></svg><span>${esc(t("lgInlaw"))}</span></div>
+      <p>${esc(t("lgStep"))}</p></details>
     <button class="btn danger" id="m-leave">${esc(t("removeDevice"))}</button>
    </div>`);
   if($("m-mem"))$("m-mem").onclick=showMembers;
@@ -1052,6 +1067,13 @@ function showSearch(){if(sheetMode==="view")flushNote();S.sel=null;sheetMode="se
 $("find").onclick=showSearch;
 $("who").onclick=()=>{const T=CUR();if(!T)return;T.seenMembers=WHO.ids;saveDB();refreshWho();showMembers(true);};
 
+/* ---------- Üvey ilişkiler: sadece açıkça girilmiş bilgiyle ----------
+   Üvey kardeş: iki kişinin de anne VE babası ağaçta kayıtlı ve sadece biri ortak.
+   Üvey anne/baba: kişinin anne VE babası kayıtlı; anne ya da babasının, bu ikisinden başka bir eşi.
+   Bir ebeveyni eksik girilmiş kişi hiçbir zaman "üvey" sayılmaz. */
+function isHalfSib(a,b){const pa=new Set(a.parents||[]),pb=(b.parents||[]);if(pa.size!==2||pb.length!==2)return false;return pb.filter(x=>pa.has(x)).length===1;}
+function stepParentsOf(p){const par=parentsOf(p);if(par.length!==2)return[];const ids=new Set(par.map(x=>x.id));
+  return[...new Map(par.flatMap(x=>spousesOf(x)).filter(x=>!ids.has(x.id)&&x.id!==p.id).map(x=>[x.id,x])).values()];}
 /* ---------- Akrabalık hesaplayıcı ---------- */
 const RW={
  tr:{self:"Kendisi",father:"Baba",mother:"Anne",gpF_m:"Dede (babanın babası)",gpF_f:"Babaanne",gpM_m:"Dede (annenin babası)",gpM_f:"Anneanne",ggp_m:"Büyük dede",ggp_f:"Büyük nine",
@@ -1083,9 +1105,8 @@ function bloodRel(a,b){/* b, a'nın neyi? */
   const sideF=u>=1&&best.pa[1].gender!=="f";
   if(d===0){if(u===1)return g==="f"?W.mother:W.father;if(u===2)return sideF?(g==="f"?W.gpF_f:W.gpF_m):(g==="f"?W.gpM_f:W.gpM_m);if(u===3)return g==="f"?W.ggp_f:W.ggp_m;return W.anc(u,g);}
   if(u===0){if(d===1)return g==="f"?W.daughter:W.son;if(d===2)return W.grand;if(d===3)return W.ggrand;return W.desc(d);}
-  if(u===1&&d===1){const pa=new Set(parentsOf(a).map(x=>x.id)),pb=new Set(parentsOf(b).map(x=>x.id));
-    const full=pa.size===pb.size&&[...pa].every(x=>pb.has(x));
-    if(!full)return g==="f"?W.half_f:g==="m"?W.half_m:W.half;
+  if(u===1&&d===1){
+    if(isHalfSib(a,b))return g==="f"?W.half_f:g==="m"?W.half_m:W.half;
     const ka=dateKey(a.born),kb=dateKey(b.born);if(ka===99999999||kb===99999999||ka===kb)return g==="f"?(LANG==="ug"?"ئاچا-سىڭلىسى":"Kız kardeş"):g==="m"?(LANG==="ug"?"ئاكا-ئىنىسى":"Erkek kardeş"):W.sib;
     const older=kb<ka;return g==="f"?(older?W.sis_o:W.sis_y):(older?W.bro_o:W.bro_y);}
   if(u===2&&d===1)return sideF?(g==="f"?W.hala:W.amca):(g==="f"?W.teyze:W.dayi);
@@ -1108,14 +1129,14 @@ function relation(a,b){
   for(const x of spousesOf(b)){const r=bloodUD(a,x);if(!r)continue;
     if(r.u===0&&r.d===1)return g==="f"?W.bride:W.groom;
     if(r.u===0&&r.d===2)return W.grandSp;
-    if(r.u===1&&r.d===0)return g==="f"?W.stepM:W.stepF;
+    if(r.u===1&&r.d===0&&stepParentsOf(a).some(x=>x.id===b.id))return g==="f"?W.stepM:W.stepF;
     if(r.u===1&&r.d===1)return x.gender==="f"?W.eniste:W.yenge;
     if(r.u===2&&r.d===1)return x.gender==="f"?W.eniste:W.yenge;
   }
   /* b, a'nın eşinin akrabası */
   for(const s of spousesOf(a)){const r=bloodUD(s,b);if(!r)continue;
     if(r.u===1&&r.d===0)return g==="f"?W.mil:W.fil;
-    if(r.u===0&&r.d===1)return g==="f"?W.stepD:W.stepS;
+    if(r.u===0&&r.d===1&&stepParentsOf(b).some(x=>x.id===a.id))return g==="f"?W.stepD:W.stepS;
     if(r.u===1&&r.d===1){if(g==="m")return W.kayinbirader;return s.gender==="f"?W.baldiz:W.gorumce;}
   }
   /* bacanak / elti / dünür */
@@ -1268,12 +1289,12 @@ function relChips(p){
   spouseLinks(p).forEach(l=>{const x=P(l.id);out.push(chip(l.st==="d"?t("exSpouse"):l.st==="w"?t("lateSpouse"):t("spouse"),x.name));});
   /* üvey anne/baba: anne ya da babanın, kendi anne-babası olmayan eşleri */
   const parIds=new Set(par.map(x=>x.id));
-  const steps=[...new Map(par.flatMap(x=>spousesOf(x)).filter(x=>!parIds.has(x.id)&&x.id!==p.id).map(x=>[x.id,x])).values()];
+  const steps=stepParentsOf(p);
   steps.forEach(x=>out.push(chip(x.gender==="f"?t("stepMother"):x.gender==="m"?t("stepFather"):t("stepParent"),x.name)));
   const sib=[...new Map(par.flatMap(x=>kidsOf(x)).filter(x=>x.id!==p.id).map(x=>[x.id,x])).values()];
-  const full=sib.filter(x=>par.length&&par.every(q=>(x.parents||[]).includes(q.id))&&(x.parents||[]).length===par.length);
+  const half=sib.filter(x=>isHalfSib(p,x)), full=sib.filter(x=>!half.includes(x));
   if(full.length)out.push(chip(t("siblings"),t("people",full.length)));
-  if(sib.length>full.length)out.push(chip(t("halfSiblings"),t("people",sib.length-full.length)));
+  if(half.length)out.push(chip(t("halfSiblings"),t("people",half.length)));
   if(k.length)out.push(chip(t("kids"),t("people",k.length)));
   return out.length?`<div class="rel">${out.join("")}</div>`:"";
 }
@@ -1292,6 +1313,7 @@ function showView(id,recenter=true){
       <button class="btn" data-a="spouse">${spousesOf(p).length?t("addAnotherSpouse"):t("addSpouse")}</button>
       ${spousesOf(p).length?`<button class="btn" data-a="marr">${t("marriages")}</button>`:""}
       <button class="btn" data-a="rel">${t("relBtn")}</button>
+      ${par.length===1?spousesOf(par[0]).filter(x=>x.id!==p.id).map(x=>`<button class="btn wide" data-a="addpar" data-x="${esc(x.id)}"><bdi>${esc(x.name)}</bdi> ${esc(t("addAsParent","",x.gender).trim())}</button>`).join(""):""}
       ${par.length<2?`<button class="btn" data-a="parent">${pl}</button>`:""}
       <button class="btn" data-a="edit">${t("edit")}</button>
       ${kidsOf(p).length?`<button class="btn" data-a="fold">${isFolded(p)?esc(t("unfold")):esc(t("fold"))}</button>`:""}
@@ -1301,7 +1323,7 @@ function showView(id,recenter=true){
   openSheet(head+relChips(p)+body);
   const ta=$("sh-note");
   if(ta){ta.addEventListener("input",()=>{clearTimeout(noteTimer);$("sh-saved").textContent=t("typing");noteTimer=setTimeout(flushNote,900);});ta.addEventListener("blur",flushNote);}
-  sheet.querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>action(b.dataset.a,id));
+  sheet.querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>action(b.dataset.a,id,b.dataset.x));
   if(recenter)centerOn(id);
 }
 function refreshView(){const ta=$("sh-note");if(ta&&document.activeElement===ta)return;showView(S.sel,false);}
@@ -1360,6 +1382,8 @@ function action(a,id,other){
     const o=other===undefined?spouseOf(p):(other?P(other):null);
     formView(t("tChild"),t("childOf",p.name,o&&o.name),{withNote:true,back},f=>addChild(id,f,o?o.id:null));}
   if(a==="rel"){showRelPick(id);return;}
+  if(a==="addpar"){const x=P(other);if(!x)return;const par=(p.parents||[]).filter(z=>S.people.has(z));if(par.length!==1)return;
+    store.update(id,{parents:[par[0],x.id]});toast(t("saved"));setTimeout(()=>select(id),50);return;}
   if(a==="marr"){sheetMode="menu";
     openSheet(`<div class="sh-head"><div><h2>${esc(t("marriages"))}</h2><div style="color:var(--muted);font-size:13px" dir="auto">${esc(p.name)}</div></div><button class="x" id="sh-x">×</button></div>
      <div class="mlist">${spouseLinks(p).map(l=>{const x=P(l.id);return`<div class="mrow"><div style="min-width:0"><b dir="auto">${esc(x.name)}</b></div>
