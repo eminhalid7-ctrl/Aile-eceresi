@@ -519,6 +519,14 @@ async function pull(){
       T.people=T.dirty?merge(T.base||{},T.people,doc.people||{}):(doc.people||{});
       T.log=T.dirty?mergeLog(T.log,doc.log):(doc.log||[]);
       T.base=doc.people||{}; T.version=r.version; T.title=doc.title||T.title;
+    } else if(!T.dirty&&r.blob){
+      /* aynı sürümde sunucu ile bu cihaz farklıysa: eski bir hata yüzünden gönderilmemiş değişiklik kalmış demektir.
+         Yazma yetkisi olan cihaz kendi hâlini gönderir; sadece gören cihaz sunucudakini alır. */
+      try{const doc=open_(r.blob,keyOf(T));const sp=doc.people||{};
+        if(JSON.stringify(sp)!==JSON.stringify(T.people)){
+          if(r.role==="viewer"){T.people=sp;T.log=doc.log||[];}
+          else{T.base=sp;T.log=mergeLog(T.log,doc.log);T.dirty=true;}
+        }}catch(e){}
     }
     saveDB(); SYNC=T.dirty?"syncing":"ok"; setPeopleFromCur(); renderStatus(); refreshWho(); askName(); sendMyDevice(); syncBdays(); notifyToday();
     if(T.dirty)push();
