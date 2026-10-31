@@ -66,6 +66,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-body);overflow
 .gen b{font-weight:700}
 .gen{position:absolute;inset-inline-start:max(8px,env(safe-area-inset-left,0px));transform:translateY(-50%);font:600 11px/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--paper);padding:5px 8px;border-radius:999px;border:1px solid var(--card-edge);white-space:nowrap}
 #qlist{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-height:50vh;overflow:auto}
+#sugg{display:flex;flex-direction:column;gap:6px;margin-top:8px;max-height:230px;overflow:auto}#sugg .lb{margin:2px 0 0}
 .qrow{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:12px;border:1px solid var(--card-edge);background:var(--card);color:var(--ink);font:inherit;text-align:start;cursor:pointer}
 .qrow small{color:var(--muted);display:block;font-size:12px;margin-top:2px}
 #edges .wed{stroke:var(--gold);stroke-width:2.6}
@@ -270,7 +271,7 @@ tr:{title:"Aile Şeceresi",loading:"Yükleniyor…",people:n=>n+" kişi",empty:"
  father:"Babası",mother:"Annesi",parent:"Ebeveyni",spouse:"Eşi",kids:"Çocukları",male:"Erkek",female:"Kadın",noGender:"Cinsiyet belirtilmedi",
  note:"Açıklama",notePh:"Bu kişi hakkında not: memleketi, mesleği, hatıraları…",typing:"Yazılıyor…",saved:"Kaydedildi",
  addChild:"+ Çocuk ekle",withX:x=>"("+x+" ile)",addSpouse:"Eş ekle",addMother:"Anne ekle",addFather:"Baba ekle",addParent:"Ebeveyn ekle",addParents:"Anne / Baba ekle",
- edit:"Düzenle",del:"Sil",noNote:"Bu kişi için açıklama yok.",name:"İsim",namePh:"Örn. Abdurehim Tursun",gender:"Cinsiyet",born:"Doğum yılı (isteğe bağlı)",bornPh:"Örn. 1952",
+ edit:"Düzenle",del:"Sil",noNote:"Bu kişi için açıklama yok.",name:"İsim",namePh:"Örn. Abdurehim Tursun",suggT:"Ağaçta olan biri mi? Seçip bağla",gender:"Cinsiyet",born:"Doğum yılı (isteğe bağlı)",bornPh:"Örn. 1952",
  noteOpt:"Açıklama (isteğe bağlı)",notePh2:"Memleketi, mesleği, hatıraları…",cancel:"Vazgeç",save:"Kaydet",
  hGuess:"İsimden tahmin edildi, yanlışsa değiştir.",hNoGuess:"İsimden çıkaramadım, cinsiyeti seç.",hManual:"Elle seçildi.",hOpp:"Karşı cinsiyet seçildi, istersen değiştir.",
  tChild:"Çocuk ekle",childOf:(a,b)=>(b?a+" ve "+b:a)+" çocuğu",tSpouse:"Eş ekle",forX:a=>a+" için",pairWith:(a,b)=>a+" için, "+b+" ile eşleşecek",tEdit:"Kişiyi düzenle",
@@ -285,7 +286,7 @@ ug:{title:"ئائىلە شەجەرىسى",loading:"يۈكلىنىۋاتىدۇ…
  father:"دادىسى",mother:"ئانىسى",parent:"ئاتا-ئانىسى",spouse:"جۈپتى",kids:"بالىلىرى",male:"ئەر",female:"ئايال",noGender:"جىنسى بەلگىلەنمىگەن",
  note:"چۈشەندۈرۈش",notePh:"بۇ كىشى ھەققىدە خاتىرە: يۇرتى، كەسپى، ئەسلىمىلىرى…",typing:"يېزىلىۋاتىدۇ…",saved:"ساقلاندى",
  addChild:"+ بالا قوشۇش",withX:x=>"("+x+" بىلەن)",addSpouse:"جۈپتىنى قوشۇش",addMother:"ئانىسىنى قوشۇش",addFather:"دادىسىنى قوشۇش",addParent:"ئاتا-ئانا قوشۇش",addParents:"ئاتا ياكى ئانا قوشۇش",
- edit:"تەھرىرلەش",del:"ئۆچۈرۈش",noNote:"بۇ كىشى ئۈچۈن چۈشەندۈرۈش يوق.",name:"ئىسمى",namePh:"مەسىلەن: ئابدۇرېھىم تۇرسۇن",gender:"جىنسى",born:"تۇغۇلغان يىلى (ئىختىيارى)",bornPh:"مەسىلەن: 1952",
+ edit:"تەھرىرلەش",del:"ئۆچۈرۈش",noNote:"بۇ كىشى ئۈچۈن چۈشەندۈرۈش يوق.",name:"ئىسمى",namePh:"مەسىلەن: ئابدۇرېھىم تۇرسۇن",suggT:"دەرەختە بار بىرىمۇ؟ تاللاپ باغلاڭ",gender:"جىنسى",born:"تۇغۇلغان يىلى (ئىختىيارى)",bornPh:"مەسىلەن: 1952",
  noteOpt:"چۈشەندۈرۈش (ئىختىيارى)",notePh2:"يۇرتى، كەسپى، ئەسلىمىلىرى…",cancel:"بىكار قىلىش",save:"ساقلاش",
  hGuess:"ئىسىمدىن پەرەز قىلىندى، خاتا بولسا ئۆزگەرتىڭ.",hNoGuess:"ئىسىمدىن بىلەلمىدىم، جىنسىنى تاللاڭ.",hManual:"قولدا تاللاندى.",hOpp:"قارشى جىنس تاللاندى، خالىسىڭىز ئۆزگەرتىڭ.",
  tChild:"بالا قوشۇش",childOf:(a,b)=>(b?a+" بىلەن "+b:a)+" نىڭ بالىسى",tSpouse:"جۈپتىنى قوشۇش",forX:a=>a+" ئۈچۈن",pairWith:(a,b)=>a+" ئۈچۈن، "+b+" بىلەن جۈپلىشىدۇ",tEdit:"كىشىنى تەھرىرلەش",
@@ -862,6 +863,18 @@ async function addParent(pid,f){const p=P(pid);const other=parentsOf(p)[0];const
   const sibs=other?kidsOf(other):[p];
   for(const c of sibs){ if((c.parents||[]).length<2) await store.update(c.id,{parents:[...(c.parents||[]),id]}); }
   return id;}
+/* Anne-baba önerisi kuralı: kişinin kendisi, kendi soyundan gelenler ve zaten anne-babası olanlar çıkmaz;
+   yaşı bilinenlerden sadece 15 yaşından büyük olanlar çıkar (yaşı bilinmeyenler de çıkar);
+   anne eklenirken erkekler, baba eklenirken kadınlar çıkmaz. */
+function parentCandidates(pid,g){const p=P(pid);if(!p)return[];const ex=new Set([pid,...descendantsOf(p),...(p.parents||[])]);
+  return[...S.people.values()].filter(x=>{if(ex.has(x.id))return false;const a=ageOf(x);if(a!=null&&a<=15)return false;if(g&&x.gender&&x.gender!==g)return false;return true;})
+    .sort((x,y)=>String(x.name).localeCompare(String(y.name),"tr"));}
+/* Var olan kişiyi anne/baba olarak bağla: yeni anne/baba eklemeyle aynı kurallar */
+async function linkParent(pid,xid){const p=P(pid),x=P(xid);if(!p||!x)return;const cur=(p.parents||[]).filter(z=>S.people.has(z));if(cur.length>=2||cur.includes(xid))return;
+  const other=cur.length?P(cur[0]):null;
+  if(other&&!spouseLinks(other).length&&!spouseLinks(x).length) await setMarriage(other.id,xid,"m");
+  const sibs=other?kidsOf(other):[p];
+  for(const c of sibs){const cp=(c.parents||[]).filter(z=>S.people.has(z));if(cp.length<2&&!cp.includes(xid)&&!descendantsOf(c).has(xid)&&c.id!==xid) await store.update(c.id,{parents:[...cp,xid]});}}
 async function removePerson(id){
   for(const c of [...S.people.values()]){
     if((c.parents||[]).includes(id)) await store.update(c.id,{parents:c.parents.filter(x=>x!==id)});
@@ -1555,7 +1568,7 @@ function formView(title,sub,def,onSave){
   sheetMode="form";
   openSheet(`<div class="sh-head"><div style="min-width:0"><h2>${esc(title)}</h2>${sub?`<div style="color:var(--muted);font-size:13px" dir="auto">${esc(sub)}</div>`:""}</div><button class="x" id="sh-x">×</button></div>
   <form id="pf" autocomplete="off">
-    <div class="field"><label class="lb" for="f-name">${t("name")}</label><input type="text" id="f-name" dir="auto" required placeholder="${esc(t("namePh"))}" value="${esc(def.name||"")}"></div>
+    <div class="field"><label class="lb" for="f-name">${t("name")}</label><input type="text" id="f-name" dir="auto" required placeholder="${esc(t("namePh"))}" value="${esc(def.name||"")}">${def.suggest?`<div id="sugg"></div>`:""}</div>
     <div class="field"><span class="lb">${t("gender")}</span>
       <div class="seg"><input type="radio" name="g" id="g-m" value="m"><label for="g-m">${t("male")}</label><input type="radio" name="g" id="g-f" value="f"><label for="g-f">${t("female")}</label></div>
       <div class="hint" id="g-hint"></div></div>
@@ -1573,6 +1586,11 @@ function formView(title,sub,def,onSave){
     hint.className="hint"+(g?" ok":"");hint.textContent=g?t("hGuess"):(nm.value.trim()?t("hNoGuess"):"");};
   if(def.gender){hint.textContent=def.genderHint||"";}else upd();
   nm.addEventListener("input",upd);
+  if(def.suggest){const box=$("sugg");
+    const run=()=>{const v=norm(nm.value.trim());const res=def.suggest().filter(p=>!v||norm(p.name).includes(v)).slice(0,30);
+      box.innerHTML=res.length?`<span class="lb">${esc(t("suggT"))}</span>`+res.map(p=>`<button type="button" class="qrow" data-id="${esc(p.id)}"><span class="av ${p.gender||""}" style="width:30px;height:30px;font-size:13px">${esc(initial(p.name))}</span><span style="min-width:0"><b dir="auto">${esc(p.name||t("unnamed"))}</b><small dir="auto">${esc([lifeText(p).replace(/<[^>]+>/g,""),parentsOf(p).map(x=>x.name).join(" & ")].filter(Boolean).join(" · "))}</small></span></button>`).join(""):"";
+      box.querySelectorAll(".qrow").forEach(x=>x.onclick=async()=>{x.disabled=true;await def.onPick(P(x.dataset.id));});};
+    nm.addEventListener("input",run);nm.addEventListener("focus",run);run();}
   sheet.querySelectorAll('input[name=g]').forEach(r=>r.addEventListener("change",()=>{manual=true;hint.className="hint";hint.textContent=t("hManual");}));
   $("f-cancel").onclick=()=>def.back?def.back():closeSheet();
   let dupOk=false;
@@ -1613,7 +1631,9 @@ function action(a,id,other){
     $("ms-back").onclick=back;return;}
   if(a==="spouse"){const g=p.gender==="m"?"f":p.gender==="f"?"m":"";formView(t("tSpouse"),t("forX",p.name),{withNote:true,gender:g,genderHint:g?t("hOpp"):"",back},f=>addSpouse(id,f));}
   if(a==="parent"){const o=parentsOf(p)[0];const g=o?(o.gender==="m"?"f":o.gender==="f"?"m":""):"";
-    formView(g==="f"?t("addMother"):g==="m"?t("addFather"):t("addParents"),o?t("pairWith",p.name,o.name):t("forX",p.name),{withNote:true,gender:g,back},f=>addParent(id,f));}
+    formView(g==="f"?t("addMother"):g==="m"?t("addFather"):t("addParents"),o?t("pairWith",p.name,o.name):t("forX",p.name),{withNote:true,gender:g,back,
+      suggest:()=>parentCandidates(id,g),
+      onPick:async x=>{await linkParent(id,x.id);toast(t("saved"));closeSheet();setTimeout(()=>select(id),50);}},f=>addParent(id,f));}
   if(a==="edit"){formView(t("tEdit"),"",{editId:id,name:p.name,gender:p.gender,born:p.born,died:p.died,back},async f=>{await store.update(id,{name:f.name,gender:f.gender,born:f.born,died:f.died});return id;});}
   if(a==="fold"){toggleFold(id);return;}
   if(a==="del"){sheetMode="confirm";const k=kidsOf(p).length;
