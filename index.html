@@ -301,7 +301,7 @@ Object.assign(TX.tr,{
  copy:"Kopyala",copied:"Kopyalandı",wa:"WhatsApp ile gönder",
  tMembers:"Üyeler",invite:"Yeni davet oluştur",inviteFor:"Kimin için",inviteForPh:"Örn. Halid",perm:"Yetki",
  permViewer:"Sadece görsün",permEditor:"Düzenleyebilsin",permAdmin:"Yönetici",makeInvite:"Davet linki oluştur",
- inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki sadece o kişiye gönder. Linki açan herkes bu yetkiyle girer, istediğin zaman listeden kaldırabilirsin.",
+ inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu link tek kişiliktir: ilk açan kişinin telefonuna özel olur, sonra başkası kullanamaz. Kullanılana kadar Üyeler listesinden tekrar görebilirsin. Her akrabaya ayrı davet oluştur.",unused:"link henüz kullanılmadı",showLink:"Linki göster",usedLink:"Bu davet linki daha önce kullanılmış ya da iptal edilmiş. Yöneticiden yeni bir davet iste.",
  me:"sen",lastSeen:"son giriş",never:"henüz girmedi",remove:"Kaldır",removed:"Erişimi kaldırıldı",back:"Geri",
  confirmRemove:x=>x+" ağaca erişimini kaybedecek. Emin misin?",yes:"Evet",
  confirmLeave:"Bu ağaç bu cihazdan silinecek. Buluttaki ağaç ve diğer üyeler etkilenmez. Kurtarma linkin yoksa geri dönemezsin.",
@@ -324,7 +324,7 @@ Object.assign(TX.ug,{
  copy:"كۆچۈرۈش",copied:"كۆچۈرۈلدى",wa:"WhatsApp ئارقىلىق ئەۋەتىش",
  tMembers:"ئەزالار",invite:"يېڭى تەكلىپ قۇرۇش",inviteFor:"كىم ئۈچۈن",inviteForPh:"مەسىلەن: خالىد",perm:"ھوقۇق",
  permViewer:"پەقەت كۆرسۇن",permEditor:"تەھرىرلىيەلىسۇن",permAdmin:"باشقۇرغۇچى",makeInvite:"تەكلىپ ئۇلىنىشى قۇرۇش",
- inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى پەقەت شۇ كىشىگە ئەۋەتىڭ. ئۇلىنىشنى ئاچقان ھەر كىم بۇ ھوقۇق بىلەن كىرىدۇ، خالىغان ۋاقىتتا تىزىملىكتىن چىقىرىۋېتەلەيسىز.",
+ inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىش بىر كىشىلىك: تۇنجى ئاچقان كىشىنىڭ تېلېفونىغا خاس بولىدۇ، كېيىن باشقىلار ئىشلىتەلمەيدۇ. ئىشلىتىلگۈچە ئەزالار تىزىملىكىدىن قايتا كۆرەلەيسىز. ھەر بىر تۇغقانغا ئايرىم تەكلىپ قۇرۇڭ.",unused:"ئۇلىنىش تېخى ئىشلىتىلمىدى",showLink:"ئۇلىنىشنى كۆرسىتىش",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئىشلىتىلگەن ياكى بىكار قىلىنغان. باشقۇرغۇچىدىن يېڭى تەكلىپ سوراڭ.",
  me:"سىز",lastSeen:"ئاخىرقى كىرىش",never:"تېخى كىرمىدى",remove:"چىقىرىۋېتىش",removed:"ھوقۇقى بىكار قىلىندى",back:"قايتىش",
  confirmRemove:x=>x+" دەرەخكە كىرەلمەيدۇ. جەزملەشتۈرەمسىز؟",yes:"ھەئە",
  confirmLeave:"بۇ دەرەخ بۇ ئۈسكۈنىدىن ئۆچۈرۈلىدۇ. بۇلۇتتىكى دەرەخ ۋە باشقا ئەزالارغا تەسىر يەتمەيدۇ. ئەسلىگە كەلتۈرۈش ئۇلىنىشىڭىز بولمىسا قايتالمايسىز.",
@@ -422,12 +422,22 @@ async function createTree(title,label,people){
 }
 async function joinTree(link){
   const p=parseLink(link); if(!p)throw Object.assign(new Error("bad"),{code:"bad"});
-  const rows=await rpc("get_tree",{p_tree:p.id,p_token:p.token}); const r=rows&&rows[0]; if(!r)throw Object.assign(new Error("x"),{code:"no_access"});
+  let token=p.token;
+  /* davet tek kişilik: ilk açan cihaz kendi anahtarını alır, link bir daha çalışmaz */
+  if(!(DB.trees[p.id]&&DB.trees[p.id].token===p.token)){
+    const nt=newToken(); let res;
+    try{res=await rpc("claim_invite",{p_tree:p.id,p_token:p.token,p_new_token:nt});}
+    catch(e){if(e.code==="no_access")throw Object.assign(new Error("x"),{code:"used"});throw e;}
+    if(res==="ok")token=nt;
+  }
+  let rows;
+  try{rows=await rpc("get_tree",{p_tree:p.id,p_token:token});}catch(e){if(e.code==="no_access")throw Object.assign(new Error("x"),{code:"used"});throw e;}
+  const r=rows&&rows[0]; if(!r)throw Object.assign(new Error("x"),{code:"used"});
   const key=b64u.dec(p.key); const doc=open_(r.blob,key);
-  DB.trees[p.id]={id:p.id,token:p.token,key:p.key,role:r.role,memberId:r.member_id,title:doc.title||"",people:doc.people||{},base:doc.people||{},version:r.version,dirty:false};
+  DB.trees[p.id]={id:p.id,token,key:p.key,role:r.role,memberId:r.member_id,title:doc.title||"",people:doc.people||{},base:doc.people||{},version:r.version,dirty:false};
   DB.cur=p.id; saveDB(); S.fitted=false; SYNC="ok"; setPeopleFromCur(); renderStatus(); showOnboarding(false);
 }
-function errText(e){return e.code==="net"?t("netErr"):e.code==="bad"||e.message==="decrypt"?t("badLink"):e.code==="no_access"?t("noAccess"):t("saveFail");}
+function errText(e){return e.code==="net"?t("netErr"):e.code==="bad"||e.message==="decrypt"?t("badLink"):e.code==="no_access"?t("noAccess"):e.code==="used"?t("usedLink"):t("saveFail");}
 
 /* ---------- Ekranlar ---------- */
 function showOnboarding(on){$("onboard").hidden=!on;$("brand").hidden=on;$("tools").hidden=on;$("zoom").hidden=on;if(on){$("empty").hidden=true;closeSheet();}}
@@ -520,12 +530,17 @@ async function showMembers(){
   $("mem-back").onclick=showTreeMenu; $("mem-inv").onclick=showInvite;
   let rows=[];
   try{rows=await rpc("list_members",{p_tree:T.id,p_token:T.token});}catch(e){$("mem-list").textContent=errText(e);return;}
-  const key=keyOf(T); const nameOf=l=>{try{return open_(l,key).n||"—";}catch(e){return "—";}};
+  const key=keyOf(T); const lab=l=>{try{return open_(l,key)||{};}catch(e){return {};}}; const nameOf=l=>lab(l).n||"—";
   const fmt=d=>d?new Date(d).toLocaleDateString(LANG==="ug"?"ug":"tr"):t("never");
   $("mem-list").innerHTML=rows.map(m=>`<div class="mrow"><div style="min-width:0"><b dir="auto">${esc(nameOf(m.label))}${m.is_me?` <span class="pill">${esc(t("me"))}</span>`:""}</b>
-     <small>${esc(roleName(m.role))} · ${esc(t("lastSeen"))}: ${esc(fmt(m.last_seen))}</small></div>
+     <small>${esc(roleName(m.role))} · ${m.last_seen?esc(t("lastSeen"))+": "+esc(fmt(m.last_seen)):`<span class="pill">${esc(t("unused"))}</span>`}</small></div>
+     ${!m.last_seen&&lab(m.label).tk?`<button class="btn sm" data-show="${m.id}" data-tk="${esc(lab(m.label).tk)}" data-n="${esc(nameOf(m.label))}">${esc(t("showLink"))}</button>`:""}
      ${m.is_me?"":`<select data-role="${m.id}" aria-label="${esc(t("perm"))}"><option value="viewer"${m.role==="viewer"?" selected":""}>${esc(t("permViewer"))}</option><option value="editor"${m.role==="editor"?" selected":""}>${esc(t("permEditor"))}</option><option value="admin"${m.role==="admin"?" selected":""}>${esc(t("permAdmin"))}</option></select>
      <button class="btn danger sm" data-rm="${m.id}" data-n="${esc(nameOf(m.label))}">${esc(t("remove"))}</button>`}</div>`).join("");
+  sheet.querySelectorAll("[data-show]").forEach(b=>b.onclick=()=>{const link=linkFor(T.id,b.dataset.tk,T.key);sheetMode="menu";
+    openSheet(`<div class="sh-head"><h2 dir="auto">${esc(t("inviteReady",b.dataset.n))}</h2><button class="x" id="sh-x">×</button></div>
+      <p style="color:var(--muted);line-height:1.5;margin:0 0 12px">${esc(t("inviteNote"))}</p>${linkBox(link,t("waMsg",T.title||t("title"),link))}
+      <button class="btn" id="i-done" style="width:100%;margin-top:8px">${esc(t("back"))}</button>`);wireLinkBox(link);$("i-done").onclick=showMembers;});
   sheet.querySelectorAll("[data-role]").forEach(s=>s.onchange=async()=>{try{await rpc("update_member",{p_tree:T.id,p_token:T.token,p_member:s.dataset.role,p_role:s.value});toast(t("saved"));}catch(e){toast(errText(e));}});
   sheet.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{const n=b.dataset.n;sheetMode="menu";
     openSheet(`<div class="sh-head"><h2>${esc(t("remove"))}</h2><button class="x" id="sh-x">×</button></div><div class="warn" dir="auto">${esc(t("confirmRemove",n))}</div>
@@ -546,7 +561,7 @@ function showInvite(){
   $("i-back").onclick=showMembers;
   $("if").onsubmit=async e=>{e.preventDefault();const name=$("i-name").value.trim();if(!name)return;const role=sheet.querySelector("input[name=ir]:checked").value;
     const tok=newToken();$("i-go").disabled=true;
-    try{await rpc("add_member",{p_tree:T.id,p_token:T.token,p_new_token:tok,p_role:role,p_label:seal({n:name},keyOf(T))});
+    try{await rpc("add_member",{p_tree:T.id,p_token:T.token,p_new_token:tok,p_role:role,p_label:seal({n:name,tk:tok},keyOf(T))});
       const link=linkFor(T.id,tok,T.key);
       openSheet(`<div class="sh-head"><h2 dir="auto">${esc(t("inviteReady",name))}</h2><button class="x" id="sh-x">×</button></div>
         <p style="color:var(--muted);line-height:1.5;margin:0 0 12px">${esc(t("inviteNote"))}</p>${linkBox(link,t("waMsg",T.title||t("title"),link))}
