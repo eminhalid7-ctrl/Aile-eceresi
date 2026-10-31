@@ -6,6 +6,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#1E2724">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
 <title>Aile Şeceresi</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap">
 <style>
@@ -305,7 +308,12 @@ Object.assign(TX.tr,{
  copy:"Kopyala",copied:"Kopyalandı",wa:"WhatsApp ile gönder",
  tMembers:"Üyeler",invite:"Yeni davet oluştur",inviteFor:"Kimin için",inviteForPh:"Örn. Halid",perm:"Yetki",
  permViewer:"Sadece görsün",permEditor:"Düzenleyebilsin",permAdmin:"Yönetici",makeInvite:"Davet linki oluştur",
- inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",nameNeeded:"Lütfen adını yaz.",askNameT:"Adın ne?",whoTitle:n=>"Ağaca girenler: "+n,joinedPeople:"Ağaca girenler",invAdminTxt:"Her şeyi yapar, üyeleri yönetir",invEditorTxt:"Kişi ekler ve düzenler",invViewerTxt:"Sadece görür",showLink:"Linki göster",makeLink:"Link oluştur",delLink:"Linki sil",delOldLink:"Eski linki sil",linkFor:r=>r+" linki",confirmDelLink:r=>"\""+r+"\" linki çalışmaz hale gelecek. Bu linkle daha önce girenlerin erişimi devam eder, istersen onları aşağıdan tek tek kaldırırsın.",linkDeleted:"Link silindi",noName:"İsimsiz üye",joinNameText:"Ağaca girmek için adını yaz. Yönetici seni bu isimle görecek.",joinNamePh:"Örn. Halid",
+ inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",history:"Değişiklik geçmişi",undo:"Geri al",undone:"geri alındı",undoneToast:"Geri alındı",someone:"Biri",noHistory:"Henüz bir değişiklik yok.",
+ hAdd:n=>n+" eklendi",hDel:n=>n+" silindi",hEdit:(n,f)=>n+": "+f+" değişti",hMore:n=>"(+"+n+" bağlantı)",hUndo:x=>"Geri alındı: "+x,confirmUndo:x=>"\""+x+"\" değişikliği geri alınacak. Herkesin ağacında da eski haline döner.",
+ fName:"isim",fGender:"cinsiyet",fBorn:"doğum tarihi",fDied:"vefat tarihi",fNote:"açıklama",fParents:"anne-baba",fSpouse:"eş",
+ backup:"Yedek",backupDue:"yedek al",backupText:"Ağacın tamamını bir dosya olarak bu cihaza indirir. Bilgisayarından indirirsen yedek bilgisayarında, İndirilenler klasöründe durur. Bu dosya şifresizdir, kimseyle paylaşma.",
+ lastBackup:"Son yedek",backupDl:"Yedeği bilgisayara indir",backupRestore:"Yedekten geri yükle",backupDone:"Yedek indirildi",badBackup:"Bu dosya bir Aile Şeceresi yedeği değil.",
+ confirmRestore:(n,d)=>d+" tarihli yedekteki "+n+" kişi ağaca geri yüklenecek. Şu anki hali değişir, ama istersen Değişiklik geçmişi'nden geri alabilirsin.",restored:"Yedek geri yüklendi",nameNeeded:"Lütfen adını yaz.",askNameT:"Adın ne?",whoTitle:n=>"Ağaca girenler: "+n,joinedPeople:"Ağaca girenler",invAdminTxt:"Her şeyi yapar, üyeleri yönetir",invEditorTxt:"Kişi ekler ve düzenler",invViewerTxt:"Sadece görür",showLink:"Linki göster",makeLink:"Link oluştur",delLink:"Linki sil",delOldLink:"Eski linki sil",linkFor:r=>r+" linki",confirmDelLink:r=>"\""+r+"\" linki çalışmaz hale gelecek. Bu linkle daha önce girenlerin erişimi devam eder, istersen onları aşağıdan tek tek kaldırırsın.",linkDeleted:"Link silindi",noName:"İsimsiz üye",joinNameText:"Ağaca girmek için adını yaz. Yönetici seni bu isimle görecek.",joinNamePh:"Örn. Halid",
  me:"sen",lastSeen:"son giriş",never:"henüz girmedi",remove:"Kaldır",removed:"Erişimi kaldırıldı",back:"Geri",
  confirmRemove:x=>x+" ağaca erişimini kaybedecek. Emin misin?",yes:"Evet",
  confirmLeave:"Bu ağaç bu cihazdan silinecek. Buluttaki ağaç ve diğer üyeler etkilenmez. Kurtarma linkin yoksa geri dönemezsin.",
@@ -328,7 +336,12 @@ Object.assign(TX.ug,{
  copy:"كۆچۈرۈش",copied:"كۆچۈرۈلدى",wa:"WhatsApp ئارقىلىق ئەۋەتىش",
  tMembers:"ئەزالار",invite:"يېڭى تەكلىپ قۇرۇش",inviteFor:"كىم ئۈچۈن",inviteForPh:"مەسىلەن: خالىد",perm:"ھوقۇق",
  permViewer:"پەقەت كۆرسۇن",permEditor:"تەھرىرلىيەلىسۇن",permAdmin:"باشقۇرغۇچى",makeInvite:"تەكلىپ ئۇلىنىشى قۇرۇش",
- inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",nameNeeded:"ئىسمىڭىزنى يېزىڭ.",askNameT:"ئىسمىڭىز نېمە؟",whoTitle:n=>"دەرەخكە كىرگەنلەر: "+n,joinedPeople:"دەرەخكە كىرگەنلەر",invAdminTxt:"ھەممىنى قىلالايدۇ، ئەزالارنى باشقۇرىدۇ",invEditorTxt:"كىشى قوشىدۇ ۋە تەھرىرلەيدۇ",invViewerTxt:"پەقەت كۆرىدۇ",showLink:"ئۇلىنىشنى كۆرسىتىش",makeLink:"ئۇلىنىش قۇرۇش",delLink:"ئۇلىنىشنى ئۆچۈرۈش",delOldLink:"كونا ئۇلىنىشنى ئۆچۈرۈش",linkFor:r=>r+" ئۇلىنىشى",confirmDelLink:r=>"\""+r+"\" ئۇلىنىشى ئىشلىمەيدىغان بولىدۇ. ئىلگىرى كىرگەنلەرنىڭ ھوقۇقى داۋاملىشىدۇ، خالىسىڭىز تۆۋەندىن بىر-بىرلەپ چىقىرىۋېتەلەيسىز.",linkDeleted:"ئۇلىنىش ئۆچۈرۈلدى",noName:"ئىسىمسىز ئەزا",joinNameText:"دەرەخكە قوشۇلماقچى بولۇۋاتىسىز. باشقۇرغۇچى تونۇسۇن ئۈچۈن ئىسمىڭىزنى يېزىڭ.",joinNamePh:"مەسىلەن: خالىد",
+ inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",history:"ئۆزگىرىش تارىخى",undo:"قايتۇرۇش",undone:"قايتۇرۇلدى",undoneToast:"قايتۇرۇلدى",someone:"بىرى",noHistory:"تېخى ئۆزگىرىش يوق.",
+ hAdd:n=>n+" قوشۇلدى",hDel:n=>n+" ئۆچۈرۈلدى",hEdit:(n,f)=>n+": "+f+" ئۆزگەردى",hMore:n=>"(+"+n+" باغلىنىش)",hUndo:x=>"قايتۇرۇلدى: "+x,confirmUndo:x=>"\""+x+"\" ئۆزگىرىشى قايتۇرۇلىدۇ. ھەممەيلەننىڭ دەرىخىدىمۇ ئەسلىگە قايتىدۇ.",
+ fName:"ئىسىم",fGender:"جىنس",fBorn:"تۇغۇلغان ۋاقىت",fDied:"ۋاپات ۋاقتى",fNote:"چۈشەندۈرۈش",fParents:"ئاتا-ئانا",fSpouse:"جۈپتى",
+ backup:"زاپاس",backupDue:"زاپاسلاڭ",backupText:"پۈتۈن دەرەخنى بىر ھۆججەت قىلىپ بۇ ئۈسكۈنىگە چۈشۈرىدۇ. كومپيۇتېردىن چۈشۈرسىڭىز، زاپاس كومپيۇتېرىڭىزدا ساقلىنىدۇ. بۇ ھۆججەت شىفىرلانمىغان، ھېچكىمگە بەرمەڭ.",
+ lastBackup:"ئاخىرقى زاپاس",backupDl:"زاپاسنى كومپيۇتېرغا چۈشۈرۈش",backupRestore:"زاپاستىن ئەسلىگە كەلتۈرۈش",backupDone:"زاپاس چۈشۈرۈلدى",badBackup:"بۇ ھۆججەت ئائىلە شەجەرىسى زاپىسى ئەمەس.",
+ confirmRestore:(n,d)=>d+" دىكى زاپاستىكى "+n+" كىشى دەرەخكە قايتۇرۇلىدۇ. ھازىرقى ھالىتى ئۆزگىرىدۇ، خالىسىڭىز ئۆزگىرىش تارىخىدىن قايتۇرالايسىز.",restored:"زاپاس ئەسلىگە كەلتۈرۈلدى",nameNeeded:"ئىسمىڭىزنى يېزىڭ.",askNameT:"ئىسمىڭىز نېمە؟",whoTitle:n=>"دەرەخكە كىرگەنلەر: "+n,joinedPeople:"دەرەخكە كىرگەنلەر",invAdminTxt:"ھەممىنى قىلالايدۇ، ئەزالارنى باشقۇرىدۇ",invEditorTxt:"كىشى قوشىدۇ ۋە تەھرىرلەيدۇ",invViewerTxt:"پەقەت كۆرىدۇ",showLink:"ئۇلىنىشنى كۆرسىتىش",makeLink:"ئۇلىنىش قۇرۇش",delLink:"ئۇلىنىشنى ئۆچۈرۈش",delOldLink:"كونا ئۇلىنىشنى ئۆچۈرۈش",linkFor:r=>r+" ئۇلىنىشى",confirmDelLink:r=>"\""+r+"\" ئۇلىنىشى ئىشلىمەيدىغان بولىدۇ. ئىلگىرى كىرگەنلەرنىڭ ھوقۇقى داۋاملىشىدۇ، خالىسىڭىز تۆۋەندىن بىر-بىرلەپ چىقىرىۋېتەلەيسىز.",linkDeleted:"ئۇلىنىش ئۆچۈرۈلدى",noName:"ئىسىمسىز ئەزا",joinNameText:"دەرەخكە قوشۇلماقچى بولۇۋاتىسىز. باشقۇرغۇچى تونۇسۇن ئۈچۈن ئىسمىڭىزنى يېزىڭ.",joinNamePh:"مەسىلەن: خالىد",
  me:"سىز",lastSeen:"ئاخىرقى كىرىش",never:"تېخى كىرمىدى",remove:"چىقىرىۋېتىش",removed:"ھوقۇقى بىكار قىلىندى",back:"قايتىش",
  confirmRemove:x=>x+" دەرەخكە كىرەلمەيدۇ. جەزملەشتۈرەمسىز؟",yes:"ھەئە",
  confirmLeave:"بۇ دەرەخ بۇ ئۈسكۈنىدىن ئۆچۈرۈلىدۇ. بۇلۇتتىكى دەرەخ ۋە باشقا ئەزالارغا تەسىر يەتمەيدۇ. ئەسلىگە كەلتۈرۈش ئۇلىنىشىڭىز بولمىسا قايتالمايسىز.",
@@ -367,12 +380,26 @@ function parseLink(s){const m=String(s||"").match(/katil=([0-9a-f-]{36})\.([A-Za
 let SYNC="ok", pushing=false, pushTimer=null;
 function setPeopleFromCur(){const T=CUR();if(T&&S._foldFor!==T.id){S._foldFor=T.id;loadFolds();}S.people=new Map(Object.entries(T?T.people:{}).map(([k,v])=>[k,{...v,id:k}]));S.canWrite=!!T&&T.role!=="viewer";S.ready=true;render();}
 function touch(){const T=CUR();if(!T)return;T.dirty=true;saveDB();setPeopleFromCur();clearTimeout(pushTimer);pushTimer=setTimeout(push,700);}
+/* ---------- Değişiklik geçmişi ---------- */
+const LOG_MAX=800; let BATCH=null, batchTimer=null;
+const rid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const snap=v=>v?JSON.parse(JSON.stringify(v)):null;
+function logOp(id,bf,af,undoOf){const T=CUR();if(!T)return;T.log=T.log||[];
+  const now=Date.now(), by=T.myName||"";
+  const last=T.log[T.log.length-1];
+  /* aynı kişinin notunu art arda yazmak tek kayıt olsun */
+  if(!undoOf&&last&&last.id===id&&last.by===by&&last.bf&&last.af&&bf&&af&&now-last.at<180000&&T.log.filter(e=>e.b===last.b).length===1&&!BATCH){last.af=snap(af);last.at=now;return;}
+  if(!BATCH){BATCH=rid();clearTimeout(batchTimer);batchTimer=setTimeout(()=>{BATCH=null;},1200);}
+  T.log.push({i:rid(),b:BATCH,at:now,by,id,bf:snap(bf),af:snap(af),u:undoOf||undefined});
+  trimLog(T);}
+function trimLog(T){if(T.log.length<=LOG_MAX)return;const bs=[...new Set(T.log.map(e=>e.b))];while(T.log.length>LOG_MAX&&bs.length>1){const b=bs.shift();T.log=T.log.filter(e=>e.b!==b);}}
+function mergeLog(a,b){const m=new Map();(a||[]).concat(b||[]).forEach(e=>m.set(e.i,e));return[...m.values()].sort((x,y)=>x.at-y.at);}
 const store={
-  set:async(id,d)=>{const T=CUR();T.people[id]={...d,updatedAt:Date.now()};touch();},
-  update:async(id,p)=>{const T=CUR();if(!T.people[id])return;T.people[id]={...T.people[id],...p,updatedAt:Date.now()};touch();},
-  remove:async id=>{const T=CUR();delete T.people[id];touch();}
+  set:async(id,d)=>{const T=CUR();const bf=T.people[id]||null;T.people[id]={...d,updatedAt:Date.now()};logOp(id,bf,T.people[id]);touch();},
+  update:async(id,p)=>{const T=CUR();if(!T.people[id])return;const bf=T.people[id];T.people[id]={...T.people[id],...p,updatedAt:Date.now()};logOp(id,bf,T.people[id]);touch();},
+  remove:async id=>{const T=CUR();const bf=T.people[id];delete T.people[id];if(bf)logOp(id,bf,null);touch();}
 };
-function docOf(T){return{title:T.title||"",people:T.people};}
+function docOf(T){return{title:T.title||"",people:T.people,log:T.log||[]};}
 async function push(){
   const T=CUR(); if(!T||T.role==="viewer"||!T.dirty||pushing)return;
   pushing=true; SYNC="syncing"; renderStatus();
@@ -392,12 +419,12 @@ function merge(base,local,remote){
   return out;
 }
 let WHO={n:0,ids:[]};
-function askName(){const T=CUR();if(!T||T.named||T.role==="admin"||sheetMode)return;sheetMode="menu";
+function askName(){const T=CUR();if(!T||T.myName||sheetMode)return;sheetMode="menu";
   openSheet(`<div class="sh-head"><h2>${esc(t("askNameT"))}</h2></div><p style="color:var(--muted);line-height:1.5;margin:0 0 12px">${esc(t("joinNameText"))}</p>
    <form id="nm"><input type="text" id="nm-v" dir="auto" required placeholder="${esc(t("joinNamePh"))}"><div class="err" id="nm-e"></div>
    <button class="btn pri" type="submit" style="width:100%;margin-top:10px">${esc(t("save"))}</button></form>`);
   $("nm").onsubmit=async e=>{e.preventDefault();const v=$("nm-v").value.trim();if(!v){$("nm-e").textContent=t("nameNeeded");return;}
-    try{await rpc("set_my_label",{p_tree:T.id,p_token:T.token,p_label:seal({n:v},keyOf(T))});T.named=true;saveDB();closeSheet();toast(t("saved"));}catch(err){$("nm-e").textContent=errText(err);}};
+    try{await rpc("set_my_label",{p_tree:T.id,p_token:T.token,p_label:seal({n:v},keyOf(T))});T.named=true;T.myName=v;saveDB();closeSheet();toast(t("saved"));}catch(err){$("nm-e").textContent=errText(err);}};
   setTimeout(()=>{const x=$("nm-v");if(x)x.focus();},150);}
 async function refreshWho(){const T=CUR();const b=$("who");if(!T||T.role!=="admin"){b.hidden=true;return;}b.hidden=false;
   try{const rows=await rpc("list_members",{p_tree:T.id,p_token:T.token});const ppl=rows.filter(m=>m.kind!=="invite"&&!m.is_me);
@@ -412,6 +439,7 @@ async function pull(){
     if(r.version!==T.version){
       const doc=open_(r.blob,keyOf(T));
       T.people=T.dirty?merge(T.base||{},T.people,doc.people||{}):(doc.people||{});
+      T.log=T.dirty?mergeLog(T.log,doc.log):(doc.log||[]);
       T.base=doc.people||{}; T.version=r.version; T.title=doc.title||T.title;
     }
     saveDB(); SYNC=T.dirty?"syncing":"ok"; setPeopleFromCur(); renderStatus(); refreshWho(); askName();
@@ -434,7 +462,7 @@ function renderStatus(){
 async function createTree(title,label,people){
   const key=nacl.randomBytes(32), token=newToken(), T0={title,people:people||{}};
   const id=await rpc("create_tree",{p_blob:seal(T0,key),p_token:token,p_label:seal({n:label||""},key)});
-  DB.trees[id]={id,named:true,token,key:b64u.enc(key),role:"admin",title,people:T0.people,base:JSON.parse(JSON.stringify(T0.people)),version:1,dirty:false};
+  DB.trees[id]={id,named:true,myName:label||undefined,log:[],token,key:b64u.enc(key),role:"admin",title,people:T0.people,base:JSON.parse(JSON.stringify(T0.people)),version:1,dirty:false};
   DB.cur=id; saveDB(); S.fitted=false; SYNC="ok"; setPeopleFromCur(); renderStatus(); showOnboarding(false);
 }
 async function joinTree(link,name){
@@ -451,7 +479,7 @@ async function joinTree(link,name){
   try{rows=await rpc("get_tree",{p_tree:p.id,p_token:token});}catch(e){if(e.code==="no_access")throw Object.assign(new Error("x"),{code:"used"});throw e;}
   const r=rows&&rows[0]; if(!r)throw Object.assign(new Error("x"),{code:"used"});
   const key=b64u.dec(p.key); const doc=open_(r.blob,key);
-  DB.trees[p.id]={id:p.id,named:!!name||res2==="member",token,key:p.key,role:r.role,memberId:r.member_id,title:doc.title||"",people:doc.people||{},base:doc.people||{},version:r.version,dirty:false};
+  DB.trees[p.id]={id:p.id,named:!!name||res2==="member",token,key:p.key,role:r.role,memberId:r.member_id,title:doc.title||"",people:doc.people||{},base:doc.people||{},log:doc.log||[],myName:name||undefined,version:r.version,dirty:false};
   DB.cur=p.id; saveDB(); S.fitted=false; SYNC="ok"; setPeopleFromCur(); renderStatus(); showOnboarding(false);
 }
 function errText(e){return e.code==="net"?t("netErr"):e.code==="bad"||e.message==="decrypt"?t("badLink"):e.code==="no_access"?t("noAccess"):e.code==="used"?t("usedLink"):t("saveFail");}
@@ -515,6 +543,66 @@ function wireLinkBox(link){$("lk-copy").onclick=()=>copyText(link,"lk-box");$("l
 function upcomingHtml(){const list=[...S.people.values()].map(p=>({p,n:daysToBday(p)})).filter(x=>x.n!=null&&x.n<=30).sort((a,b)=>a.n-b.n).slice(0,6);
   if(!list.length)return"";return`<span class="lb">${esc(t("upcoming"))}</span><div class="bdl">${list.map(({p,n})=>{const a=ageOf(p);
     return`<button class="qrow" data-go="${esc(p.id)}"><span class="av ${p.gender||""}" style="width:30px;height:30px;font-size:13px">${esc(initial(p.name))}</span><span style="min-width:0"><b dir="auto">${esc(p.name)}</b><small>${esc(fmtD(p.born).replace(/\s?\d{4}$/,""))} · ${esc(t("inDays",n))}${a!=null?" · "+esc(t("turns",n===0?a:a+1)):""}</small></span></button>`;}).join("")}</div>`;}
+/* ---------- Geçmiş ekranı ---------- */
+const FIELDS={name:"fName",gender:"fGender",born:"fBorn",died:"fDied",note:"fNote",parents:"fParents",spouse:"fSpouse"};
+function batchInfo(es){const add=es.find(e=>!e.bf&&e.af),del=es.find(e=>e.bf&&!e.af),main=add||del||es[0];
+  const nm=(main.af||main.bf||{}).name||t("unnamed");
+  let txt=add?t("hAdd",nm):del?t("hDel",nm):(()=>{const ch=Object.keys(FIELDS).filter(k=>JSON.stringify((main.bf||{})[k]??"")!==JSON.stringify((main.af||{})[k]??""));
+    return t("hEdit",nm,ch.map(k=>t(FIELDS[k])).join(", ")||t("fNote"));})();
+  if(es.length>1&&!add&&!del)txt+=" "+t("hMore",es.length-1);
+  return txt;}
+function showHistory(){const T=CUR();sheetMode="menu";const log=T.log||[];
+  const groups=[];const idx=new Map();log.forEach(e=>{if(!idx.has(e.b)){idx.set(e.b,groups.length);groups.push([]);}groups[idx.get(e.b)].push(e);});
+  const undone=new Set(log.filter(e=>e.u).map(e=>e.u));
+  const fmt=at=>new Date(at).toLocaleString(LANG==="ug"?"ug":"tr",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
+  const rows=groups.reverse().slice(0,150).map(es=>{const e=es[0];const isUndo=!!e.u;const lbl=isUndo?t("hUndo",batchInfo(log.filter(x=>x.b===e.u).length?log.filter(x=>x.b===e.u):es)):batchInfo(es);
+    return`<div class="mrow"><div style="min-width:0"><b dir="auto" style="font-weight:600">${esc(lbl)}</b><small dir="auto">${esc(e.by||t("someone"))} · ${esc(fmt(e.at))}</small></div>
+     ${S.canWrite&&!isUndo?(undone.has(e.b)?`<span class="pill">${esc(t("undone"))}</span>`:`<button class="btn sm" data-undo="${esc(e.b)}">${esc(t("undo"))}</button>`):""}</div>`;}).join("");
+  openSheet(`<div class="sh-head"><h2>${esc(t("history"))}</h2><button class="x" id="sh-x">×</button></div>
+   <div class="mlist">${rows||`<div class="warn">${esc(t("noHistory"))}</div>`}</div>
+   <button class="btn" id="h-back" style="width:100%;margin-top:12px">${esc(t("back"))}</button>`);
+  $("h-back").onclick=showTreeMenu;
+  sheet.querySelectorAll("[data-undo]").forEach(b=>b.onclick=()=>{const es=log.filter(x=>x.b===b.dataset.undo);sheetMode="menu";
+    openSheet(`<div class="sh-head"><h2>${esc(t("undo"))}</h2><button class="x" id="sh-x">×</button></div><div class="warn" dir="auto">${esc(t("confirmUndo",batchInfo(es)))}</div>
+     <div class="acts"><button class="btn" id="u-no">${esc(t("cancel"))}</button><button class="btn pri" id="u-yes">${esc(t("undo"))}</button></div>`);
+    $("u-no").onclick=showHistory;
+    $("u-yes").onclick=()=>{undoBatch(b.dataset.undo);toast(t("undoneToast"));showHistory();};});
+}
+function undoBatch(bid){const T=CUR();const es=(T.log||[]).filter(e=>e.b===bid).reverse();BATCH=rid();
+  es.forEach(e=>{const cur=T.people[e.id]||null;
+    if(!e.bf){if(cur){delete T.people[e.id];logOp(e.id,cur,null,bid);}}
+    else{T.people[e.id]={...e.bf,updatedAt:Date.now()};logOp(e.id,cur,T.people[e.id],bid);}});
+  BATCH=null;touch();}
+/* ---------- Yedek ---------- */
+function backupDue(T){return !T.lastBackup||Date.now()-T.lastBackup>14*864e5;}
+function showBackup(){const T=CUR();sheetMode="menu";
+  const last=T.lastBackup?new Date(T.lastBackup).toLocaleDateString(LANG==="ug"?"ug":"tr"):t("never");
+  openSheet(`<div class="sh-head"><h2>${esc(t("backup"))}</h2><button class="x" id="sh-x">×</button></div>
+   <p style="color:var(--muted);line-height:1.5;margin:0 0 12px">${esc(t("backupText"))}</p>
+   <div class="warn">${esc(t("lastBackup"))}: <b>${esc(last)}</b></div>
+   <div class="menu"><button class="btn pri" id="b-dl">${esc(t("backupDl"))}</button>
+   <label class="btn" for="b-file" style="cursor:pointer">${esc(t("backupRestore"))}</label><input type="file" id="b-file" accept=".json,application/json" hidden>
+   <div class="err" id="b-err"></div>
+   <button class="btn" id="b-back">${esc(t("back"))}</button></div>`);
+  $("b-back").onclick=showTreeMenu;
+  $("b-dl").onclick=()=>{const data={app:"aile-seceresi",v:1,exportedAt:new Date().toISOString(),title:T.title||"",people:T.people};
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const a=document.createElement("a");
+    const d=new Date(),pad=n=>String(n).padStart(2,"0");a.href=URL.createObjectURL(blob);
+    a.download=(T.title||"aile-seceresi").replace(/[^\p{L}\p{N}]+/gu,"-")+"-yedek-"+d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())+".json";
+    document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},2000);
+    T.lastBackup=Date.now();saveDB();toast(t("backupDone"));showBackup();};
+  $("b-file").onchange=async e=>{const f=e.target.files[0];if(!f)return;let d;
+    try{d=JSON.parse(await f.text());if(!d||typeof d.people!=="object")throw 0;}catch(x){$("b-err").textContent=t("badBackup");return;}
+    const n=Object.keys(d.people).length;sheetMode="menu";
+    openSheet(`<div class="sh-head"><h2>${esc(t("backupRestore"))}</h2><button class="x" id="sh-x">×</button></div>
+     <div class="warn">${esc(t("confirmRestore",n,d.exportedAt?new Date(d.exportedAt).toLocaleDateString(LANG==="ug"?"ug":"tr"):"?"))}</div>
+     <div class="acts"><button class="btn" id="r-no">${esc(t("cancel"))}</button><button class="btn danger solid" id="r-yes">${esc(t("backupRestore"))}</button></div>`);
+    $("r-no").onclick=showBackup;
+    $("r-yes").onclick=()=>{BATCH=rid();const ids=new Set([...Object.keys(T.people),...Object.keys(d.people)]);
+      ids.forEach(id=>{const cur=T.people[id]||null,nx=d.people[id]||null;if(JSON.stringify(cur)===JSON.stringify(nx))return;
+        if(nx){T.people[id]={...nx,updatedAt:Date.now()};logOp(id,cur,T.people[id]);}else{delete T.people[id];logOp(id,cur,null);}});
+      BATCH=null;S.fitted=false;touch();closeSheet();toast(t("restored"));};};
+}
 function showTreeMenu(){
   const T=CUR(); if(!T)return; if(sheetMode==="view")flushNote(); S.sel=null; sheetMode="menu";
   const others=Object.values(DB.trees).filter(x=>x.id!==T.id);
@@ -524,11 +612,15 @@ function showTreeMenu(){
     ${T.role==="admin"?`<button class="btn pri" id="m-mem">${esc(t("members"))}</button>`:""}
     ${T.role==="admin"?`<button class="btn" id="m-rec">${esc(t("recovery"))}</button>`:""}
     ${others.length?`<span class="lb" style="margin-top:6px">${esc(t("switchTree"))}</span>`+others.map(o=>`<button class="btn" data-sw="${esc(o.id)}" dir="auto">${esc(o.title||t("title"))} · ${esc(roleName(o.role))}</button>`).join(""):""}
+    <button class="btn" id="m-hist">${esc(t("history"))}</button>
+    ${T.role==="admin"?`<button class="btn" id="m-bak">${esc(t("backup"))}${backupDue(T)?` <span class="pill">${esc(t("backupDue"))}</span>`:""}</button>`:""}
     <button class="btn" id="m-other">${esc(t("otherTree"))}</button>
     <button class="btn danger" id="m-leave">${esc(t("removeDevice"))}</button>
    </div>`);
   if($("m-mem"))$("m-mem").onclick=showMembers;
   sheet.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{const id=b.dataset.go;closeSheet();revealPerson(id);select(id);});
+  $("m-hist").onclick=showHistory;
+  if($("m-bak"))$("m-bak").onclick=showBackup;
   if($("m-rec"))$("m-rec").onclick=()=>{const link=linkFor(T.id,T.token,T.key);sheetMode="menu";
     openSheet(`<div class="sh-head"><h2>${esc(t("recovery"))}</h2><button class="x" id="sh-x">×</button></div><div class="warn">${esc(t("recText"))}</div>
       <textarea id="lk-box" class="linkbox" readonly dir="ltr">${esc(link)}</textarea><div class="acts"><button class="btn" id="m-b">${esc(t("back"))}</button><button class="btn pri" id="lk-copy">${esc(t("copy"))}</button></div>`);
@@ -1005,6 +1097,7 @@ $("first-add").onclick=()=>formView(t("tFirst"),t("firstSub"),{withNote:true},as
 let tt;function toast(m){const el=$("toast");el.textContent=m;el.hidden=false;clearTimeout(tt);tt=setTimeout(()=>el.hidden=true,2600);}
 addEventListener("resize",()=>{if(!S.people.size)fit();});
 applyLang(); applyT(); render(); bootData();
+if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
 })();
 </script>
 </body>
