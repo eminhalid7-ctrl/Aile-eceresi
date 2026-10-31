@@ -100,6 +100,9 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-body);overflow
 .crow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:12px;background:var(--paper);border:1px solid var(--card-edge);font-size:14px;cursor:pointer}
 .crow input{width:44px;height:30px;border:0;padding:0;background:none;cursor:pointer}
 .crow.sm{justify-content:center;gap:6px;padding:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chipb{border:1px solid var(--card-edge);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 12px;font:600 13px/1 var(--f-body);cursor:pointer}
+.chipb.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .agerow{display:flex;align-items:center;gap:10px;margin:-4px 0 14px}
 .agerow .agebox{padding:7px 14px;min-width:40px}
 .bday{background:var(--gold-soft);color:var(--ink);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-weight:600}
@@ -345,7 +348,7 @@ Object.assign(TX.tr,{
  copy:"Kopyala",copied:"Kopyalandı",wa:"WhatsApp ile gönder",
  tMembers:"Üyeler",invite:"Yeni davet oluştur",inviteFor:"Kimin için",inviteForPh:"Adı",perm:"Yetki",
  permViewer:"Sadece görsün",permEditor:"Düzenleyebilsin",permAdmin:"Yönetici",makeInvite:"Davet linki oluştur",
- inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",colorsText:"Her rengin yanındaki kutuya dokunup istediğin rengi seç. Değişiklik hemen görünür. Diğer tonları (kenarlar, yazı gölgeleri) uygulama senin seçtiğin renklere uyumlu olarak kendisi ayarlar.",cPaper:"Arka plan",cCard:"Kişi kartları",cInk:"Yazılar",cLine:"Bağlantı çizgileri",cMarr:"Evlilik çizgisi ve vurgular",cMale:"Erkek",cFemale:"Kadın",cBranches:"Dal renkleri (dedenin her çocuğunun soyu)",cReset:"Varsayılana dön",cDone:"Tamam",settings:"Ayarlar",setLook:"Görünüm",setLang:"Dil",setPhone:"Bu telefon",setData:"Veriler",setTrees:"Ağaçlar",customColors:"Renkleri kendim seçeyim",nameTaken:"Bu isim ağaçta zaten var. Lütfen kendi adını yaz. Bu senin başka bir cihazınsa adının yanına cihazı ekle, örneğin \"(tablet)\".",themes:"Tema ve renkler",addAsParent:(n,g)=>n+" de "+(g==="f"?"annesi":g==="m"?"babası":"ebeveyni")+" olsun",
+ inviteReady:x=>x+" için davet linki hazır",inviteNote:"Bu linki açan herkes bu yetkiyle ağaca girer, sınır yok. Linki istediğin zaman buradan tekrar görebilirsin. Silersen link çalışmaz, ama linkle daha önce girenler aşağıdaki listede kalır.",usedLink:"Bu davet linki silinmiş ya da geçersiz. Yöneticiden yeni link iste.",inviteLinks:"Davet linkleri",backHere:"Bu ana dön",backHereNote:"\"Bu ana dön\": ağacı o değişiklik yapılmadan hemen önceki haline getirir, ondan sonraki her şey geri alınır. İstersen bunu da sonra geri alabilirsin.",confirmBackHere:d=>"Ağaç, "+d+" tarihindeki bu değişiklikten hemen önceki haline dönecek. Bu andan sonra herkesin yaptığı tüm değişiklikler geri alınır.",hRestored:"Ağaç önceki bir haline döndürüldü",everyone:"Herkes",undoAllBy:n=>n+" adlı kişinin tüm değişikliklerini geri al",confirmUndoAll:n=>n+" adlı kişinin yaptığı tüm değişiklikler sondan başa doğru geri alınacak.",colorsText:"Her rengin yanındaki kutuya dokunup istediğin rengi seç. Değişiklik hemen görünür. Diğer tonları (kenarlar, yazı gölgeleri) uygulama senin seçtiğin renklere uyumlu olarak kendisi ayarlar.",cPaper:"Arka plan",cCard:"Kişi kartları",cInk:"Yazılar",cLine:"Bağlantı çizgileri",cMarr:"Evlilik çizgisi ve vurgular",cMale:"Erkek",cFemale:"Kadın",cBranches:"Dal renkleri (dedenin her çocuğunun soyu)",cReset:"Varsayılana dön",cDone:"Tamam",settings:"Ayarlar",setLook:"Görünüm",setLang:"Dil",setPhone:"Bu telefon",setData:"Veriler",setTrees:"Ağaçlar",customColors:"Renkleri kendim seçeyim",nameTaken:"Bu isim ağaçta zaten var. Lütfen kendi adını yaz. Bu senin başka bir cihazınsa adının yanına cihazı ekle, örneğin \"(tablet)\".",themes:"Tema ve renkler",addAsParent:(n,g)=>n+" de "+(g==="f"?"annesi":g==="m"?"babası":"ebeveyni")+" olsun",
  legendT:"Çizgiler ne anlama geliyor?",lgChild:"Renkli düz çizgi: anne-babadan çocuklarına. Her renk dedenin bir çocuğunun soyu.",lgMarried:"Altın çizgi: evli çift.",lgDivorced:"Kesik çizgi: boşanmış çift (sadece sen \"Boşandı\" olarak işaretlersen).",lgInlaw:"Noktalı çizgi: dışarıdan gelen gelin ya da damadın kendi anne-babasına bağlantısı. Üvey değildir.",
  lgStep:"\"Üvey\" sadece açıkça girilmiş bilgiyle gösterilir: iki kişinin de anne ve babası kayıtlıysa ve sadece biri ortaksa üvey kardeş sayılır. Bir ebeveyni eksik girilmiş kişi asla üvey sayılmaz.",instTitle:"Uygulamayı telefona yükle",instTitleJoin:"Hoş geldin! Uygulamayı telefona yükle",instText:"Yüklersen ana ekranında kendi simgesiyle durur, tam ekran ve internetsiz de açılır. Bir daha link gerekmez.",installBtn:"Yükle",installed:"Uygulama yüklendi",later:"Sonra",
  andStep1:"Chrome'da sağ üstteki ⋮ menüsüne dokun.",andStep2:"\"Uygulamayı yükle\" ya da \"Ana ekrana ekle\"yi seç. Ana ekranda simgesi çıkar, girişin hatırlanır.",
@@ -380,7 +383,7 @@ Object.assign(TX.ug,{
  copy:"كۆچۈرۈش",copied:"كۆچۈرۈلدى",wa:"WhatsApp ئارقىلىق ئەۋەتىش",
  tMembers:"ئەزالار",invite:"يېڭى تەكلىپ قۇرۇش",inviteFor:"كىم ئۈچۈن",inviteForPh:"ئىسمى",perm:"ھوقۇق",
  permViewer:"پەقەت كۆرسۇن",permEditor:"تەھرىرلىيەلىسۇن",permAdmin:"باشقۇرغۇچى",makeInvite:"تەكلىپ ئۇلىنىشى قۇرۇش",
- inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",colorsText:"ھەر بىر رەڭنىڭ يېنىدىكى كۇنۇپكىنى بېسىپ خالىغان رەڭنى تاللاڭ. ئۆزگىرىش دەرھال كۆرۈنىدۇ. باشقا رەڭلەرنى ئەپ ئۆزى ماسلاشتۇرىدۇ.",cPaper:"تەگلىك",cCard:"كىشى كارتىلىرى",cInk:"خەتلەر",cLine:"باغلىنىش سىزىقلىرى",cMarr:"نىكاھ سىزىقى ۋە تەكىتلەش",cMale:"ئەر",cFemale:"ئايال",cBranches:"شاخ رەڭلىرى (بوۋىنىڭ ھەر بىر بالىسىنىڭ نەسلى)",cReset:"ئەسلىگە قايتۇرۇش",cDone:"بولدى",settings:"تەڭشەكلەر",setLook:"كۆرۈنۈش",setLang:"تىل",setPhone:"بۇ تېلېفون",setData:"سانلىق مەلۇمات",setTrees:"دەرەخلەر",customColors:"رەڭلەرنى ئۆزۈم تاللاي",nameTaken:"بۇ ئىسىم دەرەختە بار. ئۆز ئىسمىڭىزنى يېزىڭ. بۇ سىزنىڭ باشقا ئۈسكۈنىڭىز بولسا، ئىسمىڭىزنىڭ يېنىغا ئۈسكۈنىنى يېزىڭ، مەسىلەن «(تابلېت)».",themes:"تېما ۋە رەڭلەر",addAsParent:(n,g)=>n+" مۇ "+(g==="f"?"ئانىسى":g==="m"?"دادىسى":"ئاتا-ئانىسى")+" بولسۇن",
+ inviteReady:x=>x+" ئۈچۈن تەكلىپ ئۇلىنىشى تەييار",inviteNote:"بۇ ئۇلىنىشنى ئاچقان ھەر كىم مۇشۇ ھوقۇق بىلەن كىرىدۇ، چەك يوق. ئۇلىنىشنى خالىغان ۋاقىتتا بۇ يەردىن قايتا كۆرەلەيسىز. ئۆچۈرسىڭىز ئۇلىنىش ئىشلىمەيدۇ، ئەمما ئىلگىرى كىرگەنلەر تۆۋەندىكى تىزىملىكتە قالىدۇ.",usedLink:"بۇ تەكلىپ ئۇلىنىشى ئۆچۈرۈلگەن ياكى ئىناۋەتسىز. باشقۇرغۇچىدىن يېڭى ئۇلىنىش سوراڭ.",inviteLinks:"تەكلىپ ئۇلىنىشلىرى",backHere:"بۇ ۋاقىتقا قايتىش",backHereNote:"«بۇ ۋاقىتقا قايتىش»: دەرەخنى شۇ ئۆزگىرىشتىن بۇرۇنقى ھالىتىگە قايتۇرىدۇ، كېيىنكى ھەممە ئۆزگىرىش قايتۇرۇلىدۇ.",confirmBackHere:d=>"دەرەخ "+d+" دىكى بۇ ئۆزگىرىشتىن بۇرۇنقى ھالىتىگە قايتىدۇ. ئۇنىڭدىن كېيىنكى ھەممە ئۆزگىرىش قايتۇرۇلىدۇ.",hRestored:"دەرەخ ئىلگىرىكى ھالىتىگە قايتۇرۇلدى",everyone:"ھەممەيلەن",undoAllBy:n=>n+" نىڭ ھەممە ئۆزگىرىشىنى قايتۇرۇش",confirmUndoAll:n=>n+" قىلغان ھەممە ئۆزگىرىش ئاخىرىدىن باشلاپ قايتۇرۇلىدۇ.",colorsText:"ھەر بىر رەڭنىڭ يېنىدىكى كۇنۇپكىنى بېسىپ خالىغان رەڭنى تاللاڭ. ئۆزگىرىش دەرھال كۆرۈنىدۇ. باشقا رەڭلەرنى ئەپ ئۆزى ماسلاشتۇرىدۇ.",cPaper:"تەگلىك",cCard:"كىشى كارتىلىرى",cInk:"خەتلەر",cLine:"باغلىنىش سىزىقلىرى",cMarr:"نىكاھ سىزىقى ۋە تەكىتلەش",cMale:"ئەر",cFemale:"ئايال",cBranches:"شاخ رەڭلىرى (بوۋىنىڭ ھەر بىر بالىسىنىڭ نەسلى)",cReset:"ئەسلىگە قايتۇرۇش",cDone:"بولدى",settings:"تەڭشەكلەر",setLook:"كۆرۈنۈش",setLang:"تىل",setPhone:"بۇ تېلېفون",setData:"سانلىق مەلۇمات",setTrees:"دەرەخلەر",customColors:"رەڭلەرنى ئۆزۈم تاللاي",nameTaken:"بۇ ئىسىم دەرەختە بار. ئۆز ئىسمىڭىزنى يېزىڭ. بۇ سىزنىڭ باشقا ئۈسكۈنىڭىز بولسا، ئىسمىڭىزنىڭ يېنىغا ئۈسكۈنىنى يېزىڭ، مەسىلەن «(تابلېت)».",themes:"تېما ۋە رەڭلەر",addAsParent:(n,g)=>n+" مۇ "+(g==="f"?"ئانىسى":g==="m"?"دادىسى":"ئاتا-ئانىسى")+" بولسۇن",
  legendT:"سىزىقلار نېمىنى بىلدۈرىدۇ؟",lgChild:"رەڭلىك تۈز سىزىق: ئاتا-ئانىدىن بالىلىرىغا. ھەر بىر رەڭ بوۋىنىڭ بىر بالىسىنىڭ نەسلى.",lgMarried:"ئالتۇن رەڭ سىزىق: نىكاھلىق جۈپتلەر.",lgDivorced:"ئۈزۈك سىزىق: ئاجراشقان جۈپتلەر (پەقەت سىز «ئاجراشقان» دەپ بەلگىلىسىڭىز).",lgInlaw:"چېكىتلىك سىزىق: سىرتتىن كەلگەن كېلىن ياكى كۈيئوغۇلنىڭ ئۆز ئاتا-ئانىسىغا باغلىنىشى. ئۆگەي ئەمەس.",
  lgStep:"«ئۆگەي» پەقەت ئېنىق كىرگۈزۈلگەن ئۇچۇر بىلەنلا كۆرسىتىلىدۇ: ئىككى كىشىنىڭ ھەر ئىككىسىنىڭ ئاتا-ئانىسى خاتىرىلەنگەن بولۇپ، پەقەت بىرىلا ئورتاق بولسا ئۆگەي قېرىنداش ھېسابلىنىدۇ. ئاتا-ئانىسىنىڭ بىرى كەم كىرگۈزۈلگەن كىشى ھەرگىز ئۆگەي ھېسابلانمايدۇ.",instTitle:"ئەپنى تېلېفونغا قاچىلاش",instTitleJoin:"خۇش كەلدىڭىز! ئەپنى تېلېفونغا قاچىلاڭ",instText:"قاچىلىسىڭىز ئاساسىي ئېكراندا ئۆز بەلگىسى بىلەن تۇرىدۇ، تولۇق ئېكران ۋە تورسىز ئېچىلىدۇ. قايتا ئۇلىنىش كېرەك بولمايدۇ.",installBtn:"قاچىلاش",installed:"ئەپ قاچىلاندى",later:"كېيىن",
  andStep1:"Chrome نىڭ ئوڭ ئۈستىدىكى ⋮ تىزىملىكىنى بېسىڭ.",andStep2:"«ئەپنى قاچىلاش» ياكى «ئاساسىي ئېكرانغا قوشۇش» نى تاللاڭ. ئاساسىي ئېكراندا بەلگىسى چىقىدۇ، كىرىشىڭىز ئەستە قالىدۇ.",
@@ -613,23 +616,43 @@ function batchInfo(es){const add=es.find(e=>!e.bf&&e.af),del=es.find(e=>e.bf&&!e
     return t("hEdit",nm,ch.map(k=>t(FIELDS[k])).join(", ")||t("fNote"));})();
   if(es.length>1&&!add&&!del)txt+=" "+t("hMore",es.length-1);
   return txt;}
+let HIST_BY=null;
 function showHistory(){const T=CUR();sheetMode="menu";const log=T.log||[];
   const groups=[];const idx=new Map();log.forEach(e=>{if(!idx.has(e.b)){idx.set(e.b,groups.length);groups.push([]);}groups[idx.get(e.b)].push(e);});
   const undone=new Set(log.filter(e=>e.u).map(e=>e.u));
+  const authors=[...new Set(log.map(e=>e.by||""))];
   const fmt=at=>new Date(at).toLocaleString(LANG==="ug"?"ug":"tr",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
-  const rows=groups.reverse().slice(0,150).map(es=>{const e=es[0];const isUndo=!!e.u;const lbl=isUndo?t("hUndo",batchInfo(log.filter(x=>x.b===e.u).length?log.filter(x=>x.b===e.u):es)):batchInfo(es);
+  const shown=groups.reverse().filter(es=>HIST_BY===null||(es[0].by||"")===HIST_BY).slice(0,200);
+  const rows=shown.map(es=>{const e=es[0];const isUndo=!!e.u;const lbl=isUndo?(e.u==="restore"?t("hRestored"):t("hUndo",batchInfo(log.filter(x=>x.b===e.u).length?log.filter(x=>x.b===e.u):es))):batchInfo(es);
     return`<div class="mrow"><div style="min-width:0"><b dir="auto" style="font-weight:600">${esc(lbl)}</b><small dir="auto">${esc(e.by||t("someone"))} · ${esc(fmt(e.at))}</small></div>
-     ${S.canWrite&&!isUndo?(undone.has(e.b)?`<span class="pill">${esc(t("undone"))}</span>`:`<button class="btn sm" data-undo="${esc(e.b)}">${esc(t("undo"))}</button>`):""}</div>`;}).join("");
+     ${S.canWrite&&!isUndo?(undone.has(e.b)?`<span class="pill">${esc(t("undone"))}</span>`:`<button class="btn sm" data-undo="${esc(e.b)}">${esc(t("undo"))}</button>`):""}
+     ${S.canWrite?`<button class="btn sm" data-back="${esc(e.b)}">${esc(t("backHere"))}</button>`:""}</div>`;}).join("");
   openSheet(`<div class="sh-head"><h2>${esc(t("history"))}</h2><button class="x" id="sh-x">×</button></div>
+   ${authors.length>1?`<div class="chips"><button class="chipb${HIST_BY===null?" on":""}" data-by="__all">${esc(t("everyone"))}</button>${authors.map(a2=>`<button class="chipb${HIST_BY===a2?" on":""}" data-by="${esc(a2)}" dir="auto">${esc(a2||t("someone"))}</button>`).join("")}</div>`:""}
+   ${S.canWrite&&HIST_BY!==null&&shown.some(es=>!es[0].u&&!undone.has(es[0].b))?`<button class="btn danger" id="h-undoall" style="width:100%;margin-bottom:10px" dir="auto">${esc(t("undoAllBy",HIST_BY||t("someone")))}</button>`:""}
+   ${S.canWrite?`<p style="color:var(--muted);font-size:13px;line-height:1.45;margin:0 0 10px">${esc(t("backHereNote"))}</p>`:""}
    <div class="mlist">${rows||`<div class="warn">${esc(t("noHistory"))}</div>`}</div>
    <button class="btn" id="h-back" style="width:100%;margin-top:12px">${esc(t("back"))}</button>`);
-  $("h-back").onclick=showTreeMenu;
-  sheet.querySelectorAll("[data-undo]").forEach(b=>b.onclick=()=>{const es=log.filter(x=>x.b===b.dataset.undo);sheetMode="menu";
-    openSheet(`<div class="sh-head"><h2>${esc(t("undo"))}</h2><button class="x" id="sh-x">×</button></div><div class="warn" dir="auto">${esc(t("confirmUndo",batchInfo(es)))}</div>
-     <div class="acts"><button class="btn" id="u-no">${esc(t("cancel"))}</button><button class="btn pri" id="u-yes">${esc(t("undo"))}</button></div>`);
-    $("u-no").onclick=showHistory;
-    $("u-yes").onclick=()=>{undoBatch(b.dataset.undo);toast(t("undoneToast"));showHistory();};});
+  $("h-back").onclick=()=>{HIST_BY=null;showTreeMenu();};
+  sheet.querySelectorAll("[data-by]").forEach(b=>b.onclick=()=>{HIST_BY=b.dataset.by==="__all"?null:b.dataset.by;showHistory();});
+  const confirmDo=(title,text,fn)=>{sheetMode="menu";openSheet(`<div class="sh-head"><h2>${esc(title)}</h2><button class="x" id="sh-x">×</button></div><div class="warn" dir="auto">${esc(text)}</div>
+     <div class="acts"><button class="btn" id="u-no">${esc(t("cancel"))}</button><button class="btn pri" id="u-yes">${esc(title)}</button></div>`);
+    $("u-no").onclick=showHistory;$("u-yes").onclick=()=>{fn();toast(t("undoneToast"));S.fitted=false;render();showHistory();};};
+  sheet.querySelectorAll("[data-undo]").forEach(b=>b.onclick=()=>{const es=log.filter(x=>x.b===b.dataset.undo);confirmDo(t("undo"),t("confirmUndo",batchInfo(es)),()=>undoBatch(b.dataset.undo));});
+  sheet.querySelectorAll("[data-back]").forEach(b=>b.onclick=()=>{const first=log.find(x=>x.b===b.dataset.back);confirmDo(t("backHere"),t("confirmBackHere",fmt(first.at)),()=>restoreBefore(b.dataset.back));});
+  if($("h-undoall"))$("h-undoall").onclick=()=>confirmDo(t("undo"),t("confirmUndoAll",HIST_BY||t("someone")),()=>undoAuthor(HIST_BY));
 }
+/* bu değişiklik yapılmadan hemen önceki hale dön: sonraki her şey tersine çevrilir */
+function restoreBefore(bid){const T=CUR();const log=T.log||[];const i=log.findIndex(e=>e.b===bid);if(i<0)return;
+  const people=JSON.parse(JSON.stringify(T.people));
+  for(let k=log.length-1;k>=i;k--){const e=log[k];if(e.bf)people[e.id]=JSON.parse(JSON.stringify(e.bf));else delete people[e.id];}
+  BATCH=rid();const ids=new Set([...Object.keys(T.people),...Object.keys(people)]);
+  ids.forEach(id=>{const cur=T.people[id]||null,nx=people[id]||null;if(JSON.stringify(cur)===JSON.stringify(nx))return;
+    if(nx){T.people[id]={...nx,updatedAt:Date.now()};logOp(id,cur,T.people[id],"restore");}else{delete T.people[id];logOp(id,cur,null,"restore");}});
+  BATCH=null;touch();}
+/* bir kişinin yaptığı bütün değişiklikleri geri al (sondan başa) */
+function undoAuthor(by){const T=CUR();const log=T.log||[];const undone=new Set(log.filter(e=>e.u).map(e=>e.u));
+  const bs=[...new Set(log.filter(e=>(e.by||"")===by&&!e.u&&!undone.has(e.b)).map(e=>e.b))].reverse();bs.forEach(b=>undoBatch(b));}
 function undoBatch(bid){const T=CUR();const es=(T.log||[]).filter(e=>e.b===bid).reverse();BATCH=rid();
   es.forEach(e=>{const cur=T.people[e.id]||null;
     if(!e.bf){if(cur){delete T.people[e.id];logOp(e.id,cur,null,bid);}}
