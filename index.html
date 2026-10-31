@@ -937,7 +937,7 @@ function computeLayout(){
       /* çok çocuklu ailelerde, kendi çocuğu olmayanlar alt alta dizilir */
       let its=gk.map(k=>({t:"n",n:k,w:k.w,g:key}));
       /* KARDEŞ SIRASI KURALI (sabit): kardeşler her zaman doğum sırasıyla dizilir, en büyük en solda, en küçük en sağda
-         (Uygurca görünümde ağaç aynalandığı için tersi). Çocuğu olan kardeşler de bu sırayı bozmaz.
+         (Türkçe ve Uygurca fark etmez). Çocuğu olan kardeşler de bu sırayı bozmaz.
          Sadece art arda gelen çocuksuz kardeşler alt alta toplanabilir; böylece sıra hiç değişmez. */
       const isLeaf=k=>!k.kids.length&&!k.hidden;
       if(gk.length>=STACK_MIN){its=[];let run=[];
@@ -973,9 +973,11 @@ function computeLayout(){
         if(Math.abs(a1.i-b1.i)===1)weds.push({x1:Math.min(a1.x,b1.x)+CW,x2:Math.max(a1.x,b1.x),d,id:A,sp:m.id,ids:[A,m.id],st:st2});
         else weds.push({bracket:true,xa:a1.x+CW/2,xs:b1.x+CW/2,d,id:A,sp:m.id,ids:[A,m.id],st:st2});});
       if(n.hidden) folds.push({x:c,d,id:n.anchor,n:n.hidden});
-      const its=rtl?[...n.items].reverse():n.items;
+      /* kardeşler dil ne olursa olsun en büyük solda; Uygurcada sadece evlilik grupları eşlerin yerine göre aynalanır */
+      let its=n.items;if(rtl&&n.keys.length>1){const gs=[];n.items.forEach(it=>{let g=gs.find(x=>x.k===it.g);if(!g)gs.push(g={k:it.g,l:[]});g.l.push({...it,gap:0});});
+        its=gs.reverse().flatMap((g,gi)=>g.l.map((it,ii)=>ii===0&&gi>0?{...it,gap:SG*2}:it));}
       let cx=x+(n.w-n.kw)/2; const grp=new Map();
-      its.forEach((it,ii)=>{const gp=rtl?(its[ii-1]&&its[ii-1].g!==it.g?SG*2:0):(it.gap||0);cx+=gp;
+      its.forEach((it,ii)=>{const gp=it.gap||0;cx+=gp;
         if(!grp.has(it.g))grp.set(it.g,{tops:[],stacks:[]});const G=grp.get(it.g);
         if(it.t==="n"){place(it.n,cx,d+1);G.tops.push({x:pos.get(it.n.anchor).x+CW/2,id:it.n.anchor});}
         else{ const railX=rtl?cx+it.w-RAIL/2:cx+RAIL/2, inner=it.w-RAIL, pts=[];
