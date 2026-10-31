@@ -432,7 +432,11 @@ async function rpc(fn,args){
 const LS_KEY="secere-v2";
 let DB={trees:{},cur:null};
 try{const x=JSON.parse(localStorage.getItem(LS_KEY)||"null");if(x&&x.trees)DB=x;}catch(e){}
-function saveDB(){try{localStorage.setItem(LS_KEY,JSON.stringify(DB));}catch(e){}}
+let saveWarned=false;
+function saveDB(){try{localStorage.setItem(LS_KEY,JSON.stringify(DB));}catch(e){
+  /* depo doluysa önce geçmişi kısalt, yine olmazsa kullanıcıyı uyar */
+  try{Object.values(DB.trees).forEach(T=>{if(T.log&&T.log.length>200)T.log=T.log.slice(-200);});localStorage.setItem(LS_KEY,JSON.stringify(DB));return;}catch(e2){}
+  if(!saveWarned&&typeof toast==="function"){saveWarned=true;toast(LANG==="ug"?"بۇ ئۈسكۈنىنىڭ ساقلاش ئورنى تولدى":"Bu cihazda kayıt yeri doldu, değişiklikler yalnızca internete gönderilebiliyor");}}}
 const CUR=()=>DB.cur&&DB.trees[DB.cur]||null;
 function keyOf(T){return b64u.dec(T.key);}
 function linkFor(id,token,key){return location.origin+location.pathname+"#katil="+id+"."+token+"."+key;}
@@ -464,8 +468,11 @@ function docOf(T){return{title:T.title||"",people:T.people,log:T.log||[]};}
 async function push(){
   const T=CUR(); if(!T||T.role==="viewer"||!T.dirty||pushing)return;
   pushing=true; SYNC="syncing"; renderStatus();
+  /* gönderilen hâlin kopyası: yükleme sürerken yapılan değişiklikler kaybolmasın */
+  const sent=JSON.stringify(T.people);
   try{ const v=await rpc("put_tree",{p_tree:T.id,p_token:T.token,p_blob:seal(docOf(T),keyOf(T)),p_expected:T.version});
-    T.version=v; T.base=JSON.parse(JSON.stringify(T.people)); T.dirty=false; saveDB(); SYNC="ok"; pushing=false; renderStatus(); }
+    T.version=v; T.base=JSON.parse(sent); T.dirty=JSON.stringify(T.people)!==sent; saveDB(); pushing=false;
+    if(T.dirty){SYNC="syncing";renderStatus();clearTimeout(pushTimer);pushTimer=setTimeout(push,300);}else{SYNC="ok";renderStatus();} }
   catch(e){ pushing=false;
     if(e.code==="conflict"){ await pull(); return; }
     if(e.code==="read_only"){T.role="viewer";T.dirty=false;saveDB();setPeopleFromCur();toast(t("readOnlyNote"));}
@@ -503,7 +510,7 @@ async function refreshWho(){const T=CUR();const b=$("who");if(!T||T.role!=="admi
     const n=$("who-n");n.textContent=fresh?"+"+fresh:(ppl.length||"");n.classList.toggle("new",!!fresh);n.hidden=!ppl.length&&!fresh;
     WHO={ids:ppl.map(m=>m.id)};b.title=t("whoTitle",ppl.length);b.setAttribute("aria-label",b.title);}catch(e){}}
 async function pull(){
-  const T=CUR(); if(!T)return;
+  const T=CUR(); if(!T||pushing)return;
   try{
     const rows=await rpc("get_tree",{p_tree:T.id,p_token:T.token}); const r=rows&&rows[0]; if(!r)throw Object.assign(new Error("x"),{code:"no_access"});
     T.role=r.role; T.memberId=r.member_id;
